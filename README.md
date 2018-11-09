@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+RTST 监控箱后台项目
+使用 axios+vue+elementUI
 ## Build Setup
 
 ``` bash
