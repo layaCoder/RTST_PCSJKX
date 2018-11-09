@@ -157,7 +157,7 @@
           <el-switch v-model="state_menci" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
           </el-switch>
         </div>
-        
+
       </el-col>
     </el-row>
   </div>
@@ -183,26 +183,25 @@ export default {
         jiaoliudiaodian: null,
         almmenci: null
       },
-        state_12_1: null,
-        state_12_2: null,
-        state_12_3: null,
-        state_12_4: false,
-        state_24_1: null,
-        state_24_2: null,
-        state_220_1: null,
-        state_220_2: null,
-        state_poe_1: null,
-        state_poe_2: null,
-        state_poe_3: null,
-        state_poe_4: null,
-        state_menci: null
-     
+      state_12_1: null,
+      state_12_2: null,
+      state_12_3: null,
+      state_12_4: false,
+      state_24_1: null,
+      state_24_2: null,
+      state_220_1: null,
+      state_220_2: null,
+      state_poe_1: null,
+      state_poe_2: null,
+      state_poe_3: null,
+      state_poe_4: null,
+      state_menci: null
     };
   },
   methods: {
     //开关change事件
     changeStatus: function($event, num) {
-      alert('on change func running！！！！')
+      alert("on change func running！！！！");
       console.log($event);
       console.log(num);
     },
@@ -218,26 +217,26 @@ export default {
         this.tableData = getTableOneData(res.data[0]);
         this.tableData2 = getTableTwoData(res.data[0]);
         this.mediaData = getMediaData(res.data[0]);
-       
-       var switchUrl =
+
+        var switchUrl =
           "api/Handler/AjaxTestHandler.ashx?mod=4&&Ws_code=" +
           this.$route.params.wsCode;
         this.$axios.get(switchUrl).then(res => {
           console.log("----开关状态----");
           console.log(res.data);
-         this.state_12_1 = getSwitchData(res.data[0]).state_12_1
-        this.state_12_2=getSwitchData(res.data[0]).state_12_2
-        this.state_12_3=getSwitchData(res.data[0]).state_12_3
-        this.state_12_4=false
-        this.state_24_1=getSwitchData(res.data[0]).state_24_1
-        this.state_24_2=getSwitchData(res.data[0]).state_24_2
-        this.state_220_1=getSwitchData(res.data[0]).state_220_1
-        this.state_220_2=getSwitchData(res.data[0]).state_220_2
-        this.state_poe_1=getSwitchData(res.data[0]).state_poe_1
-        this.state_poe_2=getSwitchData(res.data[0]).state_poe_2
-        this.state_poe_3=getSwitchData(res.data[0]).state_poe_3
-        this.state_poe_4=getSwitchData(res.data[0]).state_poe_4
-        this.state_menci=getSwitchData(res.data[0]).state_menci
+          this.state_12_1 = getSwitchData(res.data[0]).state_12_1;
+          this.state_12_2 = getSwitchData(res.data[0]).state_12_2;
+          this.state_12_3 = getSwitchData(res.data[0]).state_12_3;
+          this.state_12_4 = false;
+          this.state_24_1 = getSwitchData(res.data[0]).state_24_1;
+          this.state_24_2 = getSwitchData(res.data[0]).state_24_2;
+          this.state_220_1 = getSwitchData(res.data[0]).state_220_1;
+          this.state_220_2 = getSwitchData(res.data[0]).state_220_2;
+          this.state_poe_1 = getSwitchData(res.data[0]).state_poe_1;
+          this.state_poe_2 = getSwitchData(res.data[0]).state_poe_2;
+          this.state_poe_3 = getSwitchData(res.data[0]).state_poe_3;
+          this.state_poe_4 = getSwitchData(res.data[0]).state_poe_4;
+          this.state_menci = getSwitchData(res.data[0]).state_menci;
           console.log("-----------------");
         });
       });
@@ -276,21 +275,20 @@ export default {
         this.$axios.get(switchUrl).then(res => {
           console.log("----开关状态----");
           console.log(res.data);
-           this.state_12_1 = getSwitchData(res.data[0]).state_12_1
-        this.state_12_2=getSwitchData(res.data[0]).state_12_2
-        this.state_12_3=getSwitchData(res.data[0]).state_12_3
-        this.state_12_4=getSwitchData(res.data[0]).state_12_4
-        this.state_24_1=getSwitchData(res.data[0]).state_24_1
-        this.state_24_2=getSwitchData(res.data[0]).state_24_2
-        this.state_220_1=getSwitchData(res.data[0]).state_220_1
-        this.state_220_2=getSwitchData(res.data[0]).state_220_2
-        this.state_poe_1=getSwitchData(res.data[0]).state_poe_1
-        this.state_poe_2=getSwitchData(res.data[0]).state_poe_2
-        this.state_poe_3=getSwitchData(res.data[0]).state_poe_3
-        this.state_poe_4=getSwitchData(res.data[0]).state_poe_4
-        this.state_menci=getSwitchData(res.data[0]).state_menci
+          this.state_12_1 = getSwitchData(res.data[0]).state_12_1;
+          this.state_12_2 = getSwitchData(res.data[0]).state_12_2;
+          this.state_12_3 = getSwitchData(res.data[0]).state_12_3;
+          this.state_12_4 = getSwitchData(res.data[0]).state_12_4;
+          this.state_24_1 = getSwitchData(res.data[0]).state_24_1;
+          this.state_24_2 = getSwitchData(res.data[0]).state_24_2;
+          this.state_220_1 = getSwitchData(res.data[0]).state_220_1;
+          this.state_220_2 = getSwitchData(res.data[0]).state_220_2;
+          this.state_poe_1 = getSwitchData(res.data[0]).state_poe_1;
+          this.state_poe_2 = getSwitchData(res.data[0]).state_poe_2;
+          this.state_poe_3 = getSwitchData(res.data[0]).state_poe_3;
+          this.state_poe_4 = getSwitchData(res.data[0]).state_poe_4;
+          this.state_menci = getSwitchData(res.data[0]).state_menci;
           console.log("-----------------");
-          
         });
       }
     }
@@ -326,19 +324,19 @@ export default {
         this.$route.params.wsCode;
       this.$axios.get(switchUrl).then(res => {
         console.log("----开关状态----");
-         this.state_12_1 = getSwitchData(res.data[0]).state_12_1
-        this.state_12_2=getSwitchData(res.data[0]).state_12_2
-        this.state_12_3=getSwitchData(res.data[0]).state_12_3
-        this.state_12_4=getSwitchData(res.data[0]).state_12_4
-        this.state_24_1=getSwitchData(res.data[0]).state_24_1
-        this.state_24_2=getSwitchData(res.data[0]).state_24_2
-        this.state_220_1=getSwitchData(res.data[0]).state_220_1
-        this.state_220_2=getSwitchData(res.data[0]).state_220_2
-        this.state_poe_1=getSwitchData(res.data[0]).state_poe_1
-        this.state_poe_2=getSwitchData(res.data[0]).state_poe_2
-        this.state_poe_3=getSwitchData(res.data[0]).state_poe_3
-        this.state_poe_4=getSwitchData(res.data[0]).state_poe_4
-        this.state_menci=getSwitchData(res.data[0]).state_menci
+        this.state_12_1 = getSwitchData(res.data[0]).state_12_1;
+        this.state_12_2 = getSwitchData(res.data[0]).state_12_2;
+        this.state_12_3 = getSwitchData(res.data[0]).state_12_3;
+        this.state_12_4 = getSwitchData(res.data[0]).state_12_4;
+        this.state_24_1 = getSwitchData(res.data[0]).state_24_1;
+        this.state_24_2 = getSwitchData(res.data[0]).state_24_2;
+        this.state_220_1 = getSwitchData(res.data[0]).state_220_1;
+        this.state_220_2 = getSwitchData(res.data[0]).state_220_2;
+        this.state_poe_1 = getSwitchData(res.data[0]).state_poe_1;
+        this.state_poe_2 = getSwitchData(res.data[0]).state_poe_2;
+        this.state_poe_3 = getSwitchData(res.data[0]).state_poe_3;
+        this.state_poe_4 = getSwitchData(res.data[0]).state_poe_4;
+        this.state_menci = getSwitchData(res.data[0]).state_menci;
       });
     });
   },
@@ -471,7 +469,7 @@ function getSwitchData(data) {
     state_poe_4: BITValueB[4] === "0" ? false : true,
     state_menci: BITValueB[0] === "0" ? false : true
   };
-  return obj
+  return obj;
 }
 
 //将状态二进制编码长度补全
