@@ -3,7 +3,7 @@
 > A Vue.js project
 
 RTST 监控箱后台项目
-使用 axios+vue+elementUI
+使用 axios+vue+vue-router+elementUI
 ## Build Setup
 
 ``` bash
