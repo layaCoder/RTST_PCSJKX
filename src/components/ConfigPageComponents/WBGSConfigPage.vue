@@ -36,7 +36,7 @@
     </el-row>
     <!--新增/修改 模态框 -->
     <div>
-      <el-dialog title="新增维保单位" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+      <el-dialog :title="this.formType==0?'新增维保单位':'修改维保单位'" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
         <!-- <span>这是一段信息</span> -->
         <el-form :v-model="formObj" ref="formObj">
           <el-row>

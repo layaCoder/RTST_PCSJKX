@@ -296,12 +296,16 @@ export default {
   //页面加载完成后执行的方法
   mounted: function() {
     //定时函数
-    this.$nextTick(function() {
-      //【计时器、定时器】设置页面刷新时间
-      setInterval(this.timer, 10000);
-    });
+    // this.$nextTick(function() {
+    //   //【计时器、定时器】设置页面刷新时间
+    //   setInterval(this.timer, 10000);
+    // });
+    this._timeOut = setInterval(this.timer, 2000);
   },
-
+  beforeDestroy() {
+    //摧毁定时器
+    clearInterval(this._timeOut);
+  },
   //created方法只会执行一次，后续data刷新不会运行
   created: function() {
     //ajax获取设备状态并填充页面数据
