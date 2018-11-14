@@ -10,7 +10,7 @@
 
     </el-row>
     <el-row>
-      <el-table :data="tableData" stripe style="width: 100%">
+      <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%">
         <el-table-column prop="ID" label="单位ID" width="180">
         </el-table-column>
         <el-table-column prop="ComName" label="单位名称" width="180">
@@ -29,14 +29,35 @@
         </el-table-column>
       </el-table>
     </el-row>
+    <!--分页组件-->
+    <el-row>
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20, 50, 100]" :page-size="pagesize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
+      </el-pagination>
+    </el-row>
     <!--新增/修改 模态框 -->
     <div>
       <el-dialog title="新增维保单位" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
-        <span>这是一段信息</span>
-        <span slot="footer" class="dialog-footer">
+        <!-- <span>这是一段信息</span> -->
+        <el-form :v-model="formObj" ref="formObj">
+          <el-row>
+            <el-col :span="12">
+              <span>公司ID</span>
+              <el-input v-model="formObj.ID" placeholder="请输入内容" :disabled="true"></el-input>
+            </el-col>
+            <el-col :span="12">
+              <span>公司名称</span>
+              <el-input v-model="formObj.ComName" placeholder="请输入内容"></el-input>
+            </el-col>
+          </el-row>
+          <el-form-item>
+            <el-button type="primary" @click="handleSubmit('formObj')">提交</el-button>
+            <el-button @click="dialogVisible = false">取消</el-button>
+          </el-form-item>
+        </el-form>
+        <!-- <span slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
           <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-        </span>
+        </span> -->
       </el-dialog>
     </div>
   </div>
@@ -46,47 +67,40 @@
 export default {
   data() {
     return {
+      formType: 0, //表单状态，0位新增，1为修改
+      formObj: {
+        ID: "",
+        ComName: ""
+      },
       tableData: [
-        {
-          ID: "01",
-          ComName: "RTST",
-          Operator: "liuchunfu",
-          Address: "武大园二路",
-          Tel: "110"
-        },
-        {
-          ID: "01",
-          ComName: "RTST",
-          Operator: "liuchunfu",
-          Address: "武大园二路",
-          Tel: "110"
-        },
-        {
-          ID: "01",
-          ComName: "RTST",
-          Operator: "liuchunfu",
-          Address: "武大园二路",
-          Tel: "110"
-        },
-        {
-          ID: "01",
-          ComName: "RTST",
-          Operator: "liuchunfu",
-          Address: "武大园二路",
-          Tel: "110"
-        }
+        // {
+        //   ID: "01",
+        //   ComName: "RTST",
+        //   Operator: "liuchunfu",
+        //   Address: "武大园二路",
+        //   Tel: "110"
+        // }
       ],
+      currentPage: 1,
+      pagesize: 10,
       dialogVisible: false
     };
   },
   methods: {
     handleEdit(index, row) {
+      this.formType = 1; //表单type=1，表示为修改方法
+      this.dialogVisible = true;
+      this.formObj.ComName = row.ComName;
+      this.formObj.ID = row.ID;
       console.log(index, row);
     },
     handleDelete(index, row) {
       console.log(index, row);
     },
     handleShowDialog() {
+      this.formType = 0; //表单type=0，表示为新增方法
+      this.formObj.ID = 0;
+      this.formObj.ComName = "";
       this.dialogVisible = true;
     },
     handleClose(done) {
@@ -95,23 +109,71 @@ export default {
           done();
         })
         .catch(_ => {});
+    },
+    handleSizeChange: function(size) {
+      this.pagesize = size;
+    },
+    handleCurrentChange: function(currentPage) {
+      this.currentPage = currentPage;
+    },
+    //提交新增/修改表单
+    handleSubmit: function(e) {
+      //axios post提交表单
+      if (this.formType === 0) {
+        this.formObj.ID = 0;
+      }
+      var url = "api/Handler/AjaxTestHandler.ashx?mod=31";
+      this.$axios({
+        url: url,
+        method: "post",
+        data: this.formObj,
+        transformRequest: [
+          function(data) {
+            // Do whatever you want to transform the data
+            let ret = "";
+            for (let it in data) {
+              ret +=
+                encodeURIComponent(it) +
+                "=" +
+                encodeURIComponent(data[it]) +
+                "&";
+            }
+            return ret;
+          }
+        ],
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      }).then(res => { // axios post请求成功后执行
+        //重新加载表格数据，刷新表格/////////////////////////
+        var url = "api/Handler/AjaxTestHandler.ashx?mod=42";
+        console.log(url);
+        this.$axios.get(url).then(res => {
+          console.log(res.data);
+          this.tableData = getTableData(res.data);
+        });
+        //////////////////////////////////////////////////
+      }).catch((error)=>{
+        console.log(error)
+      });
+
+      //模态框关闭显示
+      this.dialogVisible = false;
     }
   },
- created:function(){
- var url = "api/Handler/AjaxTestHandler.ashx?mod=42";
+  created: function() {
+    var url = "api/Handler/AjaxTestHandler.ashx?mod=42";
     console.log(url);
     this.$axios.get(url).then(res => {
       console.log(res.data);
       this.tableData = getTableData(res.data);
-      
     });
- },
+  },
 
   mounted: function() {
     // var url = "api/Handler/AjaxTestHandler.ashx?mod=42";
     // console.log(url);
     // this.$axios.get(url).then(res => {
-      
     //   this.tableData = getTableData(res.data[0]);
     //   console.log(tableData);
     // });
@@ -119,18 +181,17 @@ export default {
 };
 
 function getTableData(data) {
-  
   var array = [];
-  for(var i = 0; i <data.length; i++){
+  for (var i = 0; i < data.length; i++) {
     console.log(data[i]);
     array.push({
-      ID:data[i].ID,
-      ComName:data[i].ComName,
-      Operator:'',
-      Tel:'',
-      Address:''
-    })
-}
+      ID: data[i].ID,
+      ComName: data[i].ComName,
+      Operator: "",
+      Tel: "",
+      Address: ""
+    });
+  }
   return array;
 }
 </script>

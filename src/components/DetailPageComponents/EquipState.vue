@@ -186,7 +186,7 @@ export default {
       state_12_1: null,
       state_12_2: null,
       state_12_3: null,
-      state_12_4: false,
+      state_12_4: null,
       state_24_1: null,
       state_24_2: null,
       state_220_1: null,
@@ -227,7 +227,7 @@ export default {
           this.state_12_1 = getSwitchData(res.data[0]).state_12_1;
           this.state_12_2 = getSwitchData(res.data[0]).state_12_2;
           this.state_12_3 = getSwitchData(res.data[0]).state_12_3;
-          this.state_12_4 = false;
+          this.state_12_4 = getSwitchData(res.data[0]).state_12_4;
           this.state_24_1 = getSwitchData(res.data[0]).state_24_1;
           this.state_24_2 = getSwitchData(res.data[0]).state_24_2;
           this.state_220_1 = getSwitchData(res.data[0]).state_220_1;
