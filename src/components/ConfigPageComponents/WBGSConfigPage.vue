@@ -127,7 +127,8 @@ export default {
         url: url,
         method: "post",
         data: this.formObj,
-        transformRequest: [  //格式化数据，以表单格式提交
+        transformRequest: [
+          //格式化数据，以表单格式提交
           function(data) {
             // Do whatever you want to transform the data
             let ret = "";
@@ -144,17 +145,20 @@ export default {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         }
-      }).then(res => { // axios post请求成功后执行
-        //重新加载表格数据，刷新表格/////////////////////////
-        var url = "api/Handler/AjaxTestHandler.ashx?mod=42";
-        this.$axios.get(url).then(res => {
-          console.log(res.data);
-          this.tableData = getTableData(res.data);
+      })
+        .then(res => {
+          // axios post请求成功后执行
+          //重新加载表格数据，刷新表格/////////////////////////
+          var url = "api/Handler/AjaxTestHandler.ashx?mod=42";
+          this.$axios.get(url).then(res => {
+            console.log(res.data);
+            this.tableData = getTableData(res.data);
+          });
+          //////////////////////////////////////////////////
+        })
+        .catch(error => {
+          console.log(error);
         });
-        //////////////////////////////////////////////////
-      }).catch((error)=>{
-        console.log(error)
-      });
 
       //模态框关闭显示
       this.dialogVisible = false;

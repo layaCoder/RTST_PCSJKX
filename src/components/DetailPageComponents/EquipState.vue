@@ -1,11 +1,13 @@
 <template>
   <div>
     <el-row>
+      <mediaPart :stateName="this.mediaTitleUrl.bianhao.name" :stateValue="this.mediaData.bianhao" :stateImg="this.mediaTitleUrl.bianhao.img"></mediaPart>
       <Strong>Equip State</Strong>
       <div>节点编号 {{this.$route.params.wsCode}}</div>
       <div>节点ip {{this.$route.params.ipAddress}}</div>
       <div>data中的wscode{{wsCode}}</div>
     </el-row>
+    
     <el-row>
       <el-col :span="2"></el-col>
       <el-col :span="4">
@@ -164,7 +166,12 @@
 </template>
 
 <script>
+import mediaPart from '../parts/MediaPart.vue'
+import bianhaoUrl from '../../assets/StateImgs/bianhao.png'
 export default {
+ 
+
+  components:{mediaPart},
   data() {
     return {
       wsCode: this.$route.params.wsCode,
@@ -182,6 +189,18 @@ export default {
         jiaoliudianbaojing: null,
         jiaoliudiaodian: null,
         almmenci: null
+      },
+      mediaTitleUrl:{
+       //bianhao:{name:'设备编号',img:'../../assets/StateImgs/bianhao.png'},
+       bianhao:{name:'设备编号',img:bianhaoUrl},
+       zuoyouqingxie:{name:'左右倾斜',img:''},
+       qianhouqingxie:{name:'前后倾斜',img:''},
+       shuijin:{name:'水浸',img:''},
+       fengji:{name:'风机',img:''},
+       led:{name:'LED',img:''},
+       fanglei:{name:'防雷',img:''},
+       jiaoliudianbaojing:{name:'交流电报警',img:''},
+       almmenci:{name:'门磁',img:''},
       },
       state_12_1: null,
       state_12_2: null,
