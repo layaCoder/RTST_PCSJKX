@@ -1,78 +1,44 @@
 <template>
   <div>
-    <el-row>
-      <mediaPart :stateName="this.mediaTitleUrl.bianhao.name" :stateValue="this.mediaData.bianhao" :stateImg="this.mediaTitleUrl.bianhao.img"></mediaPart>
-      <Strong>Equip State</Strong>
-      <div>节点编号 {{this.$route.params.wsCode}}</div>
-      <div>节点ip {{this.$route.params.ipAddress}}</div>
-      <div>data中的wscode{{wsCode}}</div>
-    </el-row>
-    
-    <el-row>
+    <el-row class="mediaRow">
       <el-col :span="2"></el-col>
       <el-col :span="4">
-        <div>
-          <strong>设备编号</strong>
-          <span id="bianhao">{{mediaData.bianhao}}</span>
-        </div>
+        <mediaPart :stateName="this.mediaTitleUrl.bianhao.name" :stateValue="this.mediaData.bianhao" :stateImg="this.mediaTitleUrl.bianhao.img"></mediaPart>
       </el-col>
       <el-col :span="4">
-        <div>
-          <strong>左右倾斜</strong>
-          <span id="zuoyouqingxie">{{mediaData.zuoyouqingxie}}</span>
-        </div>
+        <mediaPart :stateName="this.mediaTitleUrl.zuoyouqingxie.name" :stateValue="this.mediaData.zuoyouqingxie" :stateImg="this.mediaTitleUrl.zuoyouqingxie.img"></mediaPart>
       </el-col>
       <el-col :span="4">
-        <div>
-          <strong>前后倾斜</strong>
-          <span id="qianhouqingxie">{{mediaData.qianhouqingxie}}</span>
-        </div>
+        <mediaPart :stateName="this.mediaTitleUrl.qianhouqingxie.name" :stateValue="this.mediaData.qianhouqingxie" :stateImg="this.mediaTitleUrl.qianhouqingxie.img"></mediaPart>
       </el-col>
       <el-col :span="4">
-        <div>
-          <strong>水浸状态</strong>
-          <span id="shuijin">{{mediaData.shuijin}}</span>
-        </div>
+        <mediaPart :stateName="this.mediaTitleUrl.shuijin.name" :stateValue="this.mediaData.shuijin" :stateImg="this.mediaTitleUrl.shuijin.img"></mediaPart>
       </el-col>
       <el-col :span="4">
-        <div>
-          <strong>门磁状态</strong>
-          <span id="almmenci">{{mediaData.almmenci}}</span>
-        </div>
+        <mediaPart :stateName="this.mediaTitleUrl.almmenci.name" :stateValue="this.mediaData.almmenci" :stateImg="this.mediaTitleUrl.almmenci.img"></mediaPart>
       </el-col>
       <el-col :span="2"></el-col>
     </el-row>
-    <el-row>
+    <el-row class="mediaRow">
       <el-col :span="2"></el-col>
       <el-col :span="4">
         <div>
-          <strong>风机状态</strong>
-          <span id="fengji">{{mediaData.fengji}}</span>
+          <mediaPart :stateName="this.mediaTitleUrl.fengji.name" :stateValue="this.mediaData.fengji" :stateImg="this.mediaTitleUrl.fengji.img"></mediaPart>
         </div>
       </el-col>
       <el-col :span="4">
         <div>
-          <strong>LED照明状态</strong>
-          <span id="led">{{mediaData.led}}</span>
+          <mediaPart :stateName="this.mediaTitleUrl.led.name" :stateValue="this.mediaData.led" :stateImg="this.mediaTitleUrl.led.img"></mediaPart>
         </div>
       </el-col>
       <el-col :span="4">
-        <div>
-          <strong>防雷状态</strong>
-          <span id="fanglei">{{mediaData.fanglei}}</span>
-        </div>
+        <mediaPart :stateName="this.mediaTitleUrl.fanglei.name" :stateValue="this.mediaData.fanglei" :stateImg="this.mediaTitleUrl.fanglei.img"></mediaPart>
       </el-col>
       <el-col :span="4">
-        <div>
-          <strong>市电电压报警</strong>
-          <span id="jiaoliudianbaojing">{{mediaData.jiaoliudianbaojing}}</span>
-        </div>
+        <mediaPart :stateName="this.mediaTitleUrl.jiaoliudianbaojing.name" :stateValue="this.mediaData.jiaoliudianbaojing" :stateImg="this.mediaTitleUrl.jiaoliudianbaojing.img"></mediaPart>
       </el-col>
       <el-col :span="4">
-        <div>
-          <strong>市电掉电</strong>
-          <span id="jiaoliudiaodian">{{mediaData.jiaoliudiaodian}}</span>
-        </div>
+        <mediaPart :stateName="this.mediaTitleUrl.jiaoliudiaodian.name" :stateValue="this.mediaData.jiaoliudiaodian" :stateImg="this.mediaTitleUrl.jiaoliudiaodian.img"></mediaPart>
       </el-col>
       <el-col :span="2"></el-col>
     </el-row>
@@ -141,17 +107,17 @@
         </div>
         <div>
           <span>poe-2</span>
-          <el-switch v-model="state_poe_1" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+          <el-switch v-model="state_poe_2" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
           </el-switch>
         </div>
         <div>
           <span>poe-3</span>
-          <el-switch v-model="state_poe_1" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+          <el-switch v-model="state_poe_3" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
           </el-switch>
         </div>
         <div>
           <span>poe-4</span>
-          <el-switch v-model="state_poe_1" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+          <el-switch v-model="state_poe_4" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
           </el-switch>
         </div>
         <div>
@@ -166,12 +132,21 @@
 </template>
 
 <script>
-import mediaPart from '../parts/MediaPart.vue'
-import bianhaoUrl from '../../assets/StateImgs/bianhao.png'
-export default {
- 
+import mediaPart from "../parts/MediaPart.vue";
 
-  components:{mediaPart},
+import bianhaoUrl from "../../assets/StateImgs/bianhao.png";
+import zuoyouqingxieUrl from "../../assets/StateImgs/zuoyouqingxie.png";
+import qianhouqingxieUrl from "../../assets/StateImgs/shangxiaqingxie.png";
+import shuijinUrl from "../../assets/StateImgs/shuijin.png";
+import fengjiUrl from "../../assets/StateImgs/fengji.png";
+import ledUrl from "../../assets/StateImgs/led.png";
+import fangleiUrl from "../../assets/StateImgs/fanglei.png";
+import jiaoliudianbaojingUrl from "../../assets/StateImgs/jiaoliudian.png";
+import jiaoliudiaodianUrl from "../../assets/StateImgs/baojing.png";
+import menciUrl from "../../assets/StateImgs/menci.png";
+
+export default {
+  components: { mediaPart },
   data() {
     return {
       wsCode: this.$route.params.wsCode,
@@ -190,17 +165,18 @@ export default {
         jiaoliudiaodian: null,
         almmenci: null
       },
-      mediaTitleUrl:{
-       //bianhao:{name:'设备编号',img:'../../assets/StateImgs/bianhao.png'},
-       bianhao:{name:'设备编号',img:bianhaoUrl},
-       zuoyouqingxie:{name:'左右倾斜',img:''},
-       qianhouqingxie:{name:'前后倾斜',img:''},
-       shuijin:{name:'水浸',img:''},
-       fengji:{name:'风机',img:''},
-       led:{name:'LED',img:''},
-       fanglei:{name:'防雷',img:''},
-       jiaoliudianbaojing:{name:'交流电报警',img:''},
-       almmenci:{name:'门磁',img:''},
+      mediaTitleUrl: {
+        //bianhao:{name:'设备编号',img:'../../assets/StateImgs/bianhao.png'},
+        bianhao: { name: "设备编号", img: bianhaoUrl },
+        zuoyouqingxie: { name: "左右倾斜", img: zuoyouqingxieUrl },
+        qianhouqingxie: { name: "前后倾斜", img: qianhouqingxieUrl },
+        shuijin: { name: "水浸", img: shuijinUrl },
+        fengji: { name: "风机", img: fengjiUrl },
+        led: { name: "LED", img: ledUrl },
+        fanglei: { name: "防雷", img: fangleiUrl },
+        jiaoliudianbaojing: { name: "交流电报警", img: jiaoliudianbaojingUrl },
+        jiaoliudiaodian: { name: "交流掉电", img: jiaoliudiaodianUrl },
+        almmenci: { name: "门磁", img: menciUrl }
       },
       state_12_1: null,
       state_12_2: null,
@@ -237,27 +213,28 @@ export default {
         this.tableData2 = getTableTwoData(res.data[0]);
         this.mediaData = getMediaData(res.data[0]);
 
-        var switchUrl =
-          "api/Handler/AjaxTestHandler.ashx?mod=4&&Ws_code=" +
-          this.$route.params.wsCode;
-        this.$axios.get(switchUrl).then(res => {
-          console.log("----开关状态----");
-          console.log(res.data);
-          this.state_12_1 = getSwitchData(res.data[0]).state_12_1;
-          this.state_12_2 = getSwitchData(res.data[0]).state_12_2;
-          this.state_12_3 = getSwitchData(res.data[0]).state_12_3;
-          this.state_12_4 = getSwitchData(res.data[0]).state_12_4;
-          this.state_24_1 = getSwitchData(res.data[0]).state_24_1;
-          this.state_24_2 = getSwitchData(res.data[0]).state_24_2;
-          this.state_220_1 = getSwitchData(res.data[0]).state_220_1;
-          this.state_220_2 = getSwitchData(res.data[0]).state_220_2;
-          this.state_poe_1 = getSwitchData(res.data[0]).state_poe_1;
-          this.state_poe_2 = getSwitchData(res.data[0]).state_poe_2;
-          this.state_poe_3 = getSwitchData(res.data[0]).state_poe_3;
-          this.state_poe_4 = getSwitchData(res.data[0]).state_poe_4;
-          this.state_menci = getSwitchData(res.data[0]).state_menci;
-          console.log("-----------------");
-        });
+       //刷新开关状态
+        // var switchUrl =
+        //   "api/Handler/AjaxTestHandler.ashx?mod=4&&Ws_code=" +
+        //   this.$route.params.wsCode;
+        // this.$axios.get(switchUrl).then(res => {
+        //   console.log("----开关状态----");
+        //   console.log(res.data);
+        //   this.state_12_1 = getSwitchData(res.data[0]).state_12_1;
+        //   this.state_12_2 = getSwitchData(res.data[0]).state_12_2;
+        //   this.state_12_3 = getSwitchData(res.data[0]).state_12_3;
+        //   this.state_12_4 = getSwitchData(res.data[0]).state_12_4;
+        //   this.state_24_1 = getSwitchData(res.data[0]).state_24_1;
+        //   this.state_24_2 = getSwitchData(res.data[0]).state_24_2;
+        //   this.state_220_1 = getSwitchData(res.data[0]).state_220_1;
+        //   this.state_220_2 = getSwitchData(res.data[0]).state_220_2;
+        //   this.state_poe_1 = getSwitchData(res.data[0]).state_poe_1;
+        //   this.state_poe_2 = getSwitchData(res.data[0]).state_poe_2;
+        //   this.state_poe_3 = getSwitchData(res.data[0]).state_poe_3;
+        //   this.state_poe_4 = getSwitchData(res.data[0]).state_poe_4;
+        //   this.state_menci = getSwitchData(res.data[0]).state_menci;
+        //   console.log("-----------------");
+        // });
       });
     }
   },
@@ -518,5 +495,10 @@ function fillDataLength(data) {
 <style scoped>
 strong {
   color: orangered;
+}
+
+.mediaRow{
+  background-color:#eeeeee;
+  margin-bottom: 20px;
 }
 </style>

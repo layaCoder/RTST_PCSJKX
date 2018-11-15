@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="5">
+      <el-col :span="4" class="tree">
         <div id='tree'>
           <el-tree @node-click="handleNodeClick" :props="defaultProps" lazy :load="loadNode1"></el-tree>
         </div>
@@ -211,5 +211,9 @@ export default {
 
 .mainContent {
   background-color: antiquewhite;
+}
+
+.tree{
+  margin-right:25px;
 }
 </style>
