@@ -127,7 +127,7 @@ export default {
         url: url,
         method: "post",
         data: this.formObj,
-        transformRequest: [
+        transformRequest: [  //格式化数据，以表单格式提交
           function(data) {
             // Do whatever you want to transform the data
             let ret = "";
@@ -147,7 +147,6 @@ export default {
       }).then(res => { // axios post请求成功后执行
         //重新加载表格数据，刷新表格/////////////////////////
         var url = "api/Handler/AjaxTestHandler.ashx?mod=42";
-        console.log(url);
         this.$axios.get(url).then(res => {
           console.log(res.data);
           this.tableData = getTableData(res.data);
@@ -183,7 +182,6 @@ export default {
 function getTableData(data) {
   var array = [];
   for (var i = 0; i < data.length; i++) {
-    console.log(data[i]);
     array.push({
       ID: data[i].ID,
       ComName: data[i].ComName,

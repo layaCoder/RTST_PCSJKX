@@ -300,6 +300,8 @@ export default {
     //   //【计时器、定时器】设置页面刷新时间
     //   setInterval(this.timer, 10000);
     // });
+
+    //定时函数
     this._timeOut = setInterval(this.timer, 2000);
   },
   beforeDestroy() {
