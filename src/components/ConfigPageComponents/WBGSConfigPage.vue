@@ -40,14 +40,14 @@
         <!-- <span>这是一段信息</span> -->
         <el-form :v-model="formObj" ref="formObj">
           <el-row>
-            <el-col :span="12">
-              <span>公司ID</span>
-              <el-input v-model="formObj.ID" placeholder="请输入内容" :disabled="true"></el-input>
-            </el-col>
-            <el-col :span="12">
-              <span>公司名称</span>
-              <el-input v-model="formObj.ComName" placeholder="请输入内容"></el-input>
-            </el-col>
+            <el-input v-model="formObj.ID" placeholder="请输入内容" :disabled="true">
+              <template slot="prepend">公司ID</template>
+            </el-input>
+          </el-row>
+          <el-row>
+            <el-input v-model="formObj.ComName" placeholder="请输入内容">
+              <template slot="prepend">公司名称</template>
+            </el-input>
           </el-row>
           <el-form-item>
             <el-button type="primary" @click="handleSubmit('formObj')">提交</el-button>
@@ -96,6 +96,39 @@ export default {
     },
     handleDelete(index, row) {
       console.log(index, row);
+      this.$confirm("确认删除此条信息？", "提示", {
+        confirmButtonTest: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          var url = "api/Handler/AjaxTestHandler.ashx?mod=33";
+          this.$axios({
+            url: url,
+            method: "post",
+            params: { ID: row.ID }
+          }).then(res => {
+            console.log(res);
+          });
+          // axios post请求成功后执行
+          //重新加载表格数据，刷新表格/////////////////////////
+          var url = "api/Handler/AjaxTestHandler.ashx?mod=42";
+          this.$axios.get(url).then(res => {
+            console.log(res.data);
+            this.tableData = getTableData(res.data);
+          });
+          //////////////////////////////////////////////////
+          this.$message({
+            type: "success",
+            message: "删除成功"
+          });
+        })
+        .catch(() => {
+          this.message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
     },
     handleShowDialog() {
       this.formType = 0; //表单type=0，表示为新增方法
@@ -120,7 +153,7 @@ export default {
     handleSubmit: function(e) {
       //axios post提交表单
       if (this.formType === 0) {
-        this.formObj.ID = 0;
+        this.formObj.ID = 0; //标记ID为0，后台识别为新增方法
       }
       var url = "api/Handler/AjaxTestHandler.ashx?mod=31";
       this.$axios({
