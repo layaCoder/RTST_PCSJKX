@@ -139,8 +139,9 @@
 </template>
 
 <script>
-import mediaPart from "../parts/MediaPart.vue";
 
+import mediaPart from "../parts/MediaPart.vue";
+//图片rul
 import bianhaoUrl from "../../assets/StateImgs/bianhao.png";
 import zuoyouqingxieUrl from "../../assets/StateImgs/zuoyouqingxie.png";
 import qianhouqingxieUrl from "../../assets/StateImgs/shangxiaqingxie.png";
