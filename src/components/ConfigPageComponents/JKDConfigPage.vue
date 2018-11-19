@@ -31,7 +31,7 @@
         </el-table-column>
         <el-table-column prop="WS_Operators" label="维护人员ID">
         </el-table-column>
-         <el-table-column prop="WS_IP" label="IP地址">
+        <el-table-column prop="WS_IP" label="IP地址">
         </el-table-column>
         <el-table-column label="操作" width="180px">
           <template slot-scope="scope">
@@ -48,9 +48,9 @@
     </el-row>
     <!--新增/修改 模态框 -->
     <div>
-      <el-dialog :title="this.formType==0?'新增监控点信息':'修改监控点信息'" :visible.sync="dialogVisible" width="60%" :before-close="handleClose" >
+      <el-dialog :title="this.formType==0?'新增监控点信息':'修改监控点信息'" :visible.sync="dialogVisible" width="60%" :before-close="handleClose">
         <!-- <span>这是一段信息</span> -->
-        <el-form :v-model="formObj" ref="formObj" >
+        <el-form :v-model="formObj" ref="formObj">
           <el-row class="modalRow">
             <el-col :span="12">
               <el-input v-model="formObj.WS_ID" placeholder="请输入内容" :disabled="true">
@@ -63,9 +63,9 @@
               </el-input>
             </el-col>
           </el-row>
-           <el-row class="modalRow">
+          <el-row class="modalRow">
             <el-col :span="12">
-              <el-input v-model="formObj.WS_SysCode" placeholder="请输入内容" >
+              <el-input v-model="formObj.WS_SysCode" placeholder="请输入内容">
                 <template slot="prepend">派出所编码</template>
               </el-input>
             </el-col>
@@ -75,7 +75,7 @@
               </el-input>
             </el-col>
           </el-row>
-           <el-row class="modalRow">
+          <el-row class="modalRow">
             <el-col :span="12">
               <el-input v-model="formObj.WS_Org_Code" placeholder="请输入内容">
                 <template slot="prepend">责任人ID</template>
@@ -87,7 +87,7 @@
               </el-input>
             </el-col>
           </el-row>
-           <el-row class="modalRow">
+          <el-row class="modalRow">
             <el-col :span="12">
               <el-input v-model="formObj.WS_DWSCode" placeholder="请输入内容">
                 <template slot="prepend">设备代码</template>
@@ -99,9 +99,9 @@
               </el-input>
             </el-col>
           </el-row>
-           <el-row class="modalRow">
+          <el-row class="modalRow">
             <el-col :span="12">
-              <el-input v-model="formObj.WS_Latitude" placeholder="请输入内容" >
+              <el-input v-model="formObj.WS_Latitude" placeholder="请输入内容">
                 <template slot="prepend">纬度</template>
               </el-input>
             </el-col>
@@ -111,13 +111,13 @@
               </el-input>
             </el-col>
           </el-row>
-           <el-row class="modalRow">
+          <el-row class="modalRow">
             <el-col :span="12">
-              <el-input v-model="formObj.WS_IP" placeholder="请输入内容" >
+              <el-input v-model="formObj.WS_IP" placeholder="请输入内容">
                 <template slot="prepend">IP地址</template>
               </el-input>
             </el-col>
-           
+
           </el-row>
 
           <el-form-item>
@@ -171,8 +171,18 @@ export default {
     handleEdit(index, row) {
       this.formType = 1; //表单type=1，表示为修改方法
       this.dialogVisible = true;
-      this.formObj.ComName = row.ComName;
-      this.formObj.ID = row.ID;
+      this.formObj.WS_ID = row.WS_ID;
+      this.formObj.WS_Name = row.WS_Name;
+      this.formObj.WS_Area_Code = row.WS_Area_Code;
+      this.formObj.WS_Code = row.WS_Code;
+      this.formObj.WS_DWSCode = row.WS_DWSCode;
+      this.formObj.WS_IP = row.WS_IP;
+      this.formObj.WS_Latitude = row.WS_Latitude;
+      this.formObj.WS_Longitude = row.WS_Longitude;
+      this.formObj.WS_Num = row.WS_Num;
+      this.formObj.WS_Operators = row.WS_Operators;
+      this.formObj.WS_Org_Code = row.WS_Org_Code;
+      this.formObj.WS_SysCode = row.WS_SysCode;
       console.log(index, row);
     },
     handleDelete(index, row) {
@@ -235,44 +245,46 @@ export default {
       //axios post提交表单
       if (this.formType === 0) {
         this.formObj.ID = 0; //标记ID为0，后台识别为新增方法
+        console.log(this.formObj);
       }
-      var url = "api/Handler/AjaxTestHandler.ashx?mod=31";
-      // this.$axios({
-      //   url: url,
-      //   method: "post",
-      //   data: this.formObj,
-      //   transformRequest: [
-      //     //格式化数据，以表单格式提交
-      //     function(data) {
-      //       // Do whatever you want to transform the data
-      //       let ret = "";
-      //       for (let it in data) {
-      //         ret +=
-      //           encodeURIComponent(it) +
-      //           "=" +
-      //           encodeURIComponent(data[it]) +
-      //           "&";
-      //       }
-      //       return ret;
-      //     }
-      //   ],
-      //   headers: {
-      //     "Content-Type": "application/x-www-form-urlencoded"
-      //   }
-      // })
-      //   .then(res => {
-      //     // axios post请求成功后执行
-      //     //重新加载表格数据，刷新表格/////////////////////////
-      //     var url = "api/Handler/AjaxTestHandler.ashx?mod=42";
-      //     this.$axios.get(url).then(res => {
-      //       console.log(res.data);
-      //       this.tableData = getTableData(res.data);
-      //     });
-      //     //////////////////////////////////////////////////
-      //   })
-      //  .catch(error => {
-      //    console.log(error);
-      //  });
+      var url = "api/Handler/AjaxTestHandler.ashx?mod=30";
+      this.$axios({
+        url: url,
+        method: "post",
+        data: this.formObj,
+        transformRequest: [
+          //格式化数据，以表单格式提交
+          function(data) {
+            // Do whatever you want to transform the data
+            let ret = "";
+            for (let it in data) {
+              ret +=
+                encodeURIComponent(it) +
+                "=" +
+                encodeURIComponent(data[it]) +
+                "&";
+            }
+            return ret;
+          }
+        ],
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      })
+        .then(res => {
+          // axios post请求成功后执行
+          //重新加载表格数据，刷新表格/////////////////////////
+          var url = "api/Handler/AjaxTestHandler.ashx?mod=2";
+          console.log(url);
+          this.$axios.get(url).then(res => {
+            console.log(res.data);
+            this.tableData = getTableData(res.data);
+          });
+          //////////////////////////////////////////////////
+        })
+        .catch(error => {
+          console.log(error);
+        });
 
       //模态框关闭显示
       this.dialogVisible = false;
@@ -321,17 +333,7 @@ function getTableData(data) {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-strong {
-  color: red;
-}
-
 .modalRow {
   margin-bottom: 20px;
 }
-
-.dialog{
-  width:80%
-}
-
- 
 </style>
