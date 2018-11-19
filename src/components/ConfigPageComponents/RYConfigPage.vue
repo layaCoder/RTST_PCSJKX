@@ -41,7 +41,7 @@
         <el-form :v-model="formObj" ref="formObj">
           <el-row class="modalRow">
             <el-col :span="12">
-              <el-input v-model="formObj.ID" placeholder="请输入内容">
+              <el-input v-model="formObj.ID" placeholder="请输入内容" :disabled="true">
                 <template slot="prepend">人员ID</template>
               </el-input>
             </el-col>
@@ -158,43 +158,48 @@ export default {
     },
     handleDelete(index, row) {
       console.log(index, row);
-      // this.$confirm("确认删除此条信息？", "提示", {
-      //   confirmButtonTest: "确定",
-      //   cancelButtonText: "取消",
-      //   type: "warning"
-      // })
-      //   .then(() => {
-      //     var url = "api/Handler/AjaxTestHandler.ashx?mod=33";
-      //     this.$axios({
-      //       url: url,
-      //       method: "post",
-      //       params: { ID: row.ID }
-      //     }).then(res => {
-      //       console.log(res);
-      //     });
-      //     // axios post请求成功后执行
-      //     //重新加载表格数据，刷新表格/////////////////////////
-      //     var url = "api/Handler/AjaxTestHandler.ashx?mod=42";
-      //     this.$axios.get(url).then(res => {
-      //       console.log(res.data);
-      //       this.tableData = getTableData(res.data);
-      //     });
-      //     //////////////////////////////////////////////////
-      //     this.$message({
-      //       type: "success",
-      //       message: "删除成功"
-      //     });
-      //   })
-      //   .catch(() => {
-      //     this.message({
-      //       type: "info",
-      //       message: "已取消删除"
-      //     });
-      //   });
+      this.$confirm("确认删除此条信息？", "提示", {
+        confirmButtonTest: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          var url = "api/Handler/AjaxTestHandler.ashx?mod=34";
+          this.$axios({
+            url: url,
+            method: "post",
+            params: { ID: row.ID }
+          }).then(res => {
+            console.log(res);
+          });
+          // axios post请求成功后执行
+          //重新加载表格数据，刷新表格/////////////////////////
+          var url = "api/Handler/AjaxTestHandler.ashx?mod=43";
+          this.$axios.get(url).then(res => {
+            console.log(res.data);
+            this.tableData = getTableData(res.data);
+          });
+          //////////////////////////////////////////////////
+          this.$message({
+            type: "success",
+            message: "删除成功"
+          });
+        })
+        .catch(() => {
+          this.message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
     },
     handleShowDialog() {
       this.formType = 0; //表单type=0，表示为新增方法
       this.formObj.ID = 0;
+      this.formObj.UserName='';
+      this.formObj.UserType = '';
+      this.formObj.UserOrg = '';
+      this.formObj.UserTel = '';
+
       this.dialogVisible = true;
     },
     handleClose(done) {
@@ -216,7 +221,7 @@ export default {
       if (this.formType === 0) {
         this.formObj.ID = 0; //标记ID为0，后台识别为新增方法
       }
-      var url = "api/Handler/AjaxTestHandler.ashx?mod=31";
+      var url = "api/Handler/AjaxTestHandler.ashx?mod=32";
       this.$axios({
         url: url,
         method: "post",
@@ -241,9 +246,14 @@ export default {
         }
       })
         .then(res => {
+          //消息框
+           this.$message({
+            type: "success",
+            message:this.formType===0? "添加成功":"修改成功"
+          });
           // axios post请求成功后执行
           //重新加载表格数据，刷新表格/////////////////////////
-          var url = "api/Handler/AjaxTestHandler.ashx?mod=42";
+          var url = "api/Handler/AjaxTestHandler.ashx?mod=43";
           this.$axios.get(url).then(res => {
             console.log(res.data);
             this.tableData = getTableData(res.data);
