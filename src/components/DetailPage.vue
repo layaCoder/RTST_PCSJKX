@@ -74,7 +74,7 @@ export default {
 
         this.$router.push({
           name: "equipState",
-          params: { wsCode: data.wsCode, ipAddress: data.ipAddress }
+          params: { wsCode: data.wsCode, ipAddress: data.ipAddress,isEquip:true }
         });
 
         //显示设备监控详情
@@ -83,7 +83,7 @@ export default {
 
         this.$router.push({
           name: "equipList",
-          params: { wsCode: data.wsCode, ipAddress: data.ipAddress }
+          params: { wsCode: data.wsCode, ipAddress: data.ipAddress,isEquip:false }
         });
         //显示地点详情
       }

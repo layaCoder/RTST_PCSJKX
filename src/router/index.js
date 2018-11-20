@@ -30,12 +30,12 @@ export default new Router({
           children:[
             {
               name:'equipState',
-              path:'equipState/:wsCode/:ipAddress',
+              path:'equipState/:wsCode/:ipAddress/:isEquip',
               component:EquipState
             },
             {
               name:'equipList',
-              path:'equipList/:wsCode/:ipAddress',
+              path:'equipList/:wsCode/:ipAddress/:isEquip',
               component:EquipList
             },
            
@@ -48,7 +48,8 @@ export default new Router({
         },
         {
           name:'reportPage',
-          path:'report',
+          path:'report/:wsCode/:ipAddress/:isEquip',
+          // path:'report',
           component:ReportPage
         },
         {
