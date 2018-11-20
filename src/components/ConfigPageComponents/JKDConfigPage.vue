@@ -224,17 +224,17 @@ export default {
     handleShowDialog() {
       this.formType = 0; //表单type=0，表示为新增方法
       this.formObj.WS_ID = 0;
-      this.formObj.WS_Name ='';
-      this.formObj.WS_Area_Code = '';
-      this.formObj.WS_Code = '';
-      this.formObj.WS_DWSCode = '';
-      this.formObj.WS_IP = '';
-      this.formObj.WS_Latitude ='';
-      this.formObj.WS_Longitude ='';
-      this.formObj.WS_Num ='';
-      this.formObj.WS_Operators = '';
-      this.formObj.WS_Org_Code = '';
-      this.formObj.WS_SysCode = '';
+      this.formObj.WS_Name = "";
+      this.formObj.WS_Area_Code = "";
+      this.formObj.WS_Code = "";
+      this.formObj.WS_DWSCode = "";
+      this.formObj.WS_IP = "";
+      this.formObj.WS_Latitude = "";
+      this.formObj.WS_Longitude = "";
+      this.formObj.WS_Num = "";
+      this.formObj.WS_Operators = "";
+      this.formObj.WS_Org_Code = "";
+      this.formObj.WS_SysCode = "";
       this.dialogVisible = true;
     },
     handleClose(done) {

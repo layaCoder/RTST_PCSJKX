@@ -19,9 +19,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-.el-footer{
-  background-color: #545c64
-}
+
 
 
 </style>

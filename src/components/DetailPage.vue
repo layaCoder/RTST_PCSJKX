@@ -7,7 +7,9 @@
         </div>
       </el-col>
       <el-col :span="19" id='mainContent'>
-        <div v-if="this.showHello" class="welcomeMessage"><h2>欢迎使用</h2></div>
+        <div v-if="this.showHello" class="welcomeMessage">
+          <h2>欢迎使用</h2>
+        </div>
         <router-view></router-view>
       </el-col>
     </el-row>
@@ -17,7 +19,7 @@
 export default {
   data() {
     return {
-      showHello:true, 
+      showHello: true,
       // data: [
       //   {
       //     label: "江岸区公安局",
@@ -70,22 +72,38 @@ export default {
     handleNodeClick(data) {
       //如果是设备
       if (data.isEquip === true) {
-        this.showHello=false
+        this.showHello = false;
 
         this.$router.push({
           name: "equipState",
-          params: { wsCode: data.wsCode, ipAddress: data.ipAddress,isEquip:true }
+          params: {
+            wsCode: data.wsCode,
+            ipAddress: data.ipAddress,
+            isEquip: true
+          }
         });
+        //使用store记录当前设备/////////////////////////////////
+        this.$store.commit("setEquip", { flag: true });
+        this.$store.commit("setWsCode", { wsCode: data.wsCode });
+        this.$store.commit("setIp", { ip: data.ipAddress });
+        ///////////////////////////////////////////////////////
 
-        //显示设备监控详情
+
       } else if (data.isEquip === false) {
-       this.showHello=false
-
+        this.showHello = false;
         this.$router.push({
           name: "equipList",
-          params: { wsCode: data.wsCode, ipAddress: data.ipAddress,isEquip:false }
+          params: {
+            wsCode: data.wsCode,
+            ipAddress: data.ipAddress,
+            isEquip: false
+          }
         });
-        //显示地点详情
+        //使用store记录当前设备/////////////////////////////////
+        this.$store.commit("setEquip", { flag: false });
+        this.$store.commit("setWsCode", { wsCode: data.wsCode });
+        this.$store.commit("setIp", { ip: data.ipAddress });
+        ///////////////////////////////////////////////////////
       }
     },
     loadNode1(node, resolve) {
@@ -210,7 +228,7 @@ export default {
 /* .el-main{
    background: #999
  } */
-  
+
 .el-tree-node__label {
   font-size: 20px;
 }
@@ -219,10 +237,10 @@ export default {
   background-color: antiquewhite;
 }
 
-.tree{
-  margin-right:25px;
+.tree {
+  margin-right: 25px;
 }
-.welcomeMessage{
-  height: 600px
+.welcomeMessage {
+  height: 600px;
 }
 </style>
