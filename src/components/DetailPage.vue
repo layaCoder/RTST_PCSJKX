@@ -77,9 +77,9 @@ export default {
         this.$router.push({
           name: "equipState",
           params: {
+            nodeLevel: data.nodeLevel,
             wsCode: data.wsCode,
-            ipAddress: data.ipAddress,
-            isEquip: true
+            ipAddress: data.ipAddress
           }
         });
         //使用store记录当前设备/////////////////////////////////
@@ -96,7 +96,7 @@ export default {
           params: {
             wsCode: data.wsCode,
             ipAddress: data.ipAddress,
-            isEquip: false
+            nodeLevel: data.nodeLevel
           }
         });
         //使用store记录当前设备/////////////////////////////////
@@ -126,12 +126,14 @@ export default {
         //   }
         //   // return resolve([{label:'江岸区公安局',isEquip:false,wsCod:'0003',ipAddress:'192.168.9.xxx'}]);
         // });
+        
         return resolve([
           {
             label: "江岸区公安局",
             isEquip: false,
             wsCode: "0003",
-            ipAddress: "192.168.9.xxx"
+            ipAddress: "192.168.9.xxx",
+            nodeLevel:0
           }
         ]);
       }
@@ -147,7 +149,8 @@ export default {
               ipAddress: "192.168.1.xxx", //测试数据
               children: [],
               isEquip: false,
-              isLeaf: "leaf"
+              isLeaf: "leaf",
+              nodeLevel:1
             };
             list.push(pcs);
           }
@@ -169,7 +172,8 @@ export default {
               ipAddress: res.data[i].WS_IP, //测试数据
               //children: [],
               isEquip: true,
-              leaf: true //表示为叶子节点，末位节点，不再执行懒加载
+              leaf: true, //表示为叶子节点，末位节点，不再执行懒加载
+              nodeLevel:2
             };
             list.push(equip);
           }
