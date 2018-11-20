@@ -1,6 +1,6 @@
 <template>
    <div>
-       <strong>Report Page</strong>
+       <h2>电能报表</h2>
    </div>
 </template>
 
@@ -19,8 +19,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-strong{
-    color:aqua;
-}
+
 
 </style>

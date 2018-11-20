@@ -1,5 +1,7 @@
 <template>
-   
+   <div >
+     <span>this is footer</span>
+   </div>
 </template>
 
 <script>
@@ -16,7 +18,10 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
+.el-footer{
+  background-color: #545c64
+}
 
 
 </style>

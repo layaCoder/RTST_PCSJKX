@@ -7,6 +7,7 @@
         </div>
       </el-col>
       <el-col :span="19" id='mainContent'>
+        <div v-if="this.showHello" class="welcomeMessage"><h2>欢迎使用</h2></div>
         <router-view></router-view>
       </el-col>
     </el-row>
@@ -16,6 +17,7 @@
 export default {
   data() {
     return {
+      showHello:true, 
       // data: [
       //   {
       //     label: "江岸区公安局",
@@ -68,6 +70,8 @@ export default {
     handleNodeClick(data) {
       //如果是设备
       if (data.isEquip === true) {
+        this.showHello=false
+
         this.$router.push({
           name: "equipState",
           params: { wsCode: data.wsCode, ipAddress: data.ipAddress }
@@ -75,6 +79,8 @@ export default {
 
         //显示设备监控详情
       } else if (data.isEquip === false) {
+       this.showHello=false
+
         this.$router.push({
           name: "equipList",
           params: { wsCode: data.wsCode, ipAddress: data.ipAddress }
@@ -215,5 +221,8 @@ export default {
 
 .tree{
   margin-right:25px;
+}
+.welcomeMessage{
+  height: 600px
 }
 </style>

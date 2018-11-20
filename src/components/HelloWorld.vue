@@ -80,4 +80,9 @@ li {
 a {
   color: #42b983;
 }
+
+
+.el-footer{
+  background-color: #545c64
+}
 </style>
