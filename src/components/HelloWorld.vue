@@ -53,7 +53,8 @@ export default {
           this.$router.push({ name: "alarmPage" });
           break;
         case "3":
-          this.$router.push({ name: "reportPage" });
+          //this.$router.push({ name: "reportPage"});
+          this.$router.push({ name: "reportPage" ,query:{nodeLevel:this.$store.state.nodeLevel}});
           break;
         case "4":
          this.$router.push({name:'configPage'})

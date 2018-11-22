@@ -10,6 +10,9 @@ import EquipList from '@/components/DetailPageComponents/EquipList'
 import JKDConfig from '@/components/ConfigPageComponents/JKDConfigPage'
 import RYConfig from '@/components/ConfigPageComponents/RYConfigPage'
 import WBGSConfig from '@/components/ConfigPageComponents/WBGSConfigPage'
+import DN1Page from '@/components/ReportPageComponents/DN1Page'
+import DN2Page from '@/components/ReportPageComponents/DN2Page'
+
 
 Vue.use(Router)
 
@@ -35,6 +38,7 @@ export default new Router({
             },
             {
               name:'equipList',
+              //path:'equipList',
               path:'equipList/:nodeLevel/:wsCode/:ipAddress',
               component:EquipList
             },
@@ -48,9 +52,23 @@ export default new Router({
         },
         {
           name:'reportPage',
-          path:'report/:nodeLevel/:wsCode/:ipAddress',
-          // path:'report',
-          component:ReportPage
+          //path:'report/:nodeLevel/:wsCode/:ipAddress',
+          path:'report',
+          component:ReportPage,
+          redirect:'report/dn1',
+          children:[
+            {
+              name:'DN1Page',
+              path:'dn1',
+              component:DN1Page
+            },
+            {
+              name:'DN2Page',
+              path:'dn2',
+              component:DN2Page
+            }
+
+          ]
         },
         {
           name:'configPage',

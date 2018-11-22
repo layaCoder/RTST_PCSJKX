@@ -79,13 +79,14 @@ export default {
           params: {
             nodeLevel: data.nodeLevel,
             wsCode: data.wsCode,
-            ipAddress: data.ipAddress
+            ipAddress: data.ipAddres
           }
         });
         //使用store记录当前设备/////////////////////////////////
         this.$store.commit("setEquip", { flag: true });
         this.$store.commit("setWsCode", { wsCode: data.wsCode });
         this.$store.commit("setIp", { ip: data.ipAddress });
+        this.$store.commit("setNodeLevle",{nodeLevel:data.nodeLevel})
         ///////////////////////////////////////////////////////
 
 
@@ -103,6 +104,7 @@ export default {
         this.$store.commit("setEquip", { flag: false });
         this.$store.commit("setWsCode", { wsCode: data.wsCode });
         this.$store.commit("setIp", { ip: data.ipAddress });
+        this.$store.commit("setNodeLevle",{nodeLevel:data.nodeLevel})
         ///////////////////////////////////////////////////////
       }
     },
@@ -140,6 +142,7 @@ export default {
       ////////////// 二级节点
       if (node.level === 1) {
         var list = [];
+        
         var url = "api/Handler/AjaxTestHandler.ashx?mod=40&&PCS_AreaID=3";
         this.$axios.get(url).then(res => {
           for (var i = 0; i < res.data.length; i++) {

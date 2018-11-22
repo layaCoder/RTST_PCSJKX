@@ -25,6 +25,9 @@ export default new Vuex.Store({
         },
         setIp(state, payload) {
             state.ip = payload.ip
+        },
+        setNodeLevle(state,payload){
+            state.nodeLevel=payload.nodeLevel
         }
     },
     getters: {
