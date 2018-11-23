@@ -79,32 +79,30 @@ export default {
           params: {
             nodeLevel: data.nodeLevel,
             wsCode: data.wsCode,
-            ipAddress: data.ipAddres
+            ipAddress: data.ipAddress
           }
         });
         //使用store记录当前设备/////////////////////////////////
         this.$store.commit("setEquip", { flag: true });
         this.$store.commit("setWsCode", { wsCode: data.wsCode });
         this.$store.commit("setIp", { ip: data.ipAddress });
-        this.$store.commit("setNodeLevle",{nodeLevel:data.nodeLevel})
+        this.$store.commit("setNodeLevle", { nodeLevel: data.nodeLevel });
         ///////////////////////////////////////////////////////
-
-
       } else if (data.isEquip === false) {
         this.showHello = false;
         this.$router.push({
           name: "equipList",
           params: {
+            nodeLevel: data.nodeLevel,
             wsCode: data.wsCode,
             ipAddress: data.ipAddress,
-            nodeLevel: data.nodeLevel
           }
         });
         //使用store记录当前设备/////////////////////////////////
         this.$store.commit("setEquip", { flag: false });
         this.$store.commit("setWsCode", { wsCode: data.wsCode });
         this.$store.commit("setIp", { ip: data.ipAddress });
-        this.$store.commit("setNodeLevle",{nodeLevel:data.nodeLevel})
+        this.$store.commit("setNodeLevle", { nodeLevel: data.nodeLevel });
         ///////////////////////////////////////////////////////
       }
     },
@@ -128,21 +126,21 @@ export default {
         //   }
         //   // return resolve([{label:'江岸区公安局',isEquip:false,wsCod:'0003',ipAddress:'192.168.9.xxx'}]);
         // });
-        
+
         return resolve([
           {
             label: "江岸区公安局",
             isEquip: false,
             wsCode: "0003",
             ipAddress: "192.168.9.xxx",
-            nodeLevel:0
+            nodeLevel: 0
           }
         ]);
       }
       ////////////// 二级节点
       if (node.level === 1) {
         var list = [];
-        
+
         var url = "api/Handler/AjaxTestHandler.ashx?mod=40&&PCS_AreaID=3";
         this.$axios.get(url).then(res => {
           for (var i = 0; i < res.data.length; i++) {
@@ -153,7 +151,7 @@ export default {
               children: [],
               isEquip: false,
               isLeaf: "leaf",
-              nodeLevel:1
+              nodeLevel: 1
             };
             list.push(pcs);
           }
@@ -176,7 +174,7 @@ export default {
               //children: [],
               isEquip: true,
               leaf: true, //表示为叶子节点，末位节点，不再执行懒加载
-              nodeLevel:2
+              nodeLevel: 2
             };
             list.push(equip);
           }

@@ -60,86 +60,137 @@
         </el-table>
       </el-col>
       <el-col :span="8">
-      <table cellspacing="0" >
+        <table cellspacing="0">
           <tr>
             <th>开关名称</th>
             <th>开关状态</th>
           </tr>
           <tr>
-            <td> <span>12v-1</span></td>
-            <td><el-switch v-model="state_12_1" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
-          </el-switch></td>
+            <td>
+              <span>12v-1</span>
+            </td>
+            <td>
+              <el-switch v-model="state_12_1" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+              </el-switch>
+            </td>
           </tr>
-           <tr class="colored">
-            <td > <span>12v-2</span></td>
-            <td> <el-switch v-model="state_12_2" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
-          </el-switch></td>
+          <tr class="colored">
+            <td>
+              <span>12v-2</span>
+            </td>
+            <td>
+              <el-switch v-model="state_12_2" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+              </el-switch>
+            </td>
           </tr>
-           <tr>
-            <td> <span>12v-3</span></td>
-            <td> <el-switch v-model="state_12_3" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
-          </el-switch></td>
+          <tr>
+            <td>
+              <span>12v-3</span>
+            </td>
+            <td>
+              <el-switch v-model="state_12_3" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+              </el-switch>
+            </td>
           </tr>
-           <tr class="colored">
-            <td> <span>12v-4</span></td>
-            <td> <el-switch v-model="state_12_4" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
-          </el-switch></td>
+          <tr class="colored">
+            <td>
+              <span>12v-4</span>
+            </td>
+            <td>
+              <el-switch v-model="state_12_4" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+              </el-switch>
+            </td>
           </tr>
-           <tr>
-            <td> <span>24v-1</span></td>
-            <td> <el-switch v-model="state_24_1" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
-          </el-switch></td>
+          <tr>
+            <td>
+              <span>24v-1</span>
+            </td>
+            <td>
+              <el-switch v-model="state_24_1" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+              </el-switch>
+            </td>
           </tr>
-           <tr class="colored">
-            <td> <span>24v-2</span></td>
-            <td> <el-switch v-model="state_24_2" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
-          </el-switch></td>
+          <tr class="colored">
+            <td>
+              <span>24v-2</span>
+            </td>
+            <td>
+              <el-switch v-model="state_24_2" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+              </el-switch>
+            </td>
           </tr>
-           <tr >
-            <td> <span>220v-1</span></td>
-            <td> <el-switch v-model="state_220_1" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
-          </el-switch></td>
+          <tr>
+            <td>
+              <span>220v-1</span>
+            </td>
+            <td>
+              <el-switch v-model="state_220_1" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+              </el-switch>
+            </td>
           </tr>
-           <tr class="colored">
-            <td> <span>220v-2</span></td>
-            <td> <el-switch v-model="state_220_2" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
-          </el-switch></td>
+          <tr class="colored">
+            <td>
+              <span>220v-2</span>
+            </td>
+            <td>
+              <el-switch v-model="state_220_2" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+              </el-switch>
+            </td>
           </tr>
-           <tr>
-            <td> <span>poe-1</span></td>
-            <td> <el-switch v-model="state_poe_1" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
-          </el-switch></td>
+          <tr>
+            <td>
+              <span>poe-1</span>
+            </td>
+            <td>
+              <el-switch v-model="state_poe_1" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+              </el-switch>
+            </td>
           </tr>
-           <tr class="colored">
-            <td> <span>poe-2</span></td>
-            <td><el-switch v-model="state_poe_2" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
-          </el-switch></td>
+          <tr class="colored">
+            <td>
+              <span>poe-2</span>
+            </td>
+            <td>
+              <el-switch v-model="state_poe_2" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+              </el-switch>
+            </td>
           </tr>
-           <tr>
-            <td> <span>poe-3</span></td>
-            <td> <el-switch v-model="state_poe_3" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
-          </el-switch></td>
+          <tr>
+            <td>
+              <span>poe-3</span>
+            </td>
+            <td>
+              <el-switch v-model="state_poe_3" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+              </el-switch>
+            </td>
           </tr>
-           <tr  class="colored">
-            <td> <span>poe-4</span></td>
-            <td> <el-switch v-model="state_poe_3" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
-          </el-switch></td>
+          <tr class="colored">
+            <td>
+              <span>poe-4</span>
+            </td>
+            <td>
+              <el-switch v-model="state_poe_3" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+              </el-switch>
+            </td>
           </tr>
-           <tr>
-            <td> <span>门磁</span></td>
-            <td><el-switch v-model="state_menci" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
-          </el-switch></td>
+          <tr>
+            <td>
+              <span>门磁</span>
+            </td>
+            <td>
+              <el-switch v-model="state_menci" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+              </el-switch>
+            </td>
           </tr>
         </table>
 
       </el-col>
-     
+
     </el-row>
   </div>
 </template>
 
 <script>
-
 import mediaPart from "../parts/MediaPart.vue";
 //图片rul
 import bianhaoUrl from "../../assets/StateImgs/bianhao.png";
@@ -511,27 +562,25 @@ strong {
 }
 
 .el-switch {
-  height:35px;
+  height: 35px;
 }
 
-table{
-   font-size: 14px;
-   color:#5a5a5a
+table {
+  font-size: 14px;
+  color: #5a5a5a;
 }
 
-table th{
-   height: 50px;
-   border-bottom: 1px solid #eeeeee
+table th {
+  height: 50px;
+  border-bottom: 1px solid #eeeeee;
 }
 
 table td {
   width: 150px;
-   border-bottom: 1px solid #eeeeee
-
+  border-bottom: 1px solid #eeeeee;
 }
 
-
-.colored{
-  background-color:#fafafa;
+.colored {
+  background-color: #fafafa;
 }
 </style>

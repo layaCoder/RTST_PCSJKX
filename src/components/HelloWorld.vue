@@ -54,10 +54,13 @@ export default {
           break;
         case "3":
           //this.$router.push({ name: "reportPage"});
-          this.$router.push({ name: "reportPage" ,query:{nodeLevel:this.$store.state.nodeLevel}});
+          this.$router.push({
+            name: "reportPage",
+            query: { nodeLevel: this.$store.state.nodeLevel }
+          });
           break;
         case "4":
-         this.$router.push({name:'configPage'})
+          this.$router.push({ name: "configPage" });
       }
     }
   }
@@ -82,8 +85,7 @@ a {
   color: #42b983;
 }
 
-
-.el-footer{
-  background-color: #545c64
+.el-footer {
+  background-color: #545c64;
 }
 </style>
