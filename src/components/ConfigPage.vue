@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div class="main">
         <el-row>
-            <el-col :span="4">
-                <el-menu mode="vertical" :default-openeds="['1']" default-active="1-1" class="el-menu-vertical-demo" @select="handleSelect" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+            <el-col :span="3">
+                <el-menu mode="vertical" :default-openeds="['1']" default-active="1-1" class="el-menu-vertical-demo" @select="handleSelect" @open="handleOpen" @close="handleClose" background-color="#172850" text-color="#fff" active-text-color="#59b0ff">
                     <el-submenu index="1">
                         <template slot="title">
                             <i class="el-icon-location"></i>
@@ -25,7 +25,7 @@
 
                 </el-menu>
             </el-col>
-            <el-col :span="20">
+            <el-col :span="21" class="table">
                 <router-view/>
             </el-col>
         </el-row>
@@ -67,5 +67,14 @@ export default {
 <style scoped>
 strong {
   color: red;
+}
+
+.main{
+    background: #172850;
+    padding: 0px;
+}
+
+.table{
+    background: #ffffff
 }
 </style>

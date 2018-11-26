@@ -2,7 +2,7 @@
   <div class="hello">
     <el-container>
       <el-header>
-        <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+        <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#172850" text-color="#fff" active-text-color="#59b0ff">
           <el-menu-item index="1">站点详情</el-menu-item>
           <el-menu-item index="2">告警统计</el-menu-item>
           <!-- <el-submenu index="2">
@@ -87,8 +87,16 @@ li {
 a {
   color: #42b983;
 }
+.el-header{
+  padding:0;
+}
 
 .el-footer {
-  background-color: #545c64;
+  background-color: #172850;
 }
+
+.el-main{
+  padding:2px 0px;
+}
+
 </style>

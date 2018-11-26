@@ -1,23 +1,8 @@
 <template>
-  <div>
-    <h2>电能报表</h2>
-    <div>[url]节点编号 {{this.$route.params.wsCode}}</div>
-    <div>[url]节点ip {{this.$route.params.ipAddress}}</div>
-    <div>[url]节点等级{{this.$route.params.nodeLevel}}</div>
-    <div>----------------------------</div>
-    <div>[store]count:{{count}}</div>
-    <div>[store]节点编号{{wsCode}}</div>
-    <div>[store]节点ip{{ip}}</div>
-    <div>[store]是否为终端设备{{isEquip}}</div>
-    <div>[store]nodeLevel{{nodeLevel}}</div>
+  <div class="main">
     <el-row>
       <el-col :span="3">
-      </el-col>
-    </el-row>
-
-    <el-row>
-      <el-col :span="4">
-        <el-menu mode="vertical" :default-openeds="['1']" default-active="1-1" class="el-menu-vertical-demo" @select="handleSelect" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+        <el-menu mode="vertical" :default-openeds="['1']" default-active="1-1" class="el-menu-vertical-demo" @select="handleSelect" @open="handleOpen" @close="handleClose" background-color="#172850" text-color="#fff" active-text-color="#59b0ff">
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-location"></i>
@@ -30,7 +15,6 @@
             </el-menu-item-group>
             <!-- <el-menu-item-group title="分组2"> -->
             <!-- </el-menu-item-group> -->
-
           </el-submenu>
           <!-- <el-menu-item index="2">
                         <i class="el-icon-menu"></i>
@@ -39,7 +23,20 @@
 
         </el-menu>
       </el-col>
-      <el-col :span="20">
+      <el-col :span="21" class="content">
+
+       
+        <h2>电能报表</h2>
+    <div>[url]节点编号 {{this.$route.params.wsCode}}</div>
+    <div>[url]节点ip {{this.$route.params.ipAddress}}</div>
+    <div>[url]节点等级{{this.$route.params.nodeLevel}}</div>
+    <div>----------------------------</div>
+    <div>[store]count:{{count}}</div>
+    <div>[store]节点编号{{wsCode}}</div>
+    <div>[store]节点ip{{ip}}</div>
+    <div>[store]是否为终端设备{{isEquip}}</div>
+    <div>[store]nodeLevel{{nodeLevel}}</div>
+     <div>----------router view--------------</div>
         <router-view/>
       </el-col>
     </el-row>
@@ -104,6 +101,14 @@ export default {
 };
 </script>
 
+
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.main{
+  background-color: #172850
+}
+.content{
+  background-color: #ffffff
+}
 </style>

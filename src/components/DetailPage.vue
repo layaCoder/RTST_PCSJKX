@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="4" class="tree">
         <div id='tree'>
-          <el-tree @node-click="handleNodeClick" :props="defaultProps" lazy :load="loadNode1"></el-tree>
+          <el-tree @node-click="handleNodeClick" :props="defaultProps" :load="loadNode1" :highlight-current=true  lazy></el-tree>
         </div>
       </el-col>
       <el-col :span="19" id='mainContent'>
@@ -228,15 +228,36 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .el-tree {
-  background-color: aliceblue;
+  background-color: #ffffff;
+  border: 0.1px solid #999999;
+  border-radius: 10px
 }
 /* .el-main{
    background: #999
  } */
 
 .el-tree-node__label {
-  font-size: 20px;
+  font-size: 17px;
 }
+.el-tree-node__content{
+   border: 0.1px solid #999999;
+   height: 35px;
+}
+
+/* hover样式 */
+.el-tree-node__content:hover {
+background-color: #d1d1d1;
+}
+/* //点击的样式 */
+/* .el-tree-node:focus>.el-tree-node__content{
+background-color: yellow;
+} */
+
+.el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
+    background-color: #2578af;
+color: white;
+}
+
 
 .mainContent {
   background-color: antiquewhite;
@@ -248,4 +269,7 @@ export default {
 .welcomeMessage {
   height: 600px;
 }
+
+
+
 </style>
