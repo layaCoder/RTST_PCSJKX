@@ -15,43 +15,41 @@
       </el-col>
     </el-row>
 
-
     <el-row>
-            <el-col :span="4">
-                <el-menu mode="vertical" :default-openeds="['1']" default-active="1-1" class="el-menu-vertical-demo" @select="handleSelect" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
-                    <el-submenu index="1">
-                        <template slot="title">
-                            <i class="el-icon-location"></i>
-                            <span>基础信息设置</span>
-                        </template>
-                        <el-menu-item-group>
-                            <template slot="title">分组一</template>
-                            <el-menu-item index="1-1">电能详情</el-menu-item>
-                            <el-menu-item index="1-2">电能月报</el-menu-item>
-                        </el-menu-item-group>
-                        <!-- <el-menu-item-group title="分组2"> -->
-                        <!-- </el-menu-item-group> -->
+      <el-col :span="4">
+        <el-menu mode="vertical" :default-openeds="['1']" default-active="1-1" class="el-menu-vertical-demo" @select="handleSelect" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+          <el-submenu index="1">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>基础信息设置</span>
+            </template>
+            <el-menu-item-group>
+              <template slot="title">分组一</template>
+              <el-menu-item index="1-1">电能详情</el-menu-item>
+              <el-menu-item index="1-2">电能月报</el-menu-item>
+            </el-menu-item-group>
+            <!-- <el-menu-item-group title="分组2"> -->
+            <!-- </el-menu-item-group> -->
 
-                    </el-submenu>
-                    <!-- <el-menu-item index="2">
+          </el-submenu>
+          <!-- <el-menu-item index="2">
                         <i class="el-icon-menu"></i>
                         <span slot="title">导航二</span>
                     </el-menu-item> -->
 
-                </el-menu>
-            </el-col>
-            <el-col :span="20">
-                <router-view/>
-            </el-col>
-        </el-row>
+        </el-menu>
+      </el-col>
+      <el-col :span="20">
+        <router-view/>
+      </el-col>
+    </el-row>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      searchType:1, // 选择查询类型，1：从今年1月1日至今 2：按照指定时间段
-
+      searchType: 1 // 选择查询类型，1：从今年1月1日至今 2：按照指定时间段
     };
   },
   computed: {
@@ -68,8 +66,8 @@ export default {
     ip() {
       return this.$store.state.ip;
     },
-    nodeLevel(){
-      return this.$store.state.nodeLevel
+    nodeLevel() {
+      return this.$store.state.nodeLevel;
     }
   },
   methods: {
@@ -80,16 +78,28 @@ export default {
       console.log(key, keyPath);
     },
     handleSelect(index, indexPath) {
-        
-        if(index==="1-1"){
- this.$router.push({ name: "DN1Page" });
-        }
-        else if(index==="1-2"){
- this.$router.push({ name: "DN2Page" });
-        }
-       
+      if (index === "1-1") {
+        this.$router.push({
+          name: "DN1Page",
+          query: {
+            nodeLevel: this.$store.state.nodeLevel,
+            wsCode: this.$store.state.wsCode,
+            ip: this.$store.state.ip,
+            isEquip: this.$store.state.isEquip
+          }
+        });
+      } else if (index === "1-2") {
+        this.$router.push({
+          name: "DN2Page",
+          query: {
+            nodeLevel: this.$store.state.nodeLevel,
+            wsCode: this.$store.state.wsCode,
+            ip: this.$store.state.ip,
+            isEquip: this.$store.state.isEquip
+          }
+        });
+      }
     }
-
   }
 };
 </script>

@@ -56,7 +56,10 @@ export default {
           //this.$router.push({ name: "reportPage"});
           this.$router.push({
             name: "reportPage",
-            query: { nodeLevel: this.$store.state.nodeLevel }
+            query: { nodeLevel: this.$store.state.nodeLevel ,
+                     wsCode:this.$store.state.wsCode,
+                     ip:this.$store.state.ip,
+                     isEquip:this.$store.state.isEquip}
           });
           break;
         case "4":
