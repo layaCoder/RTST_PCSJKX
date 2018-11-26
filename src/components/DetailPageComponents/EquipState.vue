@@ -15,7 +15,7 @@
         <mediaPart :stateName="this.mediaTitleUrl.shuijin.name" :stateValue="this.mediaData.shuijin" :stateImg="this.mediaTitleUrl.shuijin.img"></mediaPart>
       </el-col>
       <el-col :span="4">
-        <mediaPart :stateName="this.mediaTitleUrl.almmenci.name" :stateValue="this.mediaData.almmenci" :stateImg="this.mediaTitleUrl.almmenci.img"></mediaPart>
+        <mediaPartMenci :stateName="this.mediaTitleUrl.almmenci.name" :stateValue="this.mediaData.almmenci" :stateImg="this.mediaTitleUrl.almmenci.img"></mediaPartMenci>
       </el-col>
       <el-col :span="2"></el-col>
     </el-row>
@@ -169,7 +169,7 @@
               <span>poe-4</span>
             </td>
             <td>
-              <el-switch v-model="state_poe_3" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+              <el-switch v-model="state_poe_4" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
               </el-switch>
             </td>
           </tr>
@@ -178,8 +178,9 @@
               <span>门磁</span>
             </td>
             <td>
-              <el-switch v-model="state_menci" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
-              </el-switch>
+              <!-- <el-switch v-model="state_menci" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+              </el-switch> -->
+              <el-button type="success" @click="btnDoorOpen" :disabled="state_menci">开门按钮</el-button>
             </td>
           </tr>
         </table>
@@ -192,6 +193,7 @@
 
 <script>
 import mediaPart from "../parts/MediaPart.vue";
+import mediaPartMenci from "../parts/MediaPartMenci.vue";
 //图片rul
 import bianhaoUrl from "../../assets/StateImgs/bianhao.png";
 import zuoyouqingxieUrl from "../../assets/StateImgs/zuoyouqingxie.png";
@@ -205,7 +207,7 @@ import jiaoliudiaodianUrl from "../../assets/StateImgs/baojing.png";
 import menciUrl from "../../assets/StateImgs/menci.png";
 
 export default {
-  components: { mediaPart },
+  components: { mediaPart,mediaPartMenci },
   data() {
     return {
       wsCode: this.$route.params.wsCode,
@@ -253,6 +255,9 @@ export default {
     };
   },
   methods: {
+    btnDoorOpen:function(){
+     alert('door open!!!')
+    },
     //开关change事件
     changeStatus: function($event, num) {
       alert("on change func running！！！！");
@@ -265,12 +270,16 @@ export default {
         this.$route.params.wsCode;
       this.$axios.get(url).then(res => {
         console.log("----刷新设备状态----");
+        console.log(this.state_menci)
         console.log(res.data);
         console.log("---------------");
         //加载数据列表
         this.tableData = getTableOneData(res.data[0]);
         this.tableData2 = getTableTwoData(res.data[0]);
         this.mediaData = getMediaData(res.data[0]);
+       
+       //重新给门磁开关按钮赋值，控制btn disable属性
+       this.state_menci=this.mediaData.almmenci==='关闭'?false:true
 
         //刷新开关状态
         // var switchUrl =
@@ -528,7 +537,7 @@ function getSwitchData(data) {
     state_poe_2: BITValueB[6] === "0" ? false : true,
     state_poe_3: BITValueB[5] === "0" ? false : true,
     state_poe_4: BITValueB[4] === "0" ? false : true,
-    state_menci: BITValueB[0] === "0" ? false : true
+    state_menci: BITValueB[0] === "0" ? false : true,
   };
   return obj;
 }
