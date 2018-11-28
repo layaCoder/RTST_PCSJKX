@@ -95,6 +95,8 @@
 </template>
 
 <script>
+import API from '../../apis/index.js'
+
 export default {
   data() {
     return {
@@ -164,7 +166,7 @@ export default {
         type: "warning"
       })
         .then(() => {
-          var url = "api/Handler/AjaxTestHandler.ashx?mod=34";
+          let url = API.delUserInfo.devUrl
           this.$axios({
             url: url,
             method: "post",
@@ -174,8 +176,8 @@ export default {
           });
           // axios post请求成功后执行
           //重新加载表格数据，刷新表格/////////////////////////
-          var url = "api/Handler/AjaxTestHandler.ashx?mod=43";
-          this.$axios.get(url).then(res => {
+          let url2 = API.getUserInfoAll.devUrl
+          this.$axios.get(url2).then(res => {
             console.log(res.data);
             this.tableData = getTableData(res.data);
           });
@@ -221,7 +223,7 @@ export default {
       if (this.formType === 0) {
         this.formObj.ID = 0; //标记ID为0，后台识别为新增方法
       }
-      var url = "api/Handler/AjaxTestHandler.ashx?mod=32";
+      let url = API.addOrUpdateUser.devUrl
       this.$axios({
         url: url,
         method: "post",
@@ -253,7 +255,7 @@ export default {
           });
           // axios post请求成功后执行
           //重新加载表格数据，刷新表格/////////////////////////
-          var url = "api/Handler/AjaxTestHandler.ashx?mod=43";
+          let url = API.getUserInfoAll.devUrl
           this.$axios.get(url).then(res => {
             console.log(res.data);
             this.tableData = getTableData(res.data);
@@ -282,14 +284,14 @@ export default {
 
   mounted: function() {
     //mod:43 加载主表格数据
-    var url = "api/Handler/AjaxTestHandler.ashx?mod=43";
+    let url = API.getUserInfoAll.devUrl
     this.$axios.get(url).then(res => {
       console.log(res.data);
       this.tableData = getTableData(res.data);
     });
 
     // mod:42 加载第三方维保单位select选项
-    var url2 = "api/Handler/AjaxTestHandler.ashx?mod=42";
+    var url2 = API.getCompany.devUrl
     this.$axios.get(url2).then(res => {
       var compArray = [];
       for (var i = 0; i < res.data.length; i++) {
@@ -302,7 +304,7 @@ export default {
     });
 
     // mod:40  加载派出所select选项， attention:此处现只加载了江岸区所有派出所，所以PCS_AreaID=3
-    var url3 = "api/Handler/AjaxTestHandler.ashx?mod=40&&PCS_AreaID=3";
+    let url3 = API.getPCS.devUrl
     this.$axios.get(url3).then(res => {
       var PcsArray = [];
       for (var i = 0; i < res.data.length; i++) {

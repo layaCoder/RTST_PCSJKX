@@ -192,6 +192,8 @@
 </template>
 
 <script>
+import API from '../../apis/index.js'
+
 import mediaPart from "../parts/MediaPart.vue";
 import mediaPartMenci from "../parts/MediaPartMenci.vue";
 //图片rul
@@ -320,9 +322,11 @@ export default {
       console.log(dataArray);
     },
     timer: function() {
-      var url =
-        "api/Handler/AjaxTestHandler.ashx?mod=3&&Ws_code=" +
-        this.$route.params.wsCode;
+      // var url =
+      //   "api/Handler/AjaxTestHandler.ashx?mod=3&&Ws_code=" +
+      //   this.$route.params.wsCode;
+
+        let url=API.getWorkSiteInfoById.devUrl+this.$route.params.wsCode;
       this.$axios.get(url).then(res => {
         console.log("----刷新设备状态----");
         console.log(res.data);
@@ -368,9 +372,11 @@ export default {
       if (this.$route.params.wsCode) {
         // 判断条件1  判断传递值的变化
         //this.wsCode=this.$route.params.wsCode
-        var url =
-          "api/Handler/AjaxTestHandler.ashx?mod=3&&Ws_code=" +
-          this.$route.params.wsCode;
+        // var url =
+        //   "api/Handler/AjaxTestHandler.ashx?mod=3&&Ws_code=" +
+        //   this.$route.params.wsCode;
+        let url=API.getWorkSiteInfoById.devUrl+this.$route.params.wsCode;
+
         console.log(url);
         this.$axios.get(url).then(res => {
           if (res.data.length > 0) {
@@ -379,17 +385,15 @@ export default {
             this.tableData2 = getTableTwoData(res.data[0]);
             this.mediaData = getMediaData(res.data[0]);
           } else if (res.data.length === 0) {
-            //如果没有设备数据
+            //如果没有设备数据果没有设备数据
             this.tableData = [];
             alert("此派出所管辖区内未安装设备");
           }
 
           //this.tableData.push({attr:'ajax数据',value:res.data[0].DS_DC12dy})
         });
-
-        var switchUrl =
-          "api/Handler/AjaxTestHandler.ashx?mod=4&&Ws_code=" +
-          this.$route.params.wsCode;
+        
+          let switchUrl= API.getSwitchStateById.devUrl+this.$route.params.wsCode;
         this.$axios.get(switchUrl).then(res => {
           console.log("----【开关状态】----");
           console.log(res.data);
@@ -429,9 +433,9 @@ export default {
   //created方法只会执行一次，后续data刷新不会运行
   created: function() {
     //ajax获取设备状态并填充页面数据
-    var url =
-      "api/Handler/AjaxTestHandler.ashx?mod=3&&Ws_code=" +
-      this.$route.params.wsCode;
+    
+    let url =API.getWorkSiteInfoById.devUrl+ this.$route.params.wsCode;
+
     console.log(url);
     // this.$axios.get("api/Handler/AjaxTestHandler.ashx?mod=2").then(res=>{
     this.$axios.get(url).then(res => {
@@ -443,9 +447,8 @@ export default {
       this.tableData2 = getTableTwoData(res.data[0]);
       this.mediaData = getMediaData(res.data[0]);
       //ajax初始化switch状态
-      var switchUrl =
-        "api/Handler/AjaxTestHandler.ashx?mod=4&&Ws_code=" +
-        this.$route.params.wsCode;
+     
+      let switchUrl = API.getSwitchStateById.devUrl+this.$route.params.wsCode;
       this.$axios.get(switchUrl).then(res => {
         console.log("----开关状态----");
         this.state_12_1 = getSwitchData(res.data[0]).state_12_1;

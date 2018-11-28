@@ -135,6 +135,8 @@
 </template>
 
 <script>
+import API from '../../apis/index.js'
+
 export default {
   data() {
     return {
@@ -257,7 +259,7 @@ export default {
         this.formObj.ID = 0; //标记ID为0，后台识别为新增方法
         console.log(this.formObj);
       }
-      var url = "api/Handler/AjaxTestHandler.ashx?mod=30";
+      let url=API.addOrUpdateWorkSite.devUrl
       this.$axios({
         url: url,
         method: "post",
@@ -284,7 +286,9 @@ export default {
         .then(res => {
           // axios post请求成功后执行
           //重新加载表格数据，刷新表格/////////////////////////
-          var url = "api/Handler/AjaxTestHandler.ashx?mod=2";
+
+          //var url = "api/Handler/AjaxTestHandler.ashx?mod=2";
+          let url = API.getWorkSiteAll.devUrl
           console.log(url);
           this.$axios.get(url).then(res => {
             console.log(res.data);
@@ -301,7 +305,7 @@ export default {
     }
   },
   created: function() {
-    var url = "api/Handler/AjaxTestHandler.ashx?mod=2";
+    let url = API.getWorkSiteAll.devUrl
     console.log(url);
     this.$axios.get(url).then(res => {
       console.log(res.data);

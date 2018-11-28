@@ -64,6 +64,9 @@
 </template>
 
 <script>
+import API from '../../apis/index.js'
+
+
 export default {
   data() {
     return {
@@ -102,9 +105,9 @@ export default {
         type: "warning"
       })
         .then(() => {
-          var url = "api/Handler/AjaxTestHandler.ashx?mod=33";
+          let url2 = API.delCompany.devUrl
           this.$axios({
-            url: url,
+            url: url2,
             method: "post",
             params: { ID: row.ID }
           }).then(res => {
@@ -112,7 +115,7 @@ export default {
           });
           // axios post请求成功后执行
           //重新加载表格数据，刷新表格/////////////////////////
-          var url = "api/Handler/AjaxTestHandler.ashx?mod=42";
+          let url = API.getCompany.devUrl
           this.$axios.get(url).then(res => {
             console.log(res.data);
             this.tableData = getTableData(res.data);
@@ -155,7 +158,7 @@ export default {
       if (this.formType === 0) {
         this.formObj.ID = 0; //标记ID为0，后台识别为新增方法
       }
-      var url = "api/Handler/AjaxTestHandler.ashx?mod=31";
+      let url= API.addOrUpdateCompany.devUrl
       this.$axios({
         url: url,
         method: "post",
@@ -182,7 +185,7 @@ export default {
         .then(res => {
           // axios post请求成功后执行
           //重新加载表格数据，刷新表格/////////////////////////
-          var url = "api/Handler/AjaxTestHandler.ashx?mod=42";
+          var url = API.getCompany.devUrl
           this.$axios.get(url).then(res => {
             console.log(res.data);
             this.tableData = getTableData(res.data);
@@ -198,7 +201,7 @@ export default {
     }
   },
   created: function() {
-    var url = "api/Handler/AjaxTestHandler.ashx?mod=42";
+    let url = API.getCompany.devUrl
     console.log(url);
     this.$axios.get(url).then(res => {
       console.log(res.data);

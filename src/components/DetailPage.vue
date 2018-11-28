@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import api from '../apis/index.js'
+import API from '../apis/index.js'
 
 export default {
   data() {
@@ -142,10 +142,7 @@ export default {
       ////////////// 二级节点
       if (node.level === 1) {
         var list = [];
-
-        console.log(api)
-        let url=api.getPCS.devUrl
-        //var url = "api/Handler/AjaxTestHandler.ashx?mod=40&&PCS_AreaID=3";
+        let url=API.getPCS.devUrl
         this.$axios.get(url).then(res => {
           for (var i = 0; i < res.data.length; i++) {
             var pcs = {
@@ -165,9 +162,7 @@ export default {
       ////////////////三级节点
       if (node.level === 2) {
         var list = [];
-        var url =
-          "api/Handler/AjaxTestHandler.ashx?mod=41&&WS_SysCode=" +
-          node.data.wsCode;
+        let url=API.getWorkSiteById.devUrl+node.data.wsCode
         this.$axios.get(url).then(res => {
           console.log(res.data);
           for (var i = 0; i < res.data.length; i++) {
