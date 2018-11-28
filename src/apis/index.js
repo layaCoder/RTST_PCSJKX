@@ -10,7 +10,7 @@
         method:'getPCS',
         //PCS_AreaID=3 现只有一个区域，固定id=3
         devUrl:'api/Handler/AjaxTestHandler.ashx?mod=40&&PCS_AreaID=3',
-        productionUrl:''
+        productionUrl:'http://192.168.1.99:8235/Handler/AjaxTestHandler.ashx?mod=40&&PCS_AreaID=3'
     },
     getWorkSiteById:{
         name:'通过地区id获取所有设备信息',
@@ -84,6 +84,13 @@
         method:'GetWorkSiteState',
         devUrl:'api/Handler/AjaxTestHandler.ashx?mod=4&&Ws_code=',
         productionUrl:''
+    },
+    getSXJCompanyAll:{
+        name:'获取摄像机品牌列表',
+        method:'getSXJCompany',
+        devUrl:'api/Handler/AjaxTestHandler.ashx?mod=45',
+        productionUrl:''
     }
+
     
  }

@@ -10,6 +10,7 @@ import EquipList from '@/components/DetailPageComponents/EquipList'
 import JKDConfig from '@/components/ConfigPageComponents/JKDConfigPage'
 import RYConfig from '@/components/ConfigPageComponents/RYConfigPage'
 import WBGSConfig from '@/components/ConfigPageComponents/WBGSConfigPage'
+import SXJConfig from '@/components/ConfigPageComponents/SXJConfigPage'
 import DN1Page from '@/components/ReportPageComponents/DN1Page'
 import DN2Page from '@/components/ReportPageComponents/DN2Page'
 
@@ -91,6 +92,11 @@ export default new Router({
               name:'wbgsConfig',
               path:'wbgsConfig',
               component:WBGSConfig
+            },
+            {
+              name:'sxjConfig',
+              path:'sxjConfig',
+              component:SXJConfig
             }
           ]
         }

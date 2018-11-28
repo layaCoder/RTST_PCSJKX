@@ -16,7 +16,7 @@
                         <!-- <el-menu-item-group title="分组2"> -->
                         <el-menu-item index="1-3">维保单位管理</el-menu-item>
                         <!-- </el-menu-item-group> -->
-
+                         <el-menu-item index="1-4">摄像机管理</el-menu-item>
                     </el-submenu>
                     <!-- <el-menu-item index="2">
                         <i class="el-icon-menu"></i>
@@ -56,6 +56,9 @@ export default {
         }
         else if(index==="1-3"){
  this.$router.push({ name: "wbgsConfig" });
+        }
+        else if(index==='1-4'){
+            this.$router.push({name:"sxjConfig"})
         }
        
     }
