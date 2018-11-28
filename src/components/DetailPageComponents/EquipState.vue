@@ -255,6 +255,7 @@ export default {
     };
   },
   methods: {
+    //开门btn clikc事件
     btnDoorOpen: function() {
       let switch_12_1 = this.state_12_1 === false ? "0" : "1";
       let switch_12_2 = this.state_12_2 === false ? "0" : "1";
@@ -286,7 +287,7 @@ export default {
       console.log("door open ->");
       console.log(dataArray2);
     },
-    //开关change事件
+    //swtich change事件
     changeStatus: function($event, num) {
       let switch_12_1 = this.state_12_1 === false ? "0" : "1";
       let switch_12_2 = this.state_12_2 === false ? "0" : "1";

@@ -16,6 +16,8 @@
   </div>
 </template>
 <script>
+import api from '../apis/index.js'
+
 export default {
   data() {
     return {
@@ -141,7 +143,9 @@ export default {
       if (node.level === 1) {
         var list = [];
 
-        var url = "api/Handler/AjaxTestHandler.ashx?mod=40&&PCS_AreaID=3";
+        console.log(api)
+        let url=api.getPCS.devUrl
+        //var url = "api/Handler/AjaxTestHandler.ashx?mod=40&&PCS_AreaID=3";
         this.$axios.get(url).then(res => {
           for (var i = 0; i < res.data.length; i++) {
             var pcs = {
