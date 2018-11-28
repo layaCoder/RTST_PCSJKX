@@ -197,30 +197,6 @@ export default {
   }
 };
 
-// function getPcsList(data) {
-//   var pcsList = [
-//     {
-//       label: "江岸区分局",
-//       wsCode: "003",
-//       ipAddress: "192.168.2.xxx",
-//       children: [],
-//       isEquip: false,
-//       isLeaf: "leaf"
-//     }
-//   ];
-//   for (var i = 0; i < data.length; i++) {
-//     var pcs = {
-//       label: data[i].PCS_Name,
-//       wsCode: data[i].ID,
-//       ipAddress: "192.168.1.xxx", //测试数据
-//       children: [],
-//       isEquip: false,
-//       isLeaf: "leaf"
-//     };
-//     pcsList[0].children.push(pcs);
-//   }
-//   return pcsList;
-// }
 </script>
 
 

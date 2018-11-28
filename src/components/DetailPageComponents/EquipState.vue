@@ -207,7 +207,7 @@ import jiaoliudiaodianUrl from "../../assets/StateImgs/baojing.png";
 import menciUrl from "../../assets/StateImgs/menci.png";
 
 export default {
-  components: { mediaPart,mediaPartMenci },
+  components: { mediaPart, mediaPartMenci },
   data() {
     return {
       wsCode: this.$route.params.wsCode,
@@ -255,14 +255,68 @@ export default {
     };
   },
   methods: {
-    btnDoorOpen:function(){
-     alert('door open!!!')
+    btnDoorOpen: function() {
+      let switch_12_1 = this.state_12_1 === false ? "0" : "1";
+      let switch_12_2 = this.state_12_2 === false ? "0" : "1";
+      let switch_12_3 = this.state_12_3 === false ? "0" : "1";
+      let switch_12_4 = this.state_12_4 === false ? "0" : "1";
+      let switch_24_1 = this.state_24_1 === false ? "0" : "1";
+      let switch_24_2 = this.state_24_2 === false ? "0" : "1";
+      let switch_220_1 = this.state_220_1 === false ? "0" : "1";
+      let switch_220_2 = this.state_220_2 === false ? "0" : "1";
+      let switch_poe_1 = this.state_poe_1 === false ? "0" : "1";
+      let switch_poe_2 = this.state_poe_2 === false ? "0" : "1";
+      let switch_poe_3 = this.state_poe_3 === false ? "0" : "1";
+      let switch_poe_4 = this.state_poe_4 === false ? "0" : "1";
+      //门磁始终未 ‘0’ ，当初设计时 门磁 帧结构是 =1 则开门
+      //let switch_menci='0'
+
+      let dataArray2 = [
+        switch_220_2 +
+          switch_220_1 +
+          switch_24_2 +
+          switch_24_1 +
+          switch_12_4 +
+          switch_12_3 +
+          switch_12_2 +
+          switch_12_1,
+        "1000" + switch_poe_4 + switch_poe_3 + switch_poe_2 + switch_poe_1,
+        "00000000"
+      ];
+      console.log("door open ->");
+      console.log(dataArray2);
     },
     //开关change事件
     changeStatus: function($event, num) {
-      alert("on change func running！！！！");
+      let switch_12_1 = this.state_12_1 === false ? "0" : "1";
+      let switch_12_2 = this.state_12_2 === false ? "0" : "1";
+      let switch_12_3 = this.state_12_3 === false ? "0" : "1";
+      let switch_12_4 = this.state_12_4 === false ? "0" : "1";
+      let switch_24_1 = this.state_24_1 === false ? "0" : "1";
+      let switch_24_2 = this.state_24_2 === false ? "0" : "1";
+      let switch_220_1 = this.state_220_1 === false ? "0" : "1";
+      let switch_220_2 = this.state_220_2 === false ? "0" : "1";
+      let switch_poe_1 = this.state_poe_1 === false ? "0" : "1";
+      let switch_poe_2 = this.state_poe_2 === false ? "0" : "1";
+      let switch_poe_3 = this.state_poe_3 === false ? "0" : "1";
+      let switch_poe_4 = this.state_poe_4 === false ? "0" : "1";
+      //门磁始终未 ‘0’ ，当初设计时 门磁 帧结构是 =1 则开门
+      //let switch_menci='0'
+
+      let dataArray = [
+        switch_220_2 +
+          switch_220_1 +
+          switch_24_2 +
+          switch_24_1 +
+          switch_12_4 +
+          switch_12_3 +
+          switch_12_2 +
+          switch_12_1,
+        "0000" + switch_poe_4 + switch_poe_3 + switch_poe_2 + switch_poe_1,
+        "00000000"
+      ];
       console.log($event);
-      console.log(num);
+      console.log(dataArray);
     },
     timer: function() {
       var url =
@@ -270,16 +324,15 @@ export default {
         this.$route.params.wsCode;
       this.$axios.get(url).then(res => {
         console.log("----刷新设备状态----");
-        console.log(this.state_menci)
         console.log(res.data);
         console.log("---------------");
         //加载数据列表
         this.tableData = getTableOneData(res.data[0]);
         this.tableData2 = getTableTwoData(res.data[0]);
         this.mediaData = getMediaData(res.data[0]);
-       
-       //重新给门磁开关按钮赋值，控制btn disable属性
-       this.state_menci=this.mediaData.almmenci==='关闭'?false:true
+
+        //重新给门磁开关按钮赋值，控制btn disable属性
+        this.state_menci = this.mediaData.almmenci === "关闭" ? false : true;
 
         //刷新开关状态
         // var switchUrl =
@@ -337,7 +390,7 @@ export default {
           "api/Handler/AjaxTestHandler.ashx?mod=4&&Ws_code=" +
           this.$route.params.wsCode;
         this.$axios.get(switchUrl).then(res => {
-          console.log("----开关状态----");
+          console.log("----【开关状态】----");
           console.log(res.data);
           this.state_12_1 = getSwitchData(res.data[0]).state_12_1;
           this.state_12_2 = getSwitchData(res.data[0]).state_12_2;
@@ -365,8 +418,8 @@ export default {
     //   setInterval(this.timer, 10000);
     // });
 
-    //定时函数
-    this._timeOut = setInterval(this.timer, 2000);
+    //定时函数 计数器 计时器  定时刷新页面数据
+    this._timeOut = setInterval(this.timer, 60000);
   },
   beforeDestroy() {
     //摧毁定时器
@@ -537,7 +590,7 @@ function getSwitchData(data) {
     state_poe_2: BITValueB[6] === "0" ? false : true,
     state_poe_3: BITValueB[5] === "0" ? false : true,
     state_poe_4: BITValueB[4] === "0" ? false : true,
-    state_menci: BITValueB[0] === "0" ? false : true,
+    state_menci: BITValueB[0] === "0" ? false : true
   };
   return obj;
 }
