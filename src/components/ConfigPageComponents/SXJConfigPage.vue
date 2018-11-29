@@ -59,7 +59,7 @@
       </el-dialog>
     </div>
 <div>
-      <el-dialog :title="this.formType==0?'新增人员摄像机信息':'修改摄像机信息'" :visible.sync="dialogSxjVisible" width="60%" :before-close="handleClose">
+      <el-dialog :title="''" :visible.sync="dialogSxjVisible" width="80%" :before-close="handleClose" :modal-append-to-body='false'>
        <SXJConfigComponent :compId="compId" v-if="dialogSxjVisible"></SXJConfigComponent>
       </el-dialog>
 </div>

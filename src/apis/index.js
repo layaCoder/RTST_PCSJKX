@@ -106,6 +106,12 @@
         method:'GetC_SXJ',
         devUrl:'api/Handler/AjaxTestHandler.ashx?mod=47',
         productionUrl:''
+    },
+    addOrUpdateCamera:{
+        name:'新增或修改摄像机',
+        method:'RunC_SXJ',
+        devUrl:'api/Handler/AjaxTestHandler.ashx?mod=46',
+        productionUrl:''
     }
     
  }
