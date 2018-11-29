@@ -33,10 +33,11 @@
         </el-table-column>
         <el-table-column prop="WS_IP" label="IP地址">
         </el-table-column>
-        <el-table-column label="操作" width="180px">
+        <el-table-column label="操作" width="240px">
           <template slot-scope="scope">
             <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
             <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            <el-button size="mini" type="info" @click="handleShowSwitchModal(scope.$index,scope.row)">开关设置</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -117,9 +118,7 @@
                 <template slot="prepend">IP地址</template>
               </el-input>
             </el-col>
-
           </el-row>
-
           <el-form-item>
             <el-button type="primary" @click="handleSubmit('formObj')">提交</el-button>
             <el-button @click="dialogVisible = false">取消</el-button>
@@ -131,11 +130,61 @@
         </span> -->
       </el-dialog>
     </div>
+    <el-dialog :title="'开关设置'" :visible.sync="dialogSwitchVisible" width="60%" :before-close="handleClose">
+      <el-form :v-model="formSwitchObj" ref="formSwitchObj">
+        <el-row>
+          <el-col :span="8">
+            <span>12-1</span>
+            <el-switch v-model="switch_12_1" active-text="开启" inactive-text="关闭" @change="changeStatus($event)">
+            </el-switch>
+          </el-col>
+          <el-col :span="8">
+            <span class="selectLabel">品牌</span>
+            <el-select v-model="formSwitchObj.ckb_12_1.compId" placeholder="请选择">
+              <el-option v-for="item in optionsComp" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-col>
+          <el-col :span="8">
+            <span class="selectLabel">型号</span>
+            <el-select v-model="formSwitchObj.ckb_12_1.equipname" placeholder="请选择">
+              <el-option v-for="item in optionsEquipName" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="8">
+            <span>12-2</span>
+            <el-switch v-model="switch_12_2" active-text="开启" inactive-text="关闭" @change="changeStatus($event)">
+            </el-switch>
+          </el-col>
+          <el-col :span="8">
+            <span class="selectLabel">品牌</span>
+            <el-select v-model="formSwitchObj.ckb_12_2.compId" placeholder="请选择">
+              <el-option v-for="item in optionsComp" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-col>
+          <el-col :span="8">
+            <span class="selectLabel">型号</span>
+            <el-select v-model="formSwitchObj.ckb_12_2.equipname" placeholder="请选择">
+              <el-option v-for="item in optionsEquipName" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-col>
+        </el-row>
+      </el-form>
+    </el-dialog>
+    <!-- 开关设置模态框 -->
+    <div>
+
+    </div>
   </div>
 </template>
 
 <script>
-import API from '../../apis/index.js'
+import API from "../../apis/index.js";
 
 export default {
   data() {
@@ -155,6 +204,70 @@ export default {
         WS_Org_Code: "",
         WS_SysCode: ""
       },
+      switch_12_1: false,
+      switch_12_2: false,
+      formSwitchObj: {
+        ckb_12_1: {
+          active: "",
+          compId: "",
+          equipname: ""
+        },
+        ckb_12_2: {
+          active: false,
+          compId: "",
+          equipname: ""
+        },
+        ckb_12_3: {
+          active: false,
+          compId: "",
+          equipname: ""
+        },
+        ckb_12_4: {
+          active: false,
+          compId: "",
+          equipname: ""
+        },
+        ckb_24_1: {
+          active: false,
+          compId: "",
+          equipname: ""
+        },
+        ckb_24_2: {
+          active: false,
+          compId: "",
+          equipname: ""
+        },
+        ckb_220_1: {
+          active: false,
+          compId: "",
+          equipname: ""
+        },
+        ckb_220_2: {
+          active: false,
+          compId: "",
+          equipname: ""
+        },
+        ckb_poe_1: {
+          active: false,
+          compId: "",
+          equipname: ""
+        },
+        ckb_poe_2: {
+          active: false,
+          compId: "",
+          equipname: ""
+        },
+        ckb_poe_3: {
+          active: false,
+          compId: "",
+          equipname: ""
+        },
+        ckb_poe_4: {
+          active: false,
+          compId: "",
+          equipname: ""
+        }
+      },
       tableData: [
         // {
         //   ID: "01",
@@ -166,7 +279,29 @@ export default {
       ],
       currentPage: 1,
       pagesize: 10,
-      dialogVisible: false
+      dialogVisible: false,
+      // handleShowDialog:false,
+      dialogSwitchVisible: false,
+      optionsComp: [
+        {
+          label: "选项1",
+          value: "01"
+        },
+        {
+          label: "选项2",
+          value: "02"
+        }
+      ],
+      optionsEquipName: [
+        {
+          label: "型号01",
+          value: "01"
+        },
+        {
+          label: "型号02",
+          value: "02"
+        }
+      ]
     };
   },
   methods: {
@@ -259,7 +394,7 @@ export default {
         this.formObj.ID = 0; //标记ID为0，后台识别为新增方法
         console.log(this.formObj);
       }
-      let url=API.addOrUpdateWorkSite.devUrl
+      let url = API.addOrUpdateWorkSite.devUrl;
       this.$axios({
         url: url,
         method: "post",
@@ -288,7 +423,7 @@ export default {
           //重新加载表格数据，刷新表格/////////////////////////
 
           //var url = "api/Handler/AjaxTestHandler.ashx?mod=2";
-          let url = API.getWorkSiteAll.devUrl
+          let url = API.getWorkSiteAll.devUrl;
           console.log(url);
           this.$axios.get(url).then(res => {
             console.log(res.data);
@@ -302,10 +437,17 @@ export default {
 
       //模态框关闭显示
       this.dialogVisible = false;
+    },
+    handleShowSwitchModal: function(index, row) {
+      console.log(row);
+      this.dialogSwitchVisible = true;
+    },
+    changeStatus: function(e) {
+      console.log(e);
     }
   },
   created: function() {
-    let url = API.getWorkSiteAll.devUrl
+    let url = API.getWorkSiteAll.devUrl;
     console.log(url);
     this.$axios.get(url).then(res => {
       console.log(res.data);

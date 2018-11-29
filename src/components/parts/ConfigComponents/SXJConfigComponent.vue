@@ -112,8 +112,10 @@ export default {
     handleShowDialog() {
       this.formType = 0; //表单type=0，表示为新增方法
       this.formObj.ID = 0;
+      this.formObj.SXJName=''
+      this.formObj.SXJType=''
       // this.formObj.='';
-      this.dialogVisible = true;
+      this.dialogVisible = true
     },
     handleSizeChange: function(size) {
       this.pagesize = size;
