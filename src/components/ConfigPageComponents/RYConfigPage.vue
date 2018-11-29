@@ -166,7 +166,8 @@ export default {
         type: "warning"
       })
         .then(() => {
-          let url = API.delUserInfo.devUrl
+           
+          //let url = API.delUserInfo.devUrl
           this.$axios({
             url: url,
             method: "post",

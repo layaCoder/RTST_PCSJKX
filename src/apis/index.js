@@ -25,6 +25,19 @@
         productionUrl:''
     },
 
+    getWorkSiteInfoById:{
+        name:'获取设备信息',
+        method:'GetWorkSiteInformation',
+        devUrl:'api/Handler/AjaxTestHandler.ashx?mod=3&&Ws_code=',
+        productionUrl:''
+    },
+    getSwitchStateById:{
+        name:'获取开关列表状态',
+        method:'GetWorkSiteState',
+        devUrl:'api/Handler/AjaxTestHandler.ashx?mod=4&&Ws_code=',
+        productionUrl:''
+    },
+
     addOrUpdateWorkSite:{
         name:'添加或修改设备',
         method:'RunWorkSite',
@@ -73,24 +86,26 @@
         productionUrl:''
     },
 
-    getWorkSiteInfoById:{
-        name:'获取设备信息',
-        method:'GetWorkSiteInformation',
-        devUrl:'api/Handler/AjaxTestHandler.ashx?mod=3&&Ws_code=',
-        productionUrl:''
-    },
-    getSwitchStateById:{
-        name:'获取开关列表状态',
-        method:'GetWorkSiteState',
-        devUrl:'api/Handler/AjaxTestHandler.ashx?mod=4&&Ws_code=',
-        productionUrl:''
-    },
+   
     getSXJCompanyAll:{
         name:'获取摄像机品牌列表',
         method:'getSXJCompany',
         devUrl:'api/Handler/AjaxTestHandler.ashx?mod=45',
         productionUrl:''
-    }
+    },
 
+    addOrUpdateCameraCompany:{
+        name:'新增或修改摄像机公司',
+        method:'RunC_SXJCompany',
+        devUrl:'api/Handler/AjaxTestHandler.ashx?mod=44',
+        productionUrl:''
+    },
+    //获取摄像机列表，接口支持 sql where
+    getCameraAll:{
+        name:'获取摄像机列表',
+        method:'GetC_SXJ',
+        devUrl:'api/Handler/AjaxTestHandler.ashx?mod=47',
+        productionUrl:''
+    }
     
  }
