@@ -74,6 +74,8 @@ export default {
     handleNodeClick(data) {
       //如果是设备
       if (data.isEquip === true) {
+
+        this.$store.commit("showLoadingBar", { flag: true });
         this.showHello = false;
 
         this.$router.push({

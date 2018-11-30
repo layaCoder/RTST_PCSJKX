@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <el-row>
-            <el-col :span="3">
+            <el-col :span="4">
                 <el-menu mode="vertical" :default-openeds="['1']" default-active="1-1" class="el-menu-vertical-demo" @select="handleSelect" @open="handleOpen" @close="handleClose" background-color="#172850" text-color="#fff" active-text-color="#59b0ff">
                     <el-submenu index="1">
                         <template slot="title">
@@ -25,7 +25,7 @@
 
                 </el-menu>
             </el-col>
-            <el-col :span="21" class="table">
+            <el-col :span="20" class="table">
                 <router-view/>
             </el-col>
         </el-row>
@@ -73,11 +73,17 @@ strong {
 }
 
 .main{
-    background: #172850;
-    padding: 0px;
+    /* background: #172850; */
+    background-color: #ffffff;
+    /*padding: 0px;*/
 }
 
 .table{
     background: #ffffff
 }
+
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 800px;
+  }
 </style>

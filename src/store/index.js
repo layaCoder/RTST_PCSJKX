@@ -10,7 +10,8 @@ export default new Vuex.Store({
         nodeLevel:'',
         isEquip: '',
         wsCode: '',
-        ip: ''
+        ip: '',
+        loading:false
     },
     //同步数据处理写在mutations中
     mutations: {
@@ -28,7 +29,18 @@ export default new Vuex.Store({
         },
         setNodeLevle(state,payload){
             state.nodeLevel=payload.nodeLevel
+        },
+        //暂时固定2秒加载数据
+        showLoadingBar(state,payload){
+            state.loading=true
+            
+            setInterval((()=>{
+             state.loading=false
+            }), 3000);
         }
+        //调出loading界面，维持2秒//////////////////////////////
+        //this.$store.commit("showLoadingBar", { flag: true });
+        /////////////////////////////////////////////////////
     },
     getters: {
         // doneTodos: state => {

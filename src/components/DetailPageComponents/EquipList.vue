@@ -3,6 +3,7 @@
    <strong>Equip List</strong>
     <div>节点编号 {{this.$route.params.wsCode}}</div>
     <div>节点ip {{this.$route.params.ipAddress}}</div>
+    <el-button type="warning" @click="hanleClick">测试loading</el-button>
   </div>
 </template>
 
@@ -14,7 +15,10 @@
       };
     },
     methods: {
-      
+      hanleClick() {
+        //调出loading界面
+       this.$store.commit("showLoadingBar", { flag: true });
+      }
     }
   }
 </script>
