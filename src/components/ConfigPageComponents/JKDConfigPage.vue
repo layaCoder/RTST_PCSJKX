@@ -17,7 +17,9 @@
         </el-table-column>
         <el-table-column prop="WS_Name" label="监控点名称">
         </el-table-column>
-        <el-table-column prop="WS_Org_Code" label="责任人ID">
+        <!-- <el-table-column prop="WS_Org_Code" label="责任人ID">
+        </el-table-column> -->
+        <el-table-column prop="WS_OrgName" label="责任人">
         </el-table-column>
         <el-table-column prop="WS_Area_Code" label="区域代码">
         </el-table-column>
@@ -27,9 +29,13 @@
         </el-table-column>
         <el-table-column prop="WS_Latitude" label="纬度">
         </el-table-column>
-        <el-table-column prop="WS_SysCode" label="派出所代码">
+        <!-- <el-table-column prop="WS_SysCode" label="派出所代码">
+        </el-table-column> -->
+        <el-table-column prop="PCS_Name" label="派出所">
         </el-table-column>
-        <el-table-column prop="WS_Operators" label="维护人员ID">
+        <!-- <el-table-column prop="WS_Operators" label="维护人员ID">
+        </el-table-column> -->
+        <el-table-column prop="WS_OperatorsName" label="维护人员">
         </el-table-column>
         <el-table-column prop="WS_IP" label="IP地址">
         </el-table-column>
@@ -66,9 +72,14 @@
           </el-row>
           <el-row class="modalRow">
             <el-col :span="12">
-              <el-input v-model="formObj.WS_SysCode" placeholder="请输入内容">
+              <!-- <el-input v-model="formObj.WS_SysCode" placeholder="请输入内容">
                 <template slot="prepend">派出所编码</template>
-              </el-input>
+              </el-input> -->
+              <span>派出所</span>
+              <el-select v-model="formObj.WS_SysCode" placeholder="请选择" >
+                <el-option v-for="item in optionsPCS" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
             </el-col>
             <el-col :span="12">
               <el-input v-model="formObj.WS_Name" placeholder="请输入内容">
@@ -78,9 +89,14 @@
           </el-row>
           <el-row class="modalRow">
             <el-col :span="12">
-              <el-input v-model="formObj.WS_Org_Code" placeholder="请输入内容">
+              <!-- <el-input v-model="formObj.WS_Org_Code" placeholder="请输入内容">
                 <template slot="prepend">责任人ID</template>
-              </el-input>
+              </el-input> -->
+              <span>责任人</span>
+              <el-select v-model="formObj.WS_Org_Code" placeholder="请选择" >
+                <el-option v-for="item in options_orgCode" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
             </el-col>
             <el-col :span="12">
               <el-input v-model="formObj.WS_Area_Code" placeholder="请输入内容">
@@ -107,9 +123,14 @@
               </el-input>
             </el-col>
             <el-col :span="12">
-              <el-input v-model="formObj.WS_Operators" placeholder="请输入内容">
+              <!-- <el-input v-model="formObj.WS_Operators" placeholder="请输入内容">
                 <template slot="prepend">维护人员ID</template>
-              </el-input>
+              </el-input> -->
+              <span>维护人员</span>
+              <el-select v-model="formObj.WS_Operators" placeholder="请选择" >
+                <el-option v-for="item in options_WS_Operators" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
             </el-col>
           </el-row>
           <el-row class="modalRow">
@@ -134,7 +155,7 @@
     <!--开关设置模态框 2 -->
     <div>
       <el-dialog :title="'开关设置'" :visible.sync="dialogSwitchVisible" width="60%" :before-close="handleClose">
-       <JKDSwitchComponent :equipCode="this.equipCode"></JKDSwitchComponent>
+        <JKDSwitchComponent :equipCode="this.equipCode"></JKDSwitchComponent>
       </el-dialog>
     </div>
 
@@ -192,14 +213,13 @@
 
 <script>
 import API from "../../apis/index.js";
-import JKDSwitchComponent from '../parts/ConfigComponents/JKDSwitchComponent.vue'
+import JKDSwitchComponent from "../parts/ConfigComponents/JKDSwitchComponent.vue";
 
 export default {
-  components:{JKDSwitchComponent},
+  components: { JKDSwitchComponent },
   data() {
-    
     return {
-      equipCode:'', //设备编号，用props传递给子组件
+      equipCode: "", //设备编号，用props传递给子组件
       formType: 0, //表单状态，0位新增，1为修改
       formObj: {
         WS_Area_Code: "",
@@ -215,7 +235,7 @@ export default {
         WS_Org_Code: "",
         WS_SysCode: ""
       },
-      
+
       tableData: [
         // {
         //   ID: "01",
@@ -230,25 +250,20 @@ export default {
       dialogVisible: false,
       // handleShowDialog:false,
       dialogSwitchVisible: false,
-      optionsComp: [
+      optionsPCS: [
         {
           label: "选项1",
           value: "01"
-        },
-        {
-          label: "选项2",
-          value: "02"
         }
       ],
-      optionsEquipName: [
+      options_orgCode: [
         {
           label: "型号01",
           value: "01"
-        },
-        {
-          label: "型号02",
-          value: "02"
         }
+      ],
+      options_WS_Operators:[
+        
       ]
     };
   },
@@ -265,9 +280,9 @@ export default {
       this.formObj.WS_Latitude = row.WS_Latitude;
       this.formObj.WS_Longitude = row.WS_Longitude;
       this.formObj.WS_Num = row.WS_Num;
-      this.formObj.WS_Operators = row.WS_Operators;
-      this.formObj.WS_Org_Code = row.WS_Org_Code;
-      this.formObj.WS_SysCode = row.WS_SysCode;
+      this.formObj.WS_Operators = parseInt(row.WS_Operators);
+      this.formObj.WS_Org_Code =parseInt(row.WS_Org_Code);
+      this.formObj.WS_SysCode = parseInt(row.WS_SysCode);
       console.log(index, row);
     },
     handleDelete(index, row) {
@@ -388,7 +403,7 @@ export default {
     },
     handleShowSwitchModal: function(index, row) {
       console.log(row);
-      this.equipCode= row.WS_Code
+      this.equipCode = row.WS_Code;
       this.dialogSwitchVisible = true;
     },
     changeStatus: function(e) {
@@ -405,12 +420,47 @@ export default {
   },
 
   mounted: function() {
-    // var url = "api/Handler/AjaxTestHandler.ashx?mod=42";
-    // console.log(url);
-    // this.$axios.get(url).then(res => {
-    //   this.tableData = getTableData(res.data[0]);
-    //   console.log(tableData);
-    // });
+    
+    //加载 【派出所】selcet数据
+    let url = API.getPCS.devUrl;
+    let array = [];
+    this.$axios.get(url).then(res => {
+      for (let item of res.data) {
+        array.push({
+          value: item.ID,
+          label: item.PCS_Name
+        });
+      }
+      this.optionsPCS = array;
+    });
+    //加载 【责任人】select数据
+     let urlWS_Org_Code = API.getUserInfoAll.devUrl
+    // let urlWS_Org_Code = API.getUserInfoAll.devUrl+'&where=UserType=01'  根据where条件进行筛选
+    let arrayOrgCode = []
+   this.$axios.get(urlWS_Org_Code).then(res => {
+      for(let item of res.data){
+        let OrgCodeItem={
+           value:item.ID,
+           label:item.UserName
+        }
+        arrayOrgCode.push(OrgCodeItem)
+      }
+      this.options_orgCode = arrayOrgCode;
+    });
+
+    //加载 【维护人员】select数据
+     let urlOperators = API.getUserInfoAll.devUrl
+    let arrayOperators = []
+   this.$axios.get(urlOperators).then(res => {
+      for(let item of res.data){
+        let OrgCodeItem={
+           value:item.ID,
+           label:item.UserName
+        }
+        arrayOperators.push(OrgCodeItem)
+      }
+      this.options_WS_Operators = arrayOperators;
+    });
   }
 };
 
@@ -429,7 +479,10 @@ function getTableData(data) {
       WS_Org_Code: data[i].WS_Org_Code,
       WS_SysCode: data[i].WS_SysCode,
       WS_Area_Code: data[i].WS_Area_Code,
-      WS_IP: data[i].WS_IP
+      WS_IP: data[i].WS_IP,
+      PCS_Name:data[i].PCS_Name,
+      WS_OrgName:data[i].WS_OrgName,
+      WS_OperatorsName:data[i].WS_OperatorsName
     });
   }
   return array;
