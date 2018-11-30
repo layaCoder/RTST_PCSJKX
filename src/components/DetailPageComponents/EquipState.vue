@@ -1,5 +1,8 @@
 <template>
   <div>
+    <el-row>
+      <h2>设备监控</h2>
+    </el-row>
     <el-row class="mediaRow">
       <el-col :span="2"></el-col>
       <el-col :span="4">

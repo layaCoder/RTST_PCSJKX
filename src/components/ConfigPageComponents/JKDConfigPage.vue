@@ -151,63 +151,12 @@
         </span> -->
       </el-dialog>
     </div>
-
     <!--开关设置模态框 2 -->
     <div>
       <el-dialog :title="'开关设置'" :visible.sync="dialogSwitchVisible" width="60%" :before-close="handleClose">
         <JKDSwitchComponent :equipCode="this.equipCode"></JKDSwitchComponent>
       </el-dialog>
     </div>
-
-    <!-- 开关设置模态框 -->
-    <!-- <div>
-      <el-dialog :title="'开关设置'" :visible.sync="dialogSwitchVisible" width="60%" :before-close="handleClose">
-        <el-form :v-model="formSwitchObj" ref="formSwitchObj">
-          <el-row>
-            <el-col :span="8">
-              <span>12-1</span>
-              <el-switch v-model="switch_12_1" active-text="开启" inactive-text="关闭" @change="changeStatus($event)">
-              </el-switch>
-            </el-col>
-            <el-col :span="8">
-              <span class="selectLabel">品牌</span>
-              <el-select v-model="formSwitchObj.ckb_12_1.compId" placeholder="请选择">
-                <el-option v-for="item in optionsComp" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </el-col>
-            <el-col :span="8">
-              <span class="selectLabel">型号</span>
-              <el-select v-model="formSwitchObj.ckb_12_1.equipname" placeholder="请选择">
-                <el-option v-for="item in optionsEquipName" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="8">
-              <span>12-2</span>
-              <el-switch v-model="switch_12_2" active-text="开启" inactive-text="关闭" @change="changeStatus($event)">
-              </el-switch>
-            </el-col>
-            <el-col :span="8">
-              <span class="selectLabel">品牌</span>
-              <el-select v-model="formSwitchObj.ckb_12_2.compId" placeholder="请选择">
-                <el-option v-for="item in optionsComp" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </el-col>
-            <el-col :span="8">
-              <span class="selectLabel">型号</span>
-              <el-select v-model="formSwitchObj.ckb_12_2.equipname" placeholder="请选择">
-                <el-option v-for="item in optionsEquipName" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </el-col>
-          </el-row>
-        </el-form>
-      </el-dialog>
-    </div> -->
   </div>
 </template>
 

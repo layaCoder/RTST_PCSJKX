@@ -33,14 +33,18 @@ export default new Vuex.Store({
         //暂时固定2秒加载数据
         showLoadingBar(state,payload){
             state.loading=true
-            
+
             setInterval((()=>{
              state.loading=false
             }), 3000);
-        }
-        //调出loading界面，维持2秒//////////////////////////////
+        },
+        //调出loading界面，维持3秒//////////////////////////////
         //this.$store.commit("showLoadingBar", { flag: true });
         /////////////////////////////////////////////////////
+
+        showLoading(state,payload){ //flag = true 显示loading
+            state.loading=payload.flag
+        }
     },
     getters: {
         // doneTodos: state => {
