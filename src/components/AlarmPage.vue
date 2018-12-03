@@ -1,6 +1,11 @@
 <template>
-   <div>
-       <strong>Alarm Page</strong>
+   <div >
+     <el-row class="main">
+        <strong>Alarm Page</strong>
+        
+     </el-row>
+      
+
    </div>
 </template>
 
@@ -12,7 +17,6 @@
       };
     },
     methods: {
-      
     }
   }
 </script>
@@ -21,6 +25,9 @@
 <style scoped>
  strong{
      color: red;
+ }
+ .main{
+   height:800px;
  }
 
 </style>

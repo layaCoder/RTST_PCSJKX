@@ -154,7 +154,7 @@
     <!--开关设置模态框 2 -->
     <div>
       <el-dialog :title="'开关设置'" :visible.sync="dialogSwitchVisible" width="60%" :before-close="handleClose">
-        <JKDSwitchComponent :equipCode="this.equipCode"></JKDSwitchComponent>
+        <JKDSwitchComponent :equipCode="this.equipCode" v-if="dialogSwitchVisible"></JKDSwitchComponent>
       </el-dialog>
     </div>
   </div>

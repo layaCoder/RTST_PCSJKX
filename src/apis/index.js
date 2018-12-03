@@ -112,6 +112,19 @@
         method:'RunC_SXJ',
         devUrl:'api/Handler/AjaxTestHandler.ashx?mod=46',
         productionUrl:''
+    },
+
+    addOrUpdateEquipSwitchState:{
+      name:'添加或修改设备开关状态',
+      method:'RunC_WSon_off',
+      devUrl:'api/Handler/AjaxTestHandler.ashx?mod=48',
+      productionUrl:''   
+    },
+    getEquipSwitchStateConfigList:{
+        name:'获取设备开关设置状态列表',
+        method:'GetC_WSon_off',
+        devUrl:'api/Handler/AjaxTestHandler.ashx?mod=49',
+        productionUrl:''
     }
     
  }
