@@ -80,6 +80,7 @@ export default {
       .then(res => {
         console.log(res.data);
         if (res.data.length > 0) {
+          console.log(res.data)
           this.tableData = getTableData(res.data);
           this.loading = false;
         }

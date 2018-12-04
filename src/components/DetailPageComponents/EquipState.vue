@@ -195,7 +195,7 @@
 </template>
 
 <script>
-import API from '../../apis/index.js'
+import API from "../../apis/index.js";
 
 import mediaPart from "../parts/MediaPart.vue";
 import mediaPartMenci from "../parts/MediaPartMenci.vue";
@@ -323,13 +323,50 @@ export default {
       ];
       console.log($event);
       console.log(dataArray);
+
+      //todo:后台对接
+      let urlSwtich = API.actionSwtich.devUrl+'mod=1&type=2';
+      this.$axios({
+        url: urlSwtich,
+        method: "post",
+        data: {
+          mod: 1,
+            type: 2,
+            action: 'actionSwitch',
+            state:dataArray,
+            equipIp:this.$route.params.ipAddress
+        },
+        transformRequest: [
+          //格式化数据，以表单格式提交
+          function(data) {
+            // Do whatever you want to transform the data
+            let ret = "";
+            for (let it in data) {
+              ret +=
+                encodeURIComponent(it) +
+                "=" +
+                encodeURIComponent(data[it]) +
+                "&";
+            }
+            return ret;
+          }
+        ],
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      }).then(res=>{
+        console.log(res)
+      }).catch(res=>{
+        conosle.log(res)
+      })
+     
     },
     timer: function() {
       // var url =
       //   "api/Handler/AjaxTestHandler.ashx?mod=3&&Ws_code=" +
       //   this.$route.params.wsCode;
 
-        let url=API.getWorkSiteInfoById.devUrl+this.$route.params.wsCode;
+      let url = API.getWorkSiteInfoById.devUrl + this.$route.params.wsCode;
       this.$axios.get(url).then(res => {
         console.log("----刷新设备状态----");
         console.log(res.data);
@@ -378,7 +415,7 @@ export default {
         // var url =
         //   "api/Handler/AjaxTestHandler.ashx?mod=3&&Ws_code=" +
         //   this.$route.params.wsCode;
-        let url=API.getWorkSiteInfoById.devUrl+this.$route.params.wsCode;
+        let url = API.getWorkSiteInfoById.devUrl + this.$route.params.wsCode;
 
         console.log(url);
         this.$axios.get(url).then(res => {
@@ -395,8 +432,9 @@ export default {
 
           //this.tableData.push({attr:'ajax数据',value:res.data[0].DS_DC12dy})
         });
-        
-          let switchUrl= API.getSwitchStateById.devUrl+this.$route.params.wsCode;
+
+        let switchUrl =
+          API.getSwitchStateById.devUrl + this.$route.params.wsCode;
         this.$axios.get(switchUrl).then(res => {
           console.log("----【开关状态】----");
           console.log(res.data);
@@ -427,7 +465,7 @@ export default {
     // });
 
     //定时函数 计数器 计时器  定时刷新页面数据
-    this._timeOut = setInterval(this.timer, 2000);
+    this._timeOut = setInterval(this.timer, 20000);
   },
   beforeDestroy() {
     //摧毁定时器
@@ -436,8 +474,8 @@ export default {
   //created方法只会执行一次，后续data刷新不会运行
   created: function() {
     //ajax获取设备状态并填充页面数据
-    
-    let url =API.getWorkSiteInfoById.devUrl+ this.$route.params.wsCode;
+
+    let url = API.getWorkSiteInfoById.devUrl + this.$route.params.wsCode;
 
     console.log(url);
     // this.$axios.get("api/Handler/AjaxTestHandler.ashx?mod=2").then(res=>{
@@ -450,8 +488,8 @@ export default {
       this.tableData2 = getTableTwoData(res.data[0]);
       this.mediaData = getMediaData(res.data[0]);
       //ajax初始化switch状态
-     
-      let switchUrl = API.getSwitchStateById.devUrl+this.$route.params.wsCode;
+
+      let switchUrl = API.getSwitchStateById.devUrl + this.$route.params.wsCode;
       this.$axios.get(switchUrl).then(res => {
         console.log("----开关状态----");
         this.state_12_1 = getSwitchData(res.data[0]).state_12_1;
@@ -617,6 +655,8 @@ function fillDataLength(data) {
     return data;
   } else return data;
 }
+
+//todo:下发switch开关控制 对应jq版本 969行
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

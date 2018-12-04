@@ -12,6 +12,12 @@
         devUrl:'api/Handler/AjaxTestHandler.ashx?mod=40&&PCS_AreaID=3',
         productionUrl:'http://192.168.1.99:8235/Handler/AjaxTestHandler.ashx?mod=40&&PCS_AreaID=3'
     },
+    actionSwtich:{
+       name:'下发开关控制',
+       method:'GetConn',
+       devUrl:'api/Handler/AjaxTestHandler.ashx?',
+       productionUrl:''
+    },
     getWorkSiteById:{
         name:'通过地区id获取所有设备信息',
         method:'getWorkSiteById',

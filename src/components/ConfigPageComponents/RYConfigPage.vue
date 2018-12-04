@@ -40,27 +40,34 @@
         <!-- <span>这是一段信息</span> -->
         <el-form :v-model="formObj" ref="formObj">
           <el-row class="modalRow">
-            <el-col :span="12">
+            <el-col :span="4">
+             &nbsp;
+            </el-col>
+            <el-col :span="8">
               <el-input v-model="formObj.ID" placeholder="请输入内容" :disabled="true">
                 <template slot="prepend">人员ID</template>
               </el-input>
             </el-col>
-            <el-col :span="12">
+            <el-col :span="8">
               <el-input v-model="formObj.UserName" placeholder="请输入内容">
                 <template slot="prepend">姓名</template>
               </el-input>
             </el-col>
           </el-row>
           <el-row class="modalRow">
-            <el-col :span="12">
+            <el-col :span="4">
+             &nbsp;
+            </el-col>
+            <el-col :span="8">
               所属单位类型
-              <el-select v-model="formObj.UserType" placeholder="请选择" @change="changeSelectType">
+              <el-select v-model="formObj.UserType" placeholder="请选择" @change="changeSelectType" >
                 <el-option v-for="item in optionsType" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
 
             </el-col>
-            <el-col :span="12">
+            
+            <el-col :span="8">
               <!-- <el-input v-model="formObj.UserOrg" placeholder="请输入内容">
                 <template slot="prepend">所属单位</template>
               </el-input> -->
@@ -73,7 +80,8 @@
             </el-col>
           </el-row>
           <el-row class="modalRow">
-            <el-col :span="12">
+            <el-col :span="4"></el-col>
+            <el-col :span="8">
               <el-input v-model="formObj.UserTel" placeholder="请输入内容">
                 <template slot="prepend">联系电话</template>
               </el-input>
