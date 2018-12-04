@@ -40,38 +40,34 @@
         <!-- <span>这是一段信息</span> -->
         <el-form :v-model="formObj" ref="formObj">
           <el-row class="modalRow">
-            <el-col :span="4">
-             &nbsp;
+            <el-col :span="2">
+              &nbsp;
             </el-col>
-            <el-col :span="8">
+            <el-col :span="10">
               <el-input v-model="formObj.ID" placeholder="请输入内容" :disabled="true">
                 <template slot="prepend">人员ID</template>
               </el-input>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="10">
               <el-input v-model="formObj.UserName" placeholder="请输入内容">
                 <template slot="prepend">姓名</template>
               </el-input>
             </el-col>
           </el-row>
           <el-row class="modalRow">
-            <el-col :span="4">
-             &nbsp;
+            <el-col :span="2">
+              &nbsp;
             </el-col>
-            <el-col :span="8">
-              所属单位类型
-              <el-select v-model="formObj.UserType" placeholder="请选择" @change="changeSelectType" >
+            <el-col :span="10">
+              <span class="selectTitle">单位类型</span>
+              <el-select v-model="formObj.UserType" placeholder="请选择" @change="changeSelectType">
                 <el-option v-for="item in optionsType" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
-
             </el-col>
-            
-            <el-col :span="8">
-              <!-- <el-input v-model="formObj.UserOrg" placeholder="请输入内容">
-                <template slot="prepend">所属单位</template>
-              </el-input> -->
-              所属单位
+
+            <el-col :span="10">
+              <span class="selectTitle">所属单位</span>
               <el-select v-model="formObj.UserOrg" placeholder="请选择">
                 <el-option v-for="item in optionsValue" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -80,8 +76,10 @@
             </el-col>
           </el-row>
           <el-row class="modalRow">
-            <el-col :span="4"></el-col>
-            <el-col :span="8">
+            <el-col :span="2">
+              &nbsp;
+            </el-col>
+            <el-col :span="10">
               <el-input v-model="formObj.UserTel" placeholder="请输入内容">
                 <template slot="prepend">联系电话</template>
               </el-input>
@@ -103,7 +101,7 @@
 </template>
 
 <script>
-import API from '../../apis/index.js'
+import API from "../../apis/index.js";
 
 export default {
   data() {
@@ -153,9 +151,11 @@ export default {
       this.formType = 1; //表单type=1，表示为修改方法
       this.dialogVisible = true;
       this.optionsValue = "";
-      if (row.UserType === "01") {  //如果是UserType是派出所，加载派出所列表
+      if (row.UserType === "01") {
+        //如果是UserType是派出所，加载派出所列表
         this.optionsValue = this.optionsPCS;
-      } else if (row.UserType === "02") {//如果UserType是第三方公司，加载第三方公司列表
+      } else if (row.UserType === "02") {
+        //如果UserType是第三方公司，加载第三方公司列表
         this.optionsValue = this.optionsCompany;
       }
       this.formObj.ID = row.ID;
@@ -174,7 +174,6 @@ export default {
         type: "warning"
       })
         .then(() => {
-           
           //let url = API.delUserInfo.devUrl
           this.$axios({
             url: url,
@@ -185,7 +184,7 @@ export default {
           });
           // axios post请求成功后执行
           //重新加载表格数据，刷新表格/////////////////////////
-          let url2 = API.getUserInfoAll.devUrl
+          let url2 = API.getUserInfoAll.devUrl;
           this.$axios.get(url2).then(res => {
             console.log(res.data);
             this.tableData = getTableData(res.data);
@@ -206,10 +205,10 @@ export default {
     handleShowDialog() {
       this.formType = 0; //表单type=0，表示为新增方法
       this.formObj.ID = 0;
-      this.formObj.UserName='';
-      this.formObj.UserType = '';
-      this.formObj.UserOrg = '';
-      this.formObj.UserTel = '';
+      this.formObj.UserName = "";
+      this.formObj.UserType = "";
+      this.formObj.UserOrg = "";
+      this.formObj.UserTel = "";
 
       this.dialogVisible = true;
     },
@@ -232,7 +231,7 @@ export default {
       if (this.formType === 0) {
         this.formObj.ID = 0; //标记ID为0，后台识别为新增方法
       }
-      let url = API.addOrUpdateUser.devUrl
+      let url = API.addOrUpdateUser.devUrl;
       this.$axios({
         url: url,
         method: "post",
@@ -258,13 +257,13 @@ export default {
       })
         .then(res => {
           //消息框
-           this.$message({
+          this.$message({
             type: "success",
-            message:this.formType===0? "添加成功":"修改成功"
+            message: this.formType === 0 ? "添加成功" : "修改成功"
           });
           // axios post请求成功后执行
           //重新加载表格数据，刷新表格/////////////////////////
-          let url = API.getUserInfoAll.devUrl
+          let url = API.getUserInfoAll.devUrl;
           this.$axios.get(url).then(res => {
             console.log(res.data);
             this.tableData = getTableData(res.data);
@@ -293,14 +292,14 @@ export default {
 
   mounted: function() {
     //mod:43 加载主表格数据
-    let url = API.getUserInfoAll.devUrl
+    let url = API.getUserInfoAll.devUrl;
     this.$axios.get(url).then(res => {
       console.log(res.data);
       this.tableData = getTableData(res.data);
     });
 
     // mod:42 加载第三方维保单位select选项
-    var url2 = API.getCompany.devUrl
+    var url2 = API.getCompany.devUrl;
     this.$axios.get(url2).then(res => {
       var compArray = [];
       for (var i = 0; i < res.data.length; i++) {
@@ -313,7 +312,7 @@ export default {
     });
 
     // mod:40  加载派出所select选项， attention:此处现只加载了江岸区所有派出所，所以PCS_AreaID=3
-    let url3 = API.getPCS.devUrl
+    let url3 = API.getPCS.devUrl;
     this.$axios.get(url3).then(res => {
       var PcsArray = [];
       for (var i = 0; i < res.data.length; i++) {
@@ -348,5 +347,21 @@ function getTableData(data) {
 <style scoped>
 .modalRow {
   margin-bottom: 20px;
+}
+
+.el-select {
+  /* padding-left: 0px;
+  margin-left: 0px; */
+  float: left;
+  width: 80%;
+}
+
+.selectTitle {
+  float: left;
+  background-color: #f5f7fa;
+  padding: 10px 10px 10px 10px;
+  border: #dfdfdf solid 1px;
+  border-radius: 5px;
+  color: #909399;
 }
 </style>

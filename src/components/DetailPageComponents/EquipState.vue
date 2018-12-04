@@ -324,17 +324,16 @@ export default {
       console.log($event);
       console.log(dataArray);
 
-      //todo:后台对接
-      let urlSwtich = API.actionSwtich.devUrl+'mod=1&type=2';
+      let urlSwtich = API.actionSwtich.devUrl + "mod=1&type=2";
       this.$axios({
         url: urlSwtich,
         method: "post",
         data: {
           mod: 1,
-            type: 2,
-            action: 'actionSwitch',
-            state:dataArray,
-            equipIp:this.$route.params.ipAddress
+          type: 2,
+          action: "actionSwitch",
+          state: dataArray,
+          equipIp: this.$route.params.ipAddress
         },
         transformRequest: [
           //格式化数据，以表单格式提交
@@ -354,12 +353,13 @@ export default {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         }
-      }).then(res=>{
-        console.log(res)
-      }).catch(res=>{
-        conosle.log(res)
       })
-     
+        .then(res => {
+          console.log(res);
+        })
+        .catch(res => {
+          // console.log(res)
+        });
     },
     timer: function() {
       // var url =
