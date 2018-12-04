@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mainContent">
     <el-row>
       <h2>监控点管理</h2>
     </el-row>
@@ -10,7 +10,7 @@
 
     </el-row>
     <el-row>
-      <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%">
+      <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%"  v-loading="loading">
         <el-table-column prop="WS_ID" label="流水号">
         </el-table-column>
         <el-table-column prop="WS_Code" label="设备编号">
@@ -168,6 +168,7 @@ export default {
   components: { JKDSwitchComponent },
   data() {
     return {
+      loading:true,
       equipCode: "", //设备编号，用props传递给子组件
       formType: 0, //表单状态，0位新增，1为修改
       formObj: {
@@ -364,6 +365,7 @@ export default {
     this.$axios.get(url).then(res => {
       console.log(res.data);
       this.tableData = getTableData(res.data);
+      this.loading=false
     });
   },
 
@@ -456,5 +458,12 @@ function getTableData(data) {
   border: #dfdfdf solid 1px;
   border-radius: 5px 0px 0px 5px;
   color: #909399;
+}
+
+.mainContent{
+  box-shadow: 0px  0px 5px #999999;
+  padding: 10px;
+  /* margin-left:-4%; */
+  margin: 4% 4% 4% -4%;
 }
 </style>

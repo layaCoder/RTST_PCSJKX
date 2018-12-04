@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mainContent">
     <el-row>
       <h2>摄像机管理</h2>
     </el-row>
@@ -9,7 +9,7 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%">
+      <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%" v-loading="loading">
         <el-table-column prop="ID" label="公司ID" width="300">
         </el-table-column>
         <el-table-column prop="ComName" label="公司名称" width="300">
@@ -77,6 +77,7 @@ export default {
 components: { SXJConfigComponent },
   data() {
     return {
+      loading:true,
       compId:'',//公司id，传递给子组件模态框
       formType: 0, //模态框类型，0位新增，1位修改
       formObj: {
@@ -225,6 +226,7 @@ components: { SXJConfigComponent },
     this.$axios.get(url).then(res => {
       console.log(res.data);
       this.tableData = getTableData(res.data);
+      this.loading=false
     });
   }
 };
@@ -245,5 +247,12 @@ function getTableData(sxjArray) {
 <style>
 .modalRow{
   margin-bottom: 20px;
+}
+
+.mainContent{
+  box-shadow: 0px  0px 5px #999999;
+  padding: 10px;
+  /* margin-left:-4%; */
+  margin: 4% 4% 4% -4%;
 }
 </style>

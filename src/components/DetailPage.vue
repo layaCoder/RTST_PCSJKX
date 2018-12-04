@@ -203,7 +203,7 @@ export default {
 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
 .el-tree {
   background-color: #ffffff;
   border: 0.1px solid #999999;
@@ -236,9 +236,7 @@ color: white;
 }
 
 
-.mainContent {
-  background-color: antiquewhite;
-}
+
 
 .tree {
   margin-right: 25px;

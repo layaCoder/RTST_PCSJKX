@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mainContent">
     <el-row>
       <h2>维保单位管理</h2>
     </el-row>
@@ -7,10 +7,9 @@
       <el-col :span="1">
         <el-button @click="handleShowDialog">添加</el-button>
       </el-col>
-
     </el-row>
     <el-row>
-      <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%">
+      <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%" v-loading="loading">
         <el-table-column prop="ID" label="单位ID" width="180">
         </el-table-column>
         <el-table-column prop="ComName" label="单位名称" width="180">
@@ -70,6 +69,7 @@ import API from '../../apis/index.js'
 export default {
   data() {
     return {
+      loading:true,
       formType: 0, //表单状态，0位新增，1为修改
       formObj: {
         ID: "",
@@ -206,6 +206,7 @@ export default {
     this.$axios.get(url).then(res => {
       console.log(res.data);
       this.tableData = getTableData(res.data);
+      this.loading=false
     });
   },
 
@@ -241,6 +242,13 @@ strong {
 }
 .modalRow{
   margin-bottom: 20px;
+}
+
+.mainContent{
+  box-shadow: 0px  0px 5px #999999;
+  padding: 10px;
+  /* margin-left:-4%; */
+  margin: 4% 4% 4% -4%;
 }
 
 </style>
