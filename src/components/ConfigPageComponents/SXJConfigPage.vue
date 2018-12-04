@@ -31,16 +31,18 @@
 
     <!--新增/修改 模态框 -->
     <div>
-      <el-dialog :title="this.formType==0?'新增人员摄像机信息':'修改摄像机信息'" :visible.sync="dialogVisible" width="60%" :before-close="handleClose">
+      <el-dialog :title="this.formType==0?'新增摄像机信息':'修改摄像机信息'" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
         <!-- <span>这是一段信息</span> -->
         <el-form :v-model="formObj" ref="formObj">
           <el-row class="modalRow">
-            <el-col :span="12">
+            <el-col>
               <el-input v-model="formObj.ID" placeholder="请输入内容" :disabled="true">
                 <template slot="prepend">公司ID</template>
               </el-input>
             </el-col>
-            <el-col :span="12">
+          </el-row>
+          <el-row class="modalRow">
+            <el-col>
               <el-input v-model="formObj.SXJCom" placeholder="请输入内容">
                 <template slot="prepend">公司名</template>
               </el-input>
@@ -241,4 +243,7 @@ function getTableData(sxjArray) {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.modalRow{
+  margin-bottom: 20px;
+}
 </style>

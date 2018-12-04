@@ -353,7 +353,7 @@ function getTableData(data) {
   /* padding-left: 0px;
   margin-left: 0px; */
   float: left;
-  width: 80%;
+  width: 75%;
 }
 
 .selectTitle {
@@ -361,7 +361,7 @@ function getTableData(data) {
   background-color: #f5f7fa;
   padding: 10px 10px 10px 10px;
   border: #dfdfdf solid 1px;
-  border-radius: 5px;
+  border-radius: 5px 0px 0px 5px;
   color: #909399;
 }
 </style>

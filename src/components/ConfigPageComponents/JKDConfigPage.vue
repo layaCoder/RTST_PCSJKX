@@ -75,7 +75,7 @@
               <!-- <el-input v-model="formObj.WS_SysCode" placeholder="请输入内容">
                 <template slot="prepend">派出所编码</template>
               </el-input> -->
-              <span>派出所</span>
+              <span class="selectTitle">派出所</span>
               <el-select v-model="formObj.WS_SysCode" placeholder="请选择">
                 <el-option v-for="item in optionsPCS" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -92,7 +92,7 @@
               <!-- <el-input v-model="formObj.WS_Org_Code" placeholder="请输入内容">
                 <template slot="prepend">责任人ID</template>
               </el-input> -->
-              <span>责任人</span>
+              <span class="selectTitle">责任人</span>
               <el-select v-model="formObj.WS_Org_Code" placeholder="请选择">
                 <el-option v-for="item in options_orgCode" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -126,7 +126,7 @@
               <!-- <el-input v-model="formObj.WS_Operators" placeholder="请输入内容">
                 <template slot="prepend">维护人员ID</template>
               </el-input> -->
-              <span>维护人员</span>
+              <span class="selectTitle">维护人</span>
               <el-select v-model="formObj.WS_Operators" placeholder="请选择">
                 <el-option v-for="item in options_WS_Operators" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -440,5 +440,21 @@ function getTableData(data) {
 <style scoped>
 .modalRow {
   margin-bottom: 20px;
+}
+
+.el-select {
+  /* padding-left: 0px;
+  margin-left: 0px; */
+  float: left;
+  width: 85%;
+}
+
+.selectTitle {
+  float: left;
+  background-color: #f5f7fa;
+  padding: 10px 10px 10px 10px;
+  border: #dfdfdf solid 1px;
+  border-radius: 5px 0px 0px 5px;
+  color: #909399;
 }
 </style>

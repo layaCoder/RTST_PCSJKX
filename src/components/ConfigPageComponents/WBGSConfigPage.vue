@@ -39,12 +39,12 @@
       <el-dialog :title="this.formType==0?'新增维保单位':'修改维保单位'" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
         <!-- <span>这是一段信息</span> -->
         <el-form :v-model="formObj" ref="formObj">
-          <el-row>
+          <el-row class="modalRow">
             <el-input v-model="formObj.ID" placeholder="请输入内容" :disabled="true">
               <template slot="prepend">公司ID</template>
             </el-input>
           </el-row>
-          <el-row>
+          <el-row class="modalRow">
             <el-input v-model="formObj.ComName" placeholder="请输入内容">
               <template slot="prepend">公司名称</template>
             </el-input>
@@ -239,4 +239,8 @@ function getTableData(data) {
 strong {
   color: red;
 }
+.modalRow{
+  margin-bottom: 20px;
+}
+
 </style>
