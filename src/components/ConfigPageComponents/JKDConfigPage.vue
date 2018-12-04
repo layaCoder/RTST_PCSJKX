@@ -76,7 +76,7 @@
                 <template slot="prepend">派出所编码</template>
               </el-input> -->
               <span>派出所</span>
-              <el-select v-model="formObj.WS_SysCode" placeholder="请选择" >
+              <el-select v-model="formObj.WS_SysCode" placeholder="请选择">
                 <el-option v-for="item in optionsPCS" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -93,7 +93,7 @@
                 <template slot="prepend">责任人ID</template>
               </el-input> -->
               <span>责任人</span>
-              <el-select v-model="formObj.WS_Org_Code" placeholder="请选择" >
+              <el-select v-model="formObj.WS_Org_Code" placeholder="请选择">
                 <el-option v-for="item in options_orgCode" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -127,7 +127,7 @@
                 <template slot="prepend">维护人员ID</template>
               </el-input> -->
               <span>维护人员</span>
-              <el-select v-model="formObj.WS_Operators" placeholder="请选择" >
+              <el-select v-model="formObj.WS_Operators" placeholder="请选择">
                 <el-option v-for="item in options_WS_Operators" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -211,12 +211,11 @@ export default {
           value: "01"
         }
       ],
-      options_WS_Operators:[
-        
-      ]
+      options_WS_Operators: []
     };
   },
   methods: {
+
     handleEdit(index, row) {
       this.formType = 1; //表单type=1，表示为修改方法
       this.dialogVisible = true;
@@ -230,7 +229,7 @@ export default {
       this.formObj.WS_Longitude = row.WS_Longitude;
       this.formObj.WS_Num = row.WS_Num;
       this.formObj.WS_Operators = parseInt(row.WS_Operators);
-      this.formObj.WS_Org_Code =parseInt(row.WS_Org_Code);
+      this.formObj.WS_Org_Code = parseInt(row.WS_Org_Code);
       this.formObj.WS_SysCode = parseInt(row.WS_SysCode);
       console.log(index, row);
     },
@@ -369,7 +368,6 @@ export default {
   },
 
   mounted: function() {
-    
     //加载 【派出所】selcet数据
     let url = API.getPCS.devUrl;
     let array = [];
@@ -383,30 +381,30 @@ export default {
       this.optionsPCS = array;
     });
     //加载 【责任人】select数据
-     let urlWS_Org_Code = API.getUserInfoAll.devUrl
+    let urlWS_Org_Code = API.getUserInfoAll.devUrl;
     // let urlWS_Org_Code = API.getUserInfoAll.devUrl+'&where=UserType=01'  根据where条件进行筛选
-    let arrayOrgCode = []
-   this.$axios.get(urlWS_Org_Code).then(res => {
-      for(let item of res.data){
-        let OrgCodeItem={
-           value:item.ID,
-           label:item.UserName
-        }
-        arrayOrgCode.push(OrgCodeItem)
+    let arrayOrgCode = [];
+    this.$axios.get(urlWS_Org_Code).then(res => {
+      for (let item of res.data) {
+        let OrgCodeItem = {
+          value: item.ID,
+          label: item.UserName
+        };
+        arrayOrgCode.push(OrgCodeItem);
       }
       this.options_orgCode = arrayOrgCode;
     });
 
     //加载 【维护人员】select数据
-     let urlOperators = API.getUserInfoAll.devUrl
-    let arrayOperators = []
-   this.$axios.get(urlOperators).then(res => {
-      for(let item of res.data){
-        let OrgCodeItem={
-           value:item.ID,
-           label:item.UserName
-        }
-        arrayOperators.push(OrgCodeItem)
+    let urlOperators = API.getUserInfoAll.devUrl;
+    let arrayOperators = [];
+    this.$axios.get(urlOperators).then(res => {
+      for (let item of res.data) {
+        let OrgCodeItem = {
+          value: item.ID,
+          label: item.UserName
+        };
+        arrayOperators.push(OrgCodeItem);
       }
       this.options_WS_Operators = arrayOperators;
     });
@@ -429,9 +427,9 @@ function getTableData(data) {
       WS_SysCode: data[i].WS_SysCode,
       WS_Area_Code: data[i].WS_Area_Code,
       WS_IP: data[i].WS_IP,
-      PCS_Name:data[i].PCS_Name,
-      WS_OrgName:data[i].WS_OrgName,
-      WS_OperatorsName:data[i].WS_OperatorsName
+      PCS_Name: data[i].PCS_Name,
+      WS_OrgName: data[i].WS_OrgName,
+      WS_OperatorsName: data[i].WS_OperatorsName
     });
   }
   return array;

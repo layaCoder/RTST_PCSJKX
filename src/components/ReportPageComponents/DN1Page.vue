@@ -21,7 +21,22 @@
                 </el-option> -->
         </el-select>
       </el-col>
+
       <el-col :span='5'>
+        <span>设备编号</span>
+        <el-select v-model="ws_code" placeholder="请选择" size="mini">
+          <!-- <el-option v-for="item in optionsType" :key="item.value" :label="item.label" :value="item.value">
+                </el-option> -->
+        </el-select>
+      </el-col>
+
+      
+      <el-col :span='1'>
+        <el-button type="success" size="mini" @click="handleSearch">查询</el-button>
+      </el-col>
+    </el-row>
+    <el-row>
+<el-col :span='5'>
         <div class="block">
           <span>时间</span>
           <el-date-picker v-model="dateBegin" type="date" placeholder="选择日期" size="mini">
@@ -34,9 +49,6 @@
           <el-date-picker v-model="dateEnd" type="date" placeholder="选择日期" size="mini">
           </el-date-picker>
         </div>
-      </el-col>
-      <el-col :span='1'>
-        <el-button type="success" size="mini" @click="handleSearch">查询</el-button>
       </el-col>
     </el-row>
     <el-row class="tableRow">
@@ -67,6 +79,7 @@ export default {
   data() {
     return {
       tableData: [],
+      ws_code:"",
       area: "",
       pcs: "",
       dateBegin: "",
@@ -84,27 +97,27 @@ export default {
     },
     handleCurrentChange: function(currentPage) {
       this.currentPage = currentPage;
-    },
+    }
   },
   mounted: function() {
-      let testData = [
-        {
-          equipCode: "70696867",
-          pcsName: "后湖",
-          JKDName:'测试数据',
-          dateBegin: "2018-11-30",
-          dateEnd: "2018-12-30",
-          DN: "99"
-        }
-      ];
-      this.tableData = testData;
-    }
+    let testData = [
+      {
+        equipCode: "70696867",
+        pcsName: "后湖",
+        JKDName: "测试数据",
+        dateBegin: "2018-11-30",
+        dateEnd: "2018-12-30",
+        DN: "99"
+      }
+    ];
+    this.tableData = testData;
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.tableRow{
+.tableRow {
   height: 500px;
 }
 </style>

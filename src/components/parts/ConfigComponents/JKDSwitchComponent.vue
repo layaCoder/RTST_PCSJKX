@@ -2,7 +2,7 @@
   <div>
     <div>{{equipCode}}</div>
     <div>
-      <el-row>
+      <el-row >
         <el-form :v-model="formSwitchObj" ref="formSwitchObj">
           <el-row class="row">
             <el-col :span="8">
@@ -281,6 +281,7 @@ export default {
   },
   data() {
     return {
+
       optionsComp: [],
 
       options121: [],
@@ -428,6 +429,15 @@ export default {
     };
   },
   methods: {
+    //loading
+   openFullScreen() {
+        this.fullscreenLoading = true;
+        setTimeout(() => {
+          this.fullscreenLoading = false;
+        }, 4000);
+      },
+
+
     changeStatus(evnent) {
       console.log(evnent);
     },
@@ -517,7 +527,7 @@ export default {
 
       this.postForm.DV241STA=this.DV241STA===false?0:1
       this.postForm.DV241SXJCOMID=this.formSwitchObj.ckb_24_1.compId===''?0:this.formSwitchObj.ckb_24_1.compId
-      this.postForm.DV241SXJID=this.formSwitchObj.ckb_24_1.equipname===''?0:this.formSwitchObj.ckb_24_2.equipname
+      this.postForm.DV241SXJID=this.formSwitchObj.ckb_24_1.equipname===''?0:this.formSwitchObj.ckb_24_1.equipname
 
       this.postForm.DV242STA=this.DV242ST===false?0:1
       this.postForm.DV242SXJCOMID=this.formSwitchObj.ckb_24_2.compId===''?0:this.formSwitchObj.ckb_24_2.compId
@@ -570,10 +580,18 @@ export default {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         }
+      }).then(
+        this.$message({
+            type: "success",
+            message:this.formType===0? "添加成功":"修改成功"
+          })
+      ).catch(function(response){
+        console.log(response)
       })
     }
   },
   mounted: function() {
+
     //加载品牌selcet框数据
     let url = API.getSXJCompanyAll.devUrl;
     this.$axios.get(url).then(res => {
@@ -589,10 +607,10 @@ export default {
    let url2=API.getEquipSwitchStateConfigList.devUrl+'&WS_Code='+this.equipCode
     this.$axios.get(url2).then(res => {
        let switchState=res.data[0]
-
       console.log('---------开光状态表数据-------------')
       console.log(res.data)
-      //switch开关赋值
+      if(res.data.length>0){
+ //switch开关赋值
       this.DV121STA=res.data[0].DV121STA==="1"?true:false
       this.DV122STA=res.data[0].DV122STA==="1"?true:false
       this.DV123STA=res.data[0].DV123STA==="1"?true:false
@@ -713,6 +731,8 @@ export default {
             this.formSwitchObj.ckb_poe_4.equipname=switchState.POE4SXJID
           });
      }
+      }
+     
      
     });
   }

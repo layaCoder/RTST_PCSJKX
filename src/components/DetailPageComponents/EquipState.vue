@@ -427,7 +427,7 @@ export default {
     // });
 
     //定时函数 计数器 计时器  定时刷新页面数据
-    this._timeOut = setInterval(this.timer, 60000);
+    this._timeOut = setInterval(this.timer, 2000);
   },
   beforeDestroy() {
     //摧毁定时器

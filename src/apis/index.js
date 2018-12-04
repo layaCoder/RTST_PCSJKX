@@ -125,6 +125,12 @@
         method:'GetC_WSon_off',
         devUrl:'api/Handler/AjaxTestHandler.ashx?mod=49',
         productionUrl:''
-    }
+    },
     
+    getDnReprotMonth:{
+         name:'获取电能月报',
+         method:'GetDNOneYearRow',
+         devUrl:'api/Handler/AjaxTestHandler.ashx?mod=12',
+         productionUrl:''
+    }
  }
