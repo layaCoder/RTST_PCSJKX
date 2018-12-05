@@ -14,6 +14,7 @@ import SXJConfig from '@/components/ConfigPageComponents/SXJConfigPage'
 import DN1Page from '@/components/ReportPageComponents/DN1Page'
 import DN2Page from '@/components/ReportPageComponents/DN2Page'
 import AlarmDetail from '@/components/AlarmPageComponets/AlarmDetailPage.vue'
+import ChartDemo from '@/components/AlarmPageComponets/ChartDemo.vue'
 
 
 Vue.use(Router)
@@ -57,6 +58,11 @@ export default new Router({
               name:'alarmDetail',
               path:'alarmDetail',
               component:AlarmDetail
+            },
+            {
+              name:'chartDemo',
+              path:'chartDemo',
+              component:ChartDemo
             }
            
           ]
