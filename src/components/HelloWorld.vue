@@ -50,16 +50,26 @@ export default {
           this.$router.push({ name: "detailPage" });
           break;
         case "2":
-          this.$router.push({ name: "alarmPage" });
+          this.$router.push({
+            name: "alarmPage",
+            query: {
+              nodeLevel: this.$store.state.nodeLevel,
+              wsCode: this.$store.state.wsCode,
+              ip: this.$store.state.ip,
+              isEquip: this.$store.state.isEquip
+            }
+          });
           break;
         case "3":
           //this.$router.push({ name: "reportPage"});
           this.$router.push({
             name: "reportPage",
-            query: { nodeLevel: this.$store.state.nodeLevel ,
-                     wsCode:this.$store.state.wsCode,
-                     ip:this.$store.state.ip,
-                     isEquip:this.$store.state.isEquip}
+            query: {
+              nodeLevel: this.$store.state.nodeLevel,
+              wsCode: this.$store.state.wsCode,
+              ip: this.$store.state.ip,
+              isEquip: this.$store.state.isEquip
+            }
           });
           break;
         case "4":
@@ -87,16 +97,15 @@ li {
 a {
   color: #42b983;
 }
-.el-header{
-  padding:0;
+.el-header {
+  padding: 0;
 }
 
 .el-footer {
   background-color: #172850;
 }
 
-.el-main{
-  padding:2px 0px;
+.el-main {
+  padding: 2px 0px;
 }
-
 </style>

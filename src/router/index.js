@@ -13,6 +13,7 @@ import WBGSConfig from '@/components/ConfigPageComponents/WBGSConfigPage'
 import SXJConfig from '@/components/ConfigPageComponents/SXJConfigPage'
 import DN1Page from '@/components/ReportPageComponents/DN1Page'
 import DN2Page from '@/components/ReportPageComponents/DN2Page'
+import AlarmDetail from '@/components/AlarmPageComponets/AlarmDetailPage.vue'
 
 
 Vue.use(Router)
@@ -49,7 +50,16 @@ export default new Router({
         {
           name:'alarmPage',
           path:'alarm',
-          component:AlarmPage
+          component:AlarmPage,
+          redirect:'alarm/alarmDetail',
+          children:[
+            {
+              name:'alarmDetail',
+              path:'alarmDetail',
+              component:AlarmDetail
+            }
+           
+          ]
         },
         {
           name:'reportPage',
