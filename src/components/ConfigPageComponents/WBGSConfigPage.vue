@@ -127,7 +127,7 @@ export default {
           });
         })
         .catch(() => {
-          this.message({
+          this.$message({
             type: "info",
             message: "已取消删除"
           });
@@ -154,6 +154,14 @@ export default {
     },
     //提交新增/修改表单
     handleSubmit: function(e) {
+      if(this.formObj.ComName===''){
+        this.$message({
+            type: "warning",
+            message: "请填写完整信息"
+          });
+        return 
+      }
+
       //axios post提交表单
       if (this.formType === 0) {
         this.formObj.ID = 0; //标记ID为0，后台识别为新增方法

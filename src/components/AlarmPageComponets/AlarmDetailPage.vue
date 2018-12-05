@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mainContent">
     <el-row>
       <el-col>
         <h2>告警详情</h2>

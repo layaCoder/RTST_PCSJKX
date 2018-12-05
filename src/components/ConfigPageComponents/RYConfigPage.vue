@@ -38,7 +38,7 @@
     <div>
       <el-dialog :title="this.formType==0?'新增人员信息':'修改人员信息'" :visible.sync="dialogVisible" width="60%" :before-close="handleClose">
         <!-- <span>这是一段信息</span> -->
-        <el-form :v-model="formObj" ref="formObj">
+        <el-form :v-model="formObj" ref="formObj" :rules="rules" class="demo-ruleForm">
           <el-row class="modalRow">
             <el-col :span="2">
               &nbsp;
@@ -49,9 +49,11 @@
               </el-input>
             </el-col>
             <el-col :span="10">
-              <el-input v-model="formObj.UserName" placeholder="请输入内容">
-                <template slot="prepend">姓名</template>
-              </el-input>
+              <!-- <el-form-item prop="name"> -->
+                <el-input v-model="formObj.UserName" placeholder="请输入内容">
+                  <template slot="prepend">姓名</template>
+                </el-input>
+              <!-- </el-form-item> -->
             </el-col>
           </el-row>
           <el-row class="modalRow">
@@ -80,7 +82,7 @@
               &nbsp;
             </el-col>
             <el-col :span="10">
-              <el-input v-model="formObj.UserTel" placeholder="请输入内容">
+              <el-input v-model="formObj.UserTel" placeholder="请输入内容" require=true>
                 <template slot="prepend">联系电话</template>
               </el-input>
             </el-col>
@@ -106,7 +108,7 @@ import API from "../../apis/index.js";
 export default {
   data() {
     return {
-      loading:true,
+      loading: true,
       formType: 0, //表单状态，0位新增，1为修改
       formObj: {
         ID: "",
@@ -144,7 +146,15 @@ export default {
       optionsPCS: [],
 
       //所属单位select数据
-      optionsValue: []
+      optionsValue: [],
+
+      //element ui 表单验证
+      rules: {
+        // name: [
+        //     { required: true, message: '请输入姓名', trigger: 'blur' },
+        //     { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+        //   ],
+      }
     };
   },
   methods: {
@@ -175,7 +185,7 @@ export default {
         type: "warning"
       })
         .then(() => {
-          //let url = API.delUserInfo.devUrl
+          let url = API.delUserInfo.devUrl;
           this.$axios({
             url: url,
             method: "post",
@@ -197,7 +207,7 @@ export default {
           });
         })
         .catch(() => {
-          this.message({
+          this.$message({
             type: "info",
             message: "已取消删除"
           });
@@ -228,6 +238,20 @@ export default {
     },
     //提交新增/修改表单
     handleSubmit: function(e) {
+      console.log(this.UserName);
+      if (
+        this.formObj.ID === '' ||
+        this.formObj.UserName === '' ||
+        this.formObj.UserOrg === '' ||
+        this.formType.UserTel === '' ||
+        this.formObj.UserType === ''
+      ) {
+        this.$message({
+          type: "warning",
+          message: "请填写完整信息"
+        });
+        return;
+      }
       //axios post提交表单
       if (this.formType === 0) {
         this.formObj.ID = 0; //标记ID为0，后台识别为新增方法
@@ -297,7 +321,7 @@ export default {
     this.$axios.get(url).then(res => {
       console.log(res.data);
       this.tableData = getTableData(res.data);
-      this.loading=false
+      this.loading = false;
     });
 
     // mod:42 加载第三方维保单位select选项
@@ -367,8 +391,8 @@ function getTableData(data) {
   color: #909399;
 }
 
-.mainContent{
-  box-shadow: 0px  0px 5px #999999;
+.mainContent {
+  box-shadow: 0px 0px 5px #999999;
   padding: 10px;
   /* margin-left:-4%; */
   margin: 4% 4% 4% -4%;

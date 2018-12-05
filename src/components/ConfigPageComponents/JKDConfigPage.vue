@@ -10,7 +10,7 @@
 
     </el-row>
     <el-row>
-      <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%"  v-loading="loading">
+      <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%" v-loading="loading">
         <el-table-column prop="WS_ID" label="流水号">
         </el-table-column>
         <el-table-column prop="WS_Code" label="设备编号">
@@ -301,6 +301,27 @@ export default {
     },
     //提交新增/修改表单
     handleSubmit: function(e) {
+      //表单验证
+      if(this.formObj.WS_ID===''||
+      this.formObj.WS_Name===''||
+      this.formObj.WS_Area_Code===''||
+      this.formObj.WS_Code ===''||
+      this.formObj.WS_DWSCode ===''||
+      this.formObj.WS_IP ===''||
+      this.formObj.WS_Latitude ===''||
+      this.formObj.WS_Longitude===''||
+      this.formObj.WS_Num ===''||
+      this.formObj.WS_Operators ===''||
+      this.formObj.WS_Org_Code===''||
+      this.formObj.WS_SysCode===''
+      ){
+        this.$message({
+            type: "warning",
+            message: "请填写完整信息"
+          });
+        return 
+      }
+
       //axios post提交表单
       if (this.formType === 0) {
         this.formObj.ID = 0; //标记ID为0，后台识别为新增方法
@@ -331,6 +352,12 @@ export default {
         }
       })
         .then(res => {
+
+          this.$message({
+            type: "success",
+            message: "删除成功"
+          });
+
           // axios post请求成功后执行
           //重新加载表格数据，刷新表格/////////////////////////
 
@@ -460,8 +487,8 @@ function getTableData(data) {
   color: #909399;
 }
 
-.mainContent{
-  box-shadow: 0px  0px 5px #999999;
+.mainContent {
+  box-shadow: 0px 0px 5px #999999;
   padding: 10px;
   /* margin-left:-4%; */
   margin: 4% 4% 4% -4%;

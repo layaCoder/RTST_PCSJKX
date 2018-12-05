@@ -145,6 +145,17 @@ export default {
       this.dialogVisible = true;
     },
     handleSubmit() {
+      if(this.formObj.ID===''||
+      this.formObj.SXJName===''||
+      this.formObj.SXJType===''||
+      this.formObj.SCJComID===''){
+        this.$message({
+          type: "warning",
+          message: "请填写完整信息"
+        });
+        return
+      }
+
       //axios post提交表单
       if (this.formType === 0) {
         this.formObj.ID = 0; //标记ID为0，后台识别为新增方法

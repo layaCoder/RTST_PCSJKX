@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <el-row>
       <h2>区域监控</h2>
     </el-row>

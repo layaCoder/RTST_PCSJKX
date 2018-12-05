@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mainContent">
     <el-row>
       <el-col>
         <h2>电能详情</h2>

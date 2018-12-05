@@ -60,25 +60,25 @@
         </span> -->
       </el-dialog>
     </div>
-<div>
+    <div>
       <el-dialog :title="''" :visible.sync="dialogSxjVisible" width="80%" :before-close="handleClose" :modal-append-to-body='false'>
-       <SXJConfigComponent :compId="compId" v-if="dialogSxjVisible"></SXJConfigComponent>
+        <SXJConfigComponent :compId="compId" v-if="dialogSxjVisible"></SXJConfigComponent>
       </el-dialog>
-</div>
+    </div>
 
   </div>
 </template>
 
 <script>
 import API from "../../apis/index.js";
-import SXJConfigComponent from '../parts/ConfigComponents/SXJConfigComponent.vue'
+import SXJConfigComponent from "../parts/ConfigComponents/SXJConfigComponent.vue";
 
 export default {
-components: { SXJConfigComponent },
+  components: { SXJConfigComponent },
   data() {
     return {
-      loading:true,
-      compId:'',//公司id，传递给子组件模态框
+      loading: true,
+      compId: "", //公司id，传递给子组件模态框
       formType: 0, //模态框类型，0位新增，1位修改
       formObj: {
         ID: "",
@@ -91,7 +91,7 @@ components: { SXJConfigComponent },
         }
       ],
       dialogVisible: false,
-      dialogSxjVisible:false,
+      dialogSxjVisible: false,
       currentPage: 1,
       pagesize: 10
     };
@@ -101,7 +101,7 @@ components: { SXJConfigComponent },
     handleShowDialog() {
       this.formType = 0; //表单type=0，表示为新增方法
       this.formObj.ID = 0;
-         this.formObj.SXJCom='';
+      this.formObj.SXJCom = "";
       this.dialogVisible = true;
     },
     handleSizeChange: function(size) {
@@ -118,10 +118,10 @@ components: { SXJConfigComponent },
     },
     //弹出【编辑】模态框
     handleEdit: function(index, row) {
-      this.dialogVisible=true
-      this.formType=1;
-      this.formObj.ID=row.ID
-      this.formObj.SXJCom=row.ComName
+      this.dialogVisible = true;
+      this.formType = 1;
+      this.formObj.ID = row.ID;
+      this.formObj.SXJCom = row.ComName;
       console.log(row);
     },
     handleDelete: function(index, row) {
@@ -133,7 +133,7 @@ components: { SXJConfigComponent },
       })
         .then(() => {
           //
-          let url = API.delUserInfo.devUrl
+          let url = API.delUserInfo.devUrl;
           this.$axios({
             url: url,
             method: "post",
@@ -143,7 +143,7 @@ components: { SXJConfigComponent },
           });
           // axios post请求成功后执行
           //重新加载表格数据，刷新表格/////////////////////////
-          let url2 = API.getSXJCompanyAll.devUrl
+          let url2 = API.getSXJCompanyAll.devUrl;
           this.$axios.get(url2).then(res => {
             console.log(res.data);
             this.tableData = getTableData(res.data);
@@ -155,7 +155,7 @@ components: { SXJConfigComponent },
           });
         })
         .catch(() => {
-          this.message({
+          this.$message({
             type: "info",
             message: "已取消删除"
           });
@@ -168,12 +168,19 @@ components: { SXJConfigComponent },
         })
         .catch(_ => {});
     },
-    handleSubmit:function(e){
+    handleSubmit: function(e) {
       //axios post提交表单
+      if (this.formObj.SXJCom === '') {
+        this.$message({
+          type: "warning",
+          message: "请填写完整信息"
+        });
+        return
+      }
       if (this.formType === 0) {
         this.formObj.ID = 0; //标记ID为0，后台识别为新增方法
       }
-      let url = API.addOrUpdateCameraCompany.devUrl
+      let url = API.addOrUpdateCameraCompany.devUrl;
       this.$axios({
         url: url,
         method: "post",
@@ -196,29 +203,28 @@ components: { SXJConfigComponent },
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         }
-      }).then(res=>{
-          //消息框
-           this.$message({
-            type: "success",
-            message:this.formType===0? "添加成功":"修改成功"
-          });
-          // axios post请求成功后执行
-          //重新加载表格数据，刷新表格/////////////////////////
-          let url = API.getSXJCompanyAll.devUrl
-          this.$axios.get(url).then(res => {
-            console.log(res.data);
-            this.tableData = getTableData(res.data);
-          });
-          //////////////////////////////////////////////////
-        })
-        this.dialogVisible=false
+      }).then(res => {
+        //消息框
+        this.$message({
+          type: "success",
+          message: this.formType === 0 ? "添加成功" : "修改成功"
+        });
+        // axios post请求成功后执行
+        //重新加载表格数据，刷新表格/////////////////////////
+        let url = API.getSXJCompanyAll.devUrl;
+        this.$axios.get(url).then(res => {
+          console.log(res.data);
+          this.tableData = getTableData(res.data);
+        });
+        //////////////////////////////////////////////////
+      });
+      this.dialogVisible = false;
     },
-   showSxjDialog:function(index,row){
-    console.log(row)
-    this.compId=row.ID
-    this.dialogSxjVisible=true
-
-   }
+    showSxjDialog: function(index, row) {
+      console.log(row);
+      this.compId = row.ID;
+      this.dialogSxjVisible = true;
+    }
   },
   mounted: function() {
     //加载表格数据
@@ -226,7 +232,7 @@ components: { SXJConfigComponent },
     this.$axios.get(url).then(res => {
       console.log(res.data);
       this.tableData = getTableData(res.data);
-      this.loading=false
+      this.loading = false;
     });
   }
 };
@@ -245,12 +251,12 @@ function getTableData(sxjArray) {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-.modalRow{
+.modalRow {
   margin-bottom: 20px;
 }
 
-.mainContent{
-  box-shadow: 0px  0px 5px #999999;
+.mainContent {
+  box-shadow: 0px 0px 5px #999999;
   padding: 10px;
   /* margin-left:-4%; */
   margin: 4% 4% 4% -4%;
