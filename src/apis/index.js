@@ -3,7 +3,7 @@
  * @type {object}
  */
 
- export default{
+export default{
     //获取派出所
     getPCS:{
         name:'获取派出所列表',

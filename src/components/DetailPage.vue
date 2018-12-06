@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="4" class="tree">
         <div id='tree'>
-          <el-tree @node-click="handleNodeClick" :props="defaultProps" :load="loadNode1" :highlight-current=true  lazy></el-tree>
+          <el-tree @node-click="handleNodeClick" :props="defaultProps" :load="loadNode1" :highlight-current=true lazy></el-tree>
         </div>
       </el-col>
       <el-col :span="19" id='mainContent'>
@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import API from '../apis/index.js'
+import API from "../apis/index.js";
 
 export default {
   data() {
@@ -74,8 +74,7 @@ export default {
     handleNodeClick(data) {
       //如果是设备
       if (data.isEquip === true) {
-
-        this.$store.commit("showLoadingBar", { flag: true });
+        this.$store.commit('SHOW_LOADING_BAR', { flag: true });
         this.showHello = false;
 
         this.$router.push({
@@ -87,10 +86,10 @@ export default {
           }
         });
         //使用store记录当前设备/////////////////////////////////
-        this.$store.commit("setEquip", { flag: true });
-        this.$store.commit("setWsCode", { wsCode: data.wsCode });
-        this.$store.commit("setIp", { ip: data.ipAddress });
-        this.$store.commit("setNodeLevle", { nodeLevel: data.nodeLevel });
+        this.$store.commit("SET_EQUIP", { flag: true });
+        this.$store.commit("SET_WS_CODE", { wsCode: data.wsCode });
+        this.$store.commit("SET_IP", { ip: data.ipAddress });
+        this.$store.commit("SET_NODE_LEVEL", { nodeLevel: data.nodeLevel });
         ///////////////////////////////////////////////////////
       } else if (data.isEquip === false) {
         this.showHello = false;
@@ -99,14 +98,14 @@ export default {
           params: {
             nodeLevel: data.nodeLevel,
             wsCode: data.wsCode,
-            ipAddress: data.ipAddress,
+            ipAddress: data.ipAddress
           }
         });
         //使用store记录当前设备/////////////////////////////////
-        this.$store.commit("setEquip", { flag: false });
-        this.$store.commit("setWsCode", { wsCode: data.wsCode });
-        this.$store.commit("setIp", { ip: data.ipAddress });
-        this.$store.commit("setNodeLevle", { nodeLevel: data.nodeLevel });
+        this.$store.commit("SET_EQUIP", { flag: false });
+        this.$store.commit("SET_WS_CODE", { wsCode: data.wsCode });
+        this.$store.commit("SET_IP", { ip: data.ipAddress });
+        this.$store.commit("SET_NODE_LEVEL", { nodeLevel: data.nodeLevel });
         ///////////////////////////////////////////////////////
       }
     },
@@ -144,7 +143,7 @@ export default {
       ////////////// 二级节点
       if (node.level === 1) {
         var list = [];
-        let url=API.getPCS.devUrl
+        let url = API.getPCS.devUrl;
         this.$axios.get(url).then(res => {
           for (var i = 0; i < res.data.length; i++) {
             var pcs = {
@@ -164,7 +163,7 @@ export default {
       ////////////////三级节点
       if (node.level === 2) {
         var list = [];
-        let url=API.getWorkSiteById.devUrl+node.data.wsCode
+        let url = API.getWorkSiteById.devUrl + node.data.wsCode;
         this.$axios.get(url).then(res => {
           console.log(res.data);
           for (var i = 0; i < res.data.length; i++) {
@@ -197,7 +196,6 @@ export default {
     }
   }
 };
-
 </script>
 
 
@@ -207,7 +205,7 @@ export default {
 .el-tree {
   background-color: #ffffff;
   border: 0.1px solid #999999;
-  border-radius: 10px
+  border-radius: 10px;
 }
 /* .el-main{
    background: #999
@@ -216,27 +214,24 @@ export default {
 .el-tree-node__label {
   font-size: 17px;
 }
-.el-tree-node__content{
-   border: 0.1px solid #999999;
-   height: 35px;
+.el-tree-node__content {
+  border: 0.1px solid #999999;
+  height: 35px;
 }
 
 /* hover样式 */
 .el-tree-node__content:hover {
-background-color: #d1d1d1;
+  background-color: #d1d1d1;
 }
 /* //点击的样式 */
 /* .el-tree-node:focus>.el-tree-node__content{
 background-color: yellow;
 } */
 
-.el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
-    background-color: #2578af;
-color: white;
+.el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
+  background-color: #2578af;
+  color: white;
 }
-
-
-
 
 .tree {
   margin-right: 25px;
@@ -244,7 +239,4 @@ color: white;
 .welcomeMessage {
   height: 600px;
 }
-
-
-
 </style>

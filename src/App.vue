@@ -1,6 +1,6 @@
 <template>
   <div id="app" >
-    <loading-component v-if="this.$store.state.loading"></loading-component>
+    <loading-component v-if="this.$store.getters.getLoading"></loading-component>
     <!-- <div v-if="this.$store.state.loading" class="loading">loading</div> -->
     <router-view v-show="!this.$store.state.loading"/>
     <footer v-show="!this.$store.state.loading"></footer>

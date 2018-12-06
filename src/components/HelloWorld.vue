@@ -53,10 +53,10 @@ export default {
           this.$router.push({
             name: "alarmPage",
             query: {
-              nodeLevel: this.$store.state.nodeLevel,
-              wsCode: this.$store.state.wsCode,
-              ip: this.$store.state.ip,
-              isEquip: this.$store.state.isEquip
+              nodeLevel:this.$store.getters.getNodeLevel,
+              wsCode: this.$store.getters.getWsCode,
+              ip: this.$store.getters.getIp,
+              isEquip: this.$store.getters.getIsEquip
             }
           });
           break;
@@ -65,10 +65,11 @@ export default {
           this.$router.push({
             name: "reportPage",
             query: {
-              nodeLevel: this.$store.state.nodeLevel,
-              wsCode: this.$store.state.wsCode,
-              ip: this.$store.state.ip,
-              isEquip: this.$store.state.isEquip
+              // nodeLevel: this.$store.state.nodeLevel,
+              nodeLevel:this.$store.getters.getNodeLevel,
+              wsCode: this.$store.getters.getWsCode,
+              ip: this.$store.getters.getIp,
+              isEquip: this.$store.getters.getIsEquip
             }
           });
           break;
