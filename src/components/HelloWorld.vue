@@ -19,6 +19,7 @@
   </el-submenu> -->
           <el-menu-item index="3">电能报表</el-menu-item>
           <el-menu-item index="4">系统设置</el-menu-item>
+           <el-menu-item index="5">Module[5]</el-menu-item>
         </el-menu>
       </el-header>
       <el-main>
@@ -75,6 +76,10 @@ export default {
           break;
         case "4":
           this.$router.push({ name: "configPage" });
+          break;
+        case "5":
+         this.$router.push({name:"cart"});
+         break;
       }
     }
   }

@@ -16,6 +16,10 @@ import DN2Page from '@/components/ReportPageComponents/DN2Page'
 import AlarmDetail from '@/components/AlarmPageComponets/AlarmDetailPage.vue'
 import ChartDemo from '@/components/AlarmPageComponets/ChartDemo.vue'
 
+import CartPage from '@/components/CartPage'
+import CartSettlement from '@/components/CartPageComponents/CartSettlement'
+import GoodsList from '@/components/CartPageComponents/GoodsList' 
+
 
 Vue.use(Router)
 
@@ -113,6 +117,24 @@ export default new Router({
               name:'sxjConfig',
               path:'sxjConfig',
               component:SXJConfig
+            }
+          ]
+        },
+        {
+          name:'cart',
+          path:'cart',
+          component:CartPage,
+          redirect:'cart/goodsList',
+          children:[
+            {
+              name:'cartSettlement',
+              path:'cartSettlement',
+              component:CartSettlement
+            },
+            {
+              name:'goodsList',
+              path:'goodsList',
+              component:GoodsList
             }
           ]
         }

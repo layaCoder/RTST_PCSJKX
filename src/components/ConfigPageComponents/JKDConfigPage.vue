@@ -310,11 +310,14 @@ export default {
       this.formObj.WS_IP ===''||
       this.formObj.WS_Latitude ===''||
       this.formObj.WS_Longitude===''||
-      this.formObj.WS_Num ===''||
+      // this.formObj.WS_Num ===''||
       this.formObj.WS_Operators ===''||
       this.formObj.WS_Org_Code===''||
       this.formObj.WS_SysCode===''
       ){
+        console.log(this.formObj)
+       
+
         this.$message({
             type: "warning",
             message: "请填写完整信息"
@@ -352,10 +355,9 @@ export default {
         }
       })
         .then(res => {
-
           this.$message({
             type: "success",
-            message: "删除成功"
+            message: "修改成功"
           });
 
           // axios post请求成功后执行

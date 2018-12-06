@@ -59,15 +59,7 @@ export default {
     };
   },
   created: function() {
-    //获取所有江岸区下的派出所
-    // var url = "api/Handler/AjaxTestHandler.ashx?mod=40&&PCS_AreaID=3";
-    // console.log(url);
-    // // this.$axios.get("api/Handler/AjaxTestHandler.ashx?mod=2").then(res=>{
-    // this.$axios.get(url).then(res => {
-    //   console.log("---派出所列表---");
-    //   console.log(res.data);
-    //   this.data = getPcsList(res.data);
-    // });
+    
   },
 
   methods: {
