@@ -43,22 +43,7 @@ export default {
     };
   },
   computed: {
-    count() {
-      return this.$store.state.count;
-    },
-    //从store中获取当前设备或地点信息
-    isEquip() {
-      return this.$store.state.isEquip;
-    },
-    wsCode() {
-      return this.$store.state.wsCode;
-    },
-    ip() {
-      return this.$store.state.ip;
-    },
-    nodeLevel() {
-      return this.$store.state.nodeLevel;
-    }
+    
   },
   methods: {
     handleOpen(key, keyPath) {

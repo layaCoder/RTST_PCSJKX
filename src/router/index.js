@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
+import Login from '@/components/Login'
 import DetailPage from '@/components/DetailPage'
 import AlarmPage from '@/components/AlarmPage'
 import ReportPage from '@/components/ReportPage'
@@ -18,7 +19,8 @@ import ChartDemo from '@/components/AlarmPageComponets/ChartDemo.vue'
 
 import CartPage from '@/components/CartPage'
 import CartSettlement from '@/components/CartPageComponents/CartSettlement'
-import GoodsList from '@/components/CartPageComponents/GoodsList' 
+import GoodsList from '@/components/CartPageComponents/GoodsList'
+
 
 
 Vue.use(Router)
@@ -27,114 +29,119 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name:'login',
+      component:Login
+    },
+    {
+      path: '/main',
       name: 'HelloWorld',
       component: HelloWorld,
+      //update 2018-12-07 增加login页面，直接从页面push path到detail组件，
       //重定向到子路由，显示默认子路由页面
-      redirect: '/detail',
-      component: HelloWorld,
-      children:[
+      // redirect: '/detail',
+      children: [
         {
-          name:'detailPage',
-          path:'detail',
-          component:DetailPage,
-          children:[
+          name: 'detailPage',
+          path: 'detail',
+          component: DetailPage,
+          children: [
             {
-              name:'equipState',
-              path:'equipState/:nodeLevel/:wsCode/:ipAddress',
-              component:EquipState
+              name: 'equipState',
+              path: 'equipState/:nodeLevel/:wsCode/:ipAddress',
+              component: EquipState
             },
             {
-              name:'equipList',
+              name: 'equipList',
               //path:'equipList',
-              path:'equipList/:nodeLevel/:wsCode/:ipAddress',
-              component:EquipList
+              path: 'equipList/:nodeLevel/:wsCode/:ipAddress',
+              component: EquipList
             },
-           
+
           ]
         },
         {
-          name:'alarmPage',
-          path:'alarm',
-          component:AlarmPage,
-          redirect:'alarm/alarmDetail',
-          children:[
+          name: 'alarmPage',
+          path: 'alarm',
+          component: AlarmPage,
+          redirect: 'alarm/alarmDetail',
+          children: [
             {
-              name:'alarmDetail',
-              path:'alarmDetail',
-              component:AlarmDetail
+              name: 'alarmDetail',
+              path: 'alarmDetail',
+              component: AlarmDetail
             },
             {
-              name:'chartDemo',
-              path:'chartDemo',
-              component:ChartDemo
-            }
-           
-          ]
-        },
-        {
-          name:'reportPage',
-          //path:'report/:nodeLevel/:wsCode/:ipAddress',
-          path:'report',
-          component:ReportPage,
-          redirect:'report/dn1',
-          children:[
-            {
-              name:'DN1Page',
-              path:'dn1',
-              component:DN1Page
-            },
-            {
-              name:'DN2Page',
-              path:'dn2',
-              component:DN2Page
+              name: 'chartDemo',
+              path: 'chartDemo',
+              component: ChartDemo
             }
 
           ]
         },
         {
-          name:'configPage',
-          path:'config',
-          component:ConfigPage,
+          name: 'reportPage',
+          //path:'report/:nodeLevel/:wsCode/:ipAddress',
+          path: 'report',
+          component: ReportPage,
+          redirect: 'report/dn1',
+          children: [
+            {
+              name: 'DN1Page',
+              path: 'dn1',
+              component: DN1Page
+            },
+            {
+              name: 'DN2Page',
+              path: 'dn2',
+              component: DN2Page
+            }
+
+          ]
+        },
+        {
+          name: 'configPage',
+          path: 'config',
+          component: ConfigPage,
           redirect: 'config/jkdConfig',
           component: ConfigPage,
-          children:[
+          children: [
             {
-              name:'jkdConfig',
-              path:'jkdConfig',
-              component:JKDConfig
+              name: 'jkdConfig',
+              path: 'jkdConfig',
+              component: JKDConfig
             },
             {
-              name:'ryConfig',
-              path:'ryConfig',
-              component:RYConfig
+              name: 'ryConfig',
+              path: 'ryConfig',
+              component: RYConfig
             },
             {
-              name:'wbgsConfig',
-              path:'wbgsConfig',
-              component:WBGSConfig
+              name: 'wbgsConfig',
+              path: 'wbgsConfig',
+              component: WBGSConfig
             },
             {
-              name:'sxjConfig',
-              path:'sxjConfig',
-              component:SXJConfig
+              name: 'sxjConfig',
+              path: 'sxjConfig',
+              component: SXJConfig
             }
           ]
         },
         {
-          name:'cart',
-          path:'cart',
-          component:CartPage,
-          redirect:'cart/goodsList',
-          children:[
+          name: 'cart',
+          path: 'cart',
+          component: CartPage,
+          redirect: 'cart/goodsList',
+          children: [
             {
-              name:'cartSettlement',
-              path:'cartSettlement',
-              component:CartSettlement
+              name: 'cartSettlement',
+              path: 'cartSettlement',
+              component: CartSettlement
             },
             {
-              name:'goodsList',
-              path:'goodsList',
-              component:GoodsList
+              name: 'goodsList',
+              path: 'goodsList',
+              component: GoodsList
             }
           ]
         }
