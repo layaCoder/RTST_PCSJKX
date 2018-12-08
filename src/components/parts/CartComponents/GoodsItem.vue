@@ -19,9 +19,9 @@
 
     <!-- 数量选择 模态框 -->
     <el-dialog title="请选择数量" :visible.sync="showCountDialog" width="30%" :before-close="handleClose">
-      <el-button type="default" size="mini" @click="handleMinusOne">-</el-button>
+      <el-button type="default" size="mini" @click="handleMinusOne" :disabled="count<1">-</el-button>
       <span> 数量:{{this.count}}</span>
-      <el-button type="default" size="mini" @click="handlePlusOne">+</el-button>
+      <el-button type="default" size="mini" @click="handlePlusOne" >+</el-button>
       <span slot="footer" class="dialog-footer">
         <el-button @click="showCountDialog=false">取 消</el-button>
         <el-button type="primary" @click="handleAddToCart">确 定</el-button>
@@ -71,7 +71,8 @@ export default {
           name: this.name,
           id: this.id,
           count: this.count,
-          price: this.price
+          price: this.price,
+          totlePrice:this.count*this.price
         }
       });
       this.showCountDialog = false;
