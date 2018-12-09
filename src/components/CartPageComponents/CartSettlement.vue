@@ -4,7 +4,7 @@
       <h2>购物车</h2>
     </el-row>
     <el-row>
-      <el-table :data="cartList" stripe style="width: 80%">
+      <el-table :data="this.$store.getters.getGoodsList" stripe style="width: 80%">
         <el-table-column prop="id" label="商品编号" width="180">
         </el-table-column>
         <el-table-column prop="name" label="商品名称" width="180">
@@ -28,7 +28,7 @@
       </el-table>
     </el-row>
     <el-row>
-      <h4>总价格：{{totlePrice}}</h4>
+      <h4>总价格：{{this.$store.getters.getCartTotlePrice}}</h4>
     </el-row>
     <el-row>
       <el-button type="warning" @click="handleClearCart">清空购物车</el-button>
@@ -41,8 +41,8 @@
 export default {
   data() {
     return {
-      cartList: [],
-      totlePrice: 0
+      // cartList: [],
+      // totlePrice: 0
     };
   },
   methods: {
@@ -56,7 +56,6 @@ export default {
           price: row.price
         }
       });
-      this.totlePrice = this.$store.getters.getCartTotlePrice;
     },
     handlePlus(index, row) {
       console.log(index, row);
@@ -68,7 +67,6 @@ export default {
           price: row.price
         }
       });
-      this.totlePrice = this.$store.getters.getCartTotlePrice;
     },
     handleDelete(index, row) {
       console.log(index, row);
@@ -97,7 +95,6 @@ export default {
             message: "已取消"
           });
         });
-      this.totlePrice = this.$store.getters.getCartTotlePrice;
     },
     handleClearCart() {
       if (this.$store.getters.getGoodsList.length > 0) {
@@ -114,8 +111,8 @@ export default {
     }
   },
   mounted() {
-    this.cartList = this.$store.getters.getGoodsList;
-    this.totlePrice = this.$store.getters.getCartTotlePrice;
+    // this.cartList = this.$store.getters.getGoodsList;
+    // this.totlePrice = this.$store.getters.getCartTotlePrice;
   }
 };
 </script>

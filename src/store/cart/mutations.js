@@ -53,8 +53,8 @@ export default {
         }
     },
     [types.CLEAR_CART](state) {
-        if (state.goodsList.lengh > 0) {
-            state.goodsList = []
+        if (state.goodsList.length > 0) {
+            state.goodsList=[]
         }
     }
 
