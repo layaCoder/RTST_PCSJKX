@@ -4,10 +4,13 @@
       <h2>人员管理</h2>
     </el-row>
     <el-row>
-      <el-col :span="1">
+      <el-col :span="2">
         <el-button @click="handleShowDialog">添加</el-button>
       </el-col>
-
+      <el-col :span="20">&nbsp;</el-col>
+      <el-col :span="2">
+        <el-button type="success" @click="export_Excel">导出到excel</el-button>
+      </el-col>
     </el-row>
     <el-row>
       <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%" v-loading="loading">
@@ -28,6 +31,9 @@
           </template>
         </el-table-column>
       </el-table>
+    </el-row>
+    <el-row>
+
     </el-row>
     <!--分页组件-->
     <el-row>
@@ -50,9 +56,9 @@
             </el-col>
             <el-col :span="10">
               <!-- <el-form-item prop="name"> -->
-                <el-input v-model="formObj.UserName" placeholder="请输入内容">
-                  <template slot="prepend">姓名</template>
-                </el-input>
+              <el-input v-model="formObj.UserName" placeholder="请输入内容">
+                <template slot="prepend">姓名</template>
+              </el-input>
               <!-- </el-form-item> -->
             </el-col>
           </el-row>
@@ -240,11 +246,11 @@ export default {
     handleSubmit: function(e) {
       console.log(this.UserName);
       if (
-        this.formObj.ID === '' ||
-        this.formObj.UserName === '' ||
-        this.formObj.UserOrg === '' ||
-        this.formType.UserTel === '' ||
-        this.formObj.UserType === ''
+        this.formObj.ID === "" ||
+        this.formObj.UserName === "" ||
+        this.formObj.UserOrg === "" ||
+        this.formType.UserTel === "" ||
+        this.formObj.UserType === ""
       ) {
         this.$message({
           type: "warning",
@@ -311,7 +317,36 @@ export default {
       } else if (data === "02") {
         this.optionsValue = this.optionsCompany;
       } else return;
+    },
+    // 导出表格数据////////////////////////////////////////
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => v[j]));
+    },
+    export_Excel() {
+      this.$confirm("确定要导出表格数据么？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          require.ensure([], () => {
+            const { exportJsonToExcel } = require("../../vendor/Export2Excel");
+            const tHeader = ["ID", "姓名", "用户组织", "电话", "类型"];
+            const filterVal = [
+              "ID",
+              "UserName",
+              "UserOrg",
+              "UserTel",
+              "UserType"
+            ];
+            const list = this.userList;
+            const data = this.formatJson(filterVal, this.tableData);
+            exportJsonToExcel(tHeader, data, "人员管理");
+          });
+        })
+        .catch(() => {});
     }
+    /////////////////////////////////////////////////////
   },
   created: function() {},
 

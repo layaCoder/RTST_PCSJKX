@@ -16,6 +16,8 @@
 <script>
 import goodsItem from "../parts/CartComponents/GoodsItem";
 
+
+
 export default {
   components: { goodsItem },
   data() {
@@ -32,14 +34,14 @@ export default {
         name: "机匣",
         img: "imgUrl1",
         count: 0,
-        price: 135
+        price: 105
       },
       {
         id: 1,
         name: "鱼骨",
         img: "imgUrl2",
         count: 0,
-        price: 297
+        price: 270
       },
       {
         id: 2,
@@ -47,6 +49,13 @@ export default {
         img: "imgUrl3",
         count: 0,
         price: 275
+      },
+      {
+        id:3,
+        name:"后托",
+        img:"imgUrl4",
+        count:0,
+        price:50
       }
     ];
     this.goods = [...goodsDataArray];

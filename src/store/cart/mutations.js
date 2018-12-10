@@ -54,7 +54,7 @@ export default {
     },
     [types.CLEAR_CART](state) {
         if (state.goodsList.length > 0) {
-            state.goodsList=[]
+            state.goodsList = []
         }
     }
 

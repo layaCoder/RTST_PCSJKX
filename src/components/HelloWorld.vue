@@ -144,30 +144,26 @@ li {
   display: inline-block;
   margin: 0 10px;
 } */
-a {
-  color: #42b983;
-}
+
+/* header 样式*/
 .el-header {
   padding: 0;
 }
 
-.el-footer {
+.haeaderWarpper {
   background-color: #172850;
-  color: #ffffff;
-}
-
-.el-main {
-  /* padding: 2px 0px; */
-  padding:0px;
 }
 .logo {
   color: #ffffff;
   line-height: 60px;
   background-color: #172850;
+  float: left;
+  padding-left: 10px;
 }
 
 .logoImg {
   background-color: #172850;
+  float: right
 }
 img {
   width: 56px;
@@ -186,7 +182,18 @@ img {
   line-height: 60px;
   color: #ffffff;
 }
-.haeaderWarpper{
+
+a {
+  color: #42b983;
+}
+
+.el-footer {
   background-color: #172850;
+  color: #ffffff;
+}
+
+.el-main {
+  /* padding: 2px 0px; */
+  padding: 0px;
 }
 </style>

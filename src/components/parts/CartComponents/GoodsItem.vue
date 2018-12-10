@@ -5,23 +5,27 @@
     </el-row>
     <el-row class="row">
       <span>{{this.img}}</span>
+      <div>
+        <!--图片暂时写死 -->
+        <img src="../../../assets/parts/part.png" alt="">
+      </div>
     </el-row>
     <el-row class="row">
       <span>单价:{{this.price}}</span>
     </el-row>
-    <el-row class="row">
+    <!-- 商品清单不显示合计金额 -->
+    <!-- <el-row class="row">
       <span>合计:{{this.getTotlePrice}}</span>
-    </el-row>
+    </el-row> -->
     <el-row class="row">
-      <el-button type="success" size="mini" @click="showDiaolog">add to cart</el-button>
-
+      <el-button type="success" size="mini" @click="showDiaolog">添加到购物车</el-button>
     </el-row>
 
     <!-- 数量选择 模态框 -->
     <el-dialog title="请选择数量" :visible.sync="showCountDialog" width="30%" :before-close="handleClose">
       <el-button type="default" size="mini" @click="handleMinusOne" :disabled="count<1">-</el-button>
       <span> 数量:{{this.count}}</span>
-      <el-button type="default" size="mini" @click="handlePlusOne" >+</el-button>
+      <el-button type="default" size="mini" @click="handlePlusOne">+</el-button>
       <span slot="footer" class="dialog-footer">
         <el-button @click="showCountDialog=false">取 消</el-button>
         <el-button type="primary" @click="handleAddToCart">确 定</el-button>
@@ -72,7 +76,7 @@ export default {
           id: this.id,
           count: this.count,
           price: this.price,
-          totlePrice:this.count*this.price
+          totlePrice: this.count * this.price
         }
       });
       this.showCountDialog = false;
@@ -107,5 +111,9 @@ export default {
 <style scoped>
 .row {
   margin-bottom: 20px;
+}
+
+img {
+  width: 80px;
 }
 </style>

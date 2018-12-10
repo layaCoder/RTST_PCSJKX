@@ -14,7 +14,6 @@ export default {
         totlePrice: item.price * item.count
       }
       item = Object.assign(item, totlePriceObj)
-      console.log('1', item)
     }
     return state.goodsList
   },
