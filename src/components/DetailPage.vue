@@ -9,6 +9,7 @@
       <el-col :span="19" id='mainContent'>
         <div v-if="this.showHello" class="welcomeMessage">
           <h2>欢迎使用</h2>
+          
         </div>
         <router-view v-if="!this.showHello"></router-view>
       </el-col>

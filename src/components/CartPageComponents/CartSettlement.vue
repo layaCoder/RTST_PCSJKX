@@ -31,8 +31,10 @@
       <h4>总价格：{{this.$store.getters.getCartTotlePrice}}</h4>
     </el-row>
     <el-row>
-      <el-button type="warning" @click="handleClearCart">清空购物车</el-button>
-      <el-button type="success" @click="handlePayForCart">结算</el-button>
+      <div class="btnGroup">
+        <el-button type="warning" @click="handleClearCart">清空购物车</el-button>
+        <el-button type="success" @click="handlePayForCart">结算</el-button>
+      </div>
     </el-row>
   </div>
 </template>
@@ -121,6 +123,11 @@ export default {
 <style scoped>
 h4 {
   float: right;
+  margin-right: 20%;
+}
+
+.btnGroup{
+  float:right;
   margin-right: 20%;
 }
 </style>
