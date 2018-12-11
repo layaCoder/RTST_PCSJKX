@@ -230,6 +230,6 @@ background-color: yellow;
   margin-right: 25px;
 }
 .welcomeMessage {
-  height: 600px;
+  height: 800px;
 }
 </style>

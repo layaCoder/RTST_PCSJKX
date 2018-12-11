@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="hello" >
     <el-container>
       <el-row class="haeaderWarpper">
         <el-header>
@@ -126,7 +126,8 @@ export default {
           break;
       }
     }
-  }
+  },
+ 
 };
 </script>
 
@@ -196,4 +197,9 @@ a {
   /* padding: 2px 0px; */
   padding: 0px;
 }
+
+
+
+
+
 </style>

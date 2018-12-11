@@ -22,7 +22,7 @@
         </el-select>
       </el-col>
 
-      <el-col :span='5'>
+      <el-col :span='7'>
         <span>设备编号</span>
         <el-select v-model="ws_code" placeholder="请选择" size="mini">
           <!-- <el-option v-for="item in optionsType" :key="item.value" :label="item.label" :value="item.value">

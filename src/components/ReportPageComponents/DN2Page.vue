@@ -14,7 +14,7 @@
           </el-option>
         </el-select>
       </el-col>
-      <el-col :span='5'>
+      <el-col :span='7'>
         <span>派出所</span>
         <el-select v-model="pcs" placeholder="请选择" size="mini">
           <el-option v-for="item in optionsPCS" :key="item.value" :label="item.label" :value="item.value">
