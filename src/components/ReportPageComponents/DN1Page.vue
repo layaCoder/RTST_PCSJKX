@@ -9,14 +9,14 @@
     <el-row>
       <el-col :span='5'>
         <span>区域</span>
-        <el-select v-model="area" placeholder="请选择" size="mini">
+        <el-select v-model="area" placeholder="请选择" size="mini" clearable>
            <el-option v-for="item in areaOptions" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </el-col>
       <el-col :span='5'>
         <span>派出所</span>
-        <el-select v-model="pcs" placeholder="请选择" size="mini">
+        <el-select v-model="pcs" placeholder="请选择" size="mini" clearable>
          <el-option v-for="item in pcsOptions" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>

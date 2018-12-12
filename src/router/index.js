@@ -50,6 +50,9 @@ export default new Router({
           name: 'detailPage',
           path: 'detail',
           component: DetailPage,
+          meta:{
+            index:0
+          },
           children: [
             {
               name: 'equipState',
@@ -70,6 +73,9 @@ export default new Router({
           path: 'alarm',
           component: AlarmPage,
           redirect: 'alarm/alarmDetail',
+          meta:{
+            index:1
+          },
           children: [
             {
               name: 'alarmDetail',

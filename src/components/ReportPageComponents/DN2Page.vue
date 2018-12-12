@@ -9,14 +9,14 @@
     <el-row>
       <el-col :span='5'>
         <span>区域</span>
-        <el-select v-model="area" placeholder="请选择" size="mini">
+        <el-select v-model="area" placeholder="请选择" size="mini" clearable>
           <el-option v-for="item in optionsArea" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </el-col>
       <el-col :span='7'>
         <span>派出所</span>
-        <el-select v-model="pcs" placeholder="请选择" size="mini">
+        <el-select v-model="pcs" placeholder="请选择" size="mini" clearable>
           <el-option v-for="item in optionsPCS" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
@@ -51,7 +51,7 @@ import API from "../../apis/index.js";
 export default {
   data() {
     return {
-      loading:true,
+      loading: true,
       optionsPCS: [],
       optionsArea: [],
       tableData: [],
@@ -80,7 +80,7 @@ export default {
       .then(res => {
         console.log(res.data);
         if (res.data.length > 0) {
-          console.log(res.data)
+          console.log(res.data);
           this.tableData = getTableData(res.data);
           this.loading = false;
         }
@@ -91,23 +91,26 @@ export default {
 
     //加载派出所select
     let urlPCS = API.getPCS.devUrl;
-    this.$axios.get(urlPCS).then(res => {
-      console.log(res.data);
-      for(let item of res.data){
-        this.optionsPCS.push({
-          label:item.PCS_Name,
-          value:item.ID
-        })
-      }
-    }).catch(res=>{
-      console.log(res)
-    })
+    this.$axios
+      .get(urlPCS)
+      .then(res => {
+        console.log(res.data);
+        for (let item of res.data) {
+          this.optionsPCS.push({
+            label: item.PCS_Name,
+            value: item.ID
+          });
+        }
+      })
+      .catch(res => {
+        console.log(res);
+      });
 
     //加载区域select
     this.optionsArea.push({
-      label:'江岸区公安局',
-      value:'03'
-    })
+      label: "江岸区公安局",
+      value: "03"
+    });
   }
 };
 
