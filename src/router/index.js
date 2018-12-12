@@ -32,7 +32,7 @@ export default new Router({
       name: 'login',
       component: Login,
       meta:{
-        index:0
+        // isLogin:true
       }
     },
     {
@@ -43,7 +43,7 @@ export default new Router({
       //重定向到子路由，显示默认子路由页面
       // redirect: '/detail',
       meta:{
-        index:1
+        // isLogin:false
       },
       children: [
         {

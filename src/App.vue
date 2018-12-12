@@ -25,12 +25,14 @@ export default {
   },
   watch: {
     $route(to, from) {
+      //设置 css 动画
       // console.log(to)
       // let toName = to.name
       // const toIndex = to.meta.index
       // const fromIndex = from.meta.index
       // this.transitionName = toIndex < fromIndex ? 'slide-right' : 'slide-left'
       this.transitionName = "bounce";
+      
     }
   }
 };

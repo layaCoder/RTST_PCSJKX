@@ -1,6 +1,7 @@
 <template>
   <el-container class="loginWarpper">
     <el-main>
+
       <div>
         <el-row>
           <img src="../assets/jinghui.png" alt="" class="jinghuiImg">
@@ -20,7 +21,7 @@
                 <el-input v-model="form.name"></el-input>
               </el-form-item>
               <el-form-item label="密码">
-                <el-input v-model="form.passwold"></el-input>
+                <el-input v-model="form.passwold" type="password"></el-input>
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="handleLogin">登录</el-button>
@@ -37,7 +38,6 @@
             <a href="http://www.hbrtst.com/"> www.hbrtst.com</a>
           </p>
         </div>
-
       </div>
     </el-main>
   </el-container>
@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import * as storage from "../utils/localstorage.js";
+
 export default {
   data() {
     return {
@@ -60,17 +62,24 @@ export default {
   methods: {
     // todo:后台API对接
     handleLogin() {
-      //   if (this.form.name !== "admin" || this.form.passwold !== "123456") {
-      //     this.$message({
-      //       message: "用户名或密码错误",
-      //       type: "warning"
-      //     });
-      //     return;
-      //   }
-
+      // 后台 api 验证user
+      if (this.form.name !== "admin" || this.form.passwold !== "111") {
+        this.$message({
+          message: "用户名或密码错误",
+          type: "warning"
+        });
+        localStorage.removeItem("user");
+        return;
+      }
       this.$router.push({
         name: "detailPage"
       });
+      //登录后将 user 存放到 localStorage
+      let user = JSON.stringify({ isLogin: true, name: this.form.name });
+      // localStorage.setItem("user", user);
+      storage.setLocalStorage("user", user);
+      // console.log("-login success-", JSON.parse(localStorage.getItem("user")));
+      console.log(JSON.parse(storage.getLocalStorage("user", 60 * 60 * 24))); 
     },
     keyupSubmit() {
       document.onkeydown = e => {
@@ -95,7 +104,6 @@ h2 {
 button {
   float: left;
 }
-
 
 .loginForm {
   box-shadow: 0px 0px 5px #999999;

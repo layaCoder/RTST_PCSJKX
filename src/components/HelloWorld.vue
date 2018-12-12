@@ -1,5 +1,5 @@
 <template>
-  <div class="hello" >
+  <div class="hello">
     <el-container>
       <el-row class="haeaderWarpper">
         <el-header>
@@ -68,6 +68,7 @@
 
 <script>
 import footer from "@/components/Footer";
+import * as storage from '@/utils/localstorage.js'
 
 export default {
   data() {
@@ -122,12 +123,17 @@ export default {
           alert("修改密码");
           break;
         case "logOut":
-          alert("logOut");
+          localStorage.removeItem("user");
+          this.$router.push({ name: "login" });
           break;
       }
     }
   },
- 
+  created: function() {
+    if (this.$route.path !== "/" && storage.getLocalStorage('user',60*60*24) === null) {  //60 * 60 * 24 一天的秒数
+      this.$router.push({ name: "login" });
+    }
+  }
 };
 </script>
 
@@ -164,7 +170,7 @@ li {
 
 .logoImg {
   background-color: #172850;
-  float: right
+  float: right;
 }
 img {
   width: 56px;
@@ -197,9 +203,4 @@ a {
   /* padding: 2px 0px; */
   padding: 0px;
 }
-
-
-
-
-
 </style>
