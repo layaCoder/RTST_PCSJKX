@@ -31,7 +31,7 @@ export default new Router({
       path: '/',
       name: 'login',
       component: Login,
-      meta:{
+      meta: {
         // isLogin:true
       }
     },
@@ -42,7 +42,7 @@ export default new Router({
       //update 2018-12-07 增加login页面，直接从页面push path到detail组件，
       //重定向到子路由，显示默认子路由页面
       // redirect: '/detail',
-      meta:{
+      meta: {
         // isLogin:false
       },
       children: [

@@ -10,33 +10,32 @@
       <el-col :span='5'>
         <span>区域</span>
         <el-select v-model="area" placeholder="请选择" size="mini">
-          <!-- <el-option v-for="item in optionsType" :key="item.value" :label="item.label" :value="item.value">
-                </el-option> -->
+           <el-option v-for="item in areaOptions" :key="item.value" :label="item.label" :value="item.value">
+          </el-option>
         </el-select>
       </el-col>
       <el-col :span='5'>
         <span>派出所</span>
         <el-select v-model="pcs" placeholder="请选择" size="mini">
-          <!-- <el-option v-for="item in optionsType" :key="item.value" :label="item.label" :value="item.value">
-                </el-option> -->
+         <el-option v-for="item in pcsOptions" :key="item.value" :label="item.label" :value="item.value">
+          </el-option>
         </el-select>
       </el-col>
 
       <el-col :span='7'>
         <span>设备编号</span>
-        <el-select v-model="ws_code" placeholder="请选择" size="mini">
+        <el-input v-model="ws_code" placeholder="请输入设备编号" size="mini" class="equipInput">
           <!-- <el-option v-for="item in optionsType" :key="item.value" :label="item.label" :value="item.value">
                 </el-option> -->
-        </el-select>
+        </el-input>
       </el-col>
 
-      
       <el-col :span='1'>
         <el-button type="success" size="mini" @click="handleSearch">查询</el-button>
       </el-col>
     </el-row>
     <el-row>
-<el-col :span='5'>
+      <el-col :span='5'>
         <div class="block">
           <span>时间</span>
           <el-date-picker v-model="dateBegin" type="date" placeholder="选择日期" size="mini">
@@ -75,11 +74,15 @@
 </template>
 
 <script>
+import API from "../../apis/index";
+
 export default {
   data() {
     return {
       tableData: [],
-      ws_code:"",
+      areaOptions: [],
+      pcsOptions: [],
+      ws_code: "",
       area: "",
       pcs: "",
       dateBegin: "",
@@ -111,6 +114,37 @@ export default {
       }
     ];
     this.tableData = testData;
+
+    //加载区域select数据
+    this.areaOptions = [{ label: "江岸区", value: "0003" }];
+    //加载派出所select数据
+    let pcsListUrl = API.getPCS.devUrl;
+    this.$axios.get(pcsListUrl).then(res => {
+      this.pcsOptions.push({ label: "全部", value: 0 });
+      for (let item of res.data) {
+        this.pcsOptions.push({ label: item.PCS_Name, value: item.ID });
+      }
+    });
+
+    switch (this.$route.query.nodeLevel) {
+      case 0:
+        this.area = this.$route.query.wsCode; //区域暂时写死，后台无相应api
+        this.pcs = 0;
+        break;
+      case 1:
+        this.area = "0003";
+        this.pcs = this.$route.query.wsCode;
+        break;
+      case 2:
+        this.area = "";
+        this.pcs = "";
+        this.ws_code = this.$route.query.wsCode;
+        break;
+      default:
+        this.area = "";
+        this.pcs = "";
+        this.ws_code = "";
+    }
   }
 };
 </script>
@@ -119,5 +153,9 @@ export default {
 <style scoped>
 .tableRow {
   height: 500px;
+}
+
+.equipInput {
+  width: 60%;
 }
 </style>

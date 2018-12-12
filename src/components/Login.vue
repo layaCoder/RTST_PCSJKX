@@ -79,7 +79,7 @@ export default {
       // localStorage.setItem("user", user);
       storage.setLocalStorage("user", user);
       // console.log("-login success-", JSON.parse(localStorage.getItem("user")));
-      console.log(JSON.parse(storage.getLocalStorage("user", 60 * 60 * 24))); 
+      console.log(JSON.parse(storage.getLocalStorage("user", 60 * 60 * 24)));
     },
     keyupSubmit() {
       document.onkeydown = e => {

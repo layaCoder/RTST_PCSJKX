@@ -38,7 +38,7 @@
             <div class="dropDown">
               <el-dropdown @command="handleCommand">
                 <span class="el-dropdown-link">
-                  当前用户:Admin
+                  当前用户:{{username}}
                   <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
@@ -50,11 +50,40 @@
           </el-col>
         </el-header>
       </el-row>
+
       <el-row>
+        <el-dialog title="修改密码" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+          <el-form :v-model="passObj" ref="passObj" class="demo-ruleForm">
+            <el-row class="modalRow">
+              <el-col>
+                <el-input v-model="passObj.passOld" placeholder="请输入内容">
+                  <template slot="prepend">&nbsp;&nbsp;&nbsp;原密码&nbsp;&nbsp;&nbsp;</template>
+                </el-input>
+              </el-col>
+            </el-row>
+            <el-row class="modalRow">
+              <el-col>
+                <el-input v-model="passObj.passNew1" placeholder="请输入内容">
+                  <template slot="prepend">&nbsp;&nbsp;&nbsp;新密码&nbsp;&nbsp;&nbsp;</template>
+                </el-input>
+              </el-col>
+            </el-row>
+            <el-row class="modalRow">
+              <el-col>
+                <el-input v-model="passObj.passNew2" placeholder="请输入内容">
+                  <template slot="prepend">再次输入新密码</template>
+                </el-input>
+              </el-col>
+            </el-row>
+            <el-form-item>
+              <el-button type="primary" @click="handleSubmit('formObj')">提交</el-button>
+              <el-button @click="dialogVisible = false">取消</el-button>
+            </el-form-item>
+          </el-form>
+        </el-dialog>
 
       </el-row>
       <el-row>
-
       </el-row>
       <el-main>
         <router-view></router-view>
@@ -68,13 +97,20 @@
 
 <script>
 import footer from "@/components/Footer";
-import * as storage from '@/utils/localstorage.js'
+import * as storage from "@/utils/localstorage.js";
 
 export default {
   data() {
     return {
+      username: "",
+      dialogVisible: false,
       activeIndex: "1",
-      activeIndex2: "1"
+      activeIndex2: "1",
+      passObj: {
+        passOld1: "",
+        passNew1: "",
+        passNew2: ""
+      }
     };
   },
   methods: {
@@ -120,19 +156,38 @@ export default {
     handleCommand(command) {
       switch (command) {
         case "updatePass":
-          alert("修改密码");
+          this.dialogVisible = true;
           break;
         case "logOut":
           localStorage.removeItem("user");
           this.$router.push({ name: "login" });
           break;
       }
+    },
+    handleClose(done) {
+      this.$confirm("确认关闭？")
+        .then(_ => {
+          done();
+        })
+        .catch(_ => {});
+    },
+    handleSubmit() {
+      alert("todo:修改密码api对接");
     }
   },
   created: function() {
-    if (this.$route.path !== "/" && storage.getLocalStorage('user',60*60*24) === null) {  //60 * 60 * 24 一天的秒数
+    if (
+      //如果当前地址不是登录页面 && 不是用户成功登录状态 ， 则跳转到登录页面
+      this.$route.path !== "/" &&
+      storage.getLocalStorage("user", 60 * 60 * 24) === null //localStorage中的user登录信息存放 60*60*24秒（一天的秒数）
+    ) {
+      //60 * 60 * 24 一天的秒数
       this.$router.push({ name: "login" });
     }
+
+    this.username = JSON.parse(
+      storage.getLocalStorage("user", 60 * 60 * 24)
+    ).name;
   }
 };
 </script>
@@ -202,5 +257,8 @@ a {
 .el-main {
   /* padding: 2px 0px; */
   padding: 0px;
+}
+.modalRow {
+  margin-bottom: 10px;
 }
 </style>
