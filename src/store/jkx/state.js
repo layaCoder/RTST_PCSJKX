@@ -5,5 +5,6 @@ export default {
     isEquip: '',
     wsCode: '',
     ip: '',
+    name,
     loading: false
 }

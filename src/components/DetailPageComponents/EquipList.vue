@@ -1,7 +1,8 @@
 <template>
-  <div >
+  <div>
     <el-row>
-      <h2>区域监控</h2>
+      <div></div>
+      <h2>{{this.$store.getters.getName}}</h2>
     </el-row>
     <el-row>
       <el-col :span="2">&nbsp;</el-col>
@@ -38,7 +39,7 @@
     </el-row>
     <el-row>
       <el-row v-show="this.showTable">
-        <el-table  :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%" v-loading="loading">
+        <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%" v-loading="loading">
           <el-table-column prop="PCSName" label="派出所名称" width="180">
           </el-table-column>
           <el-table-column prop="WS_Code" label="设备编号" width="180">
@@ -78,11 +79,13 @@ export default {
     return {
       showTable: false,
       loading: false,
-      tableData: [{
-        PCSName:'后湖派出所',
-        WS_Code:70696867,
-        state:'左右倾斜'
-      }],
+      tableData: [
+        {
+          PCSName: "后湖派出所",
+          WS_Code: 70696867,
+          state: "左右倾斜"
+        }
+      ],
       currentPage: 1,
       pagesize: 10,
       state: {

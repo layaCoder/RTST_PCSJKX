@@ -10,6 +10,9 @@ export const SET_WS_CODE = 'SET_WS_CODE'
 //记录节点IP
 export const SET_IP = 'SET_IP'
 
+//记录节点名称
+export const SET_NAME='SET_NAME'
+
 //记录节点层级
 export const SET_NODE_LEVEL = 'SET_NODE_LEVEL'
 

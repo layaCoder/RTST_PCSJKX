@@ -179,15 +179,16 @@ export default {
     if (
       //如果当前地址不是登录页面 && 不是用户成功登录状态 ， 则跳转到登录页面
       this.$route.path !== "/" &&
-      storage.getLocalStorage("user", 60 * 60 * 24) === null //localStorage中的user登录信息存放 60*60*24秒（一天的秒数）
+      storage.getLocalStorage("user", 1000 * 60 * 60 * 24) === null //localStorage中的user登录信息存放 60*60*24秒（一天的秒数）
     ) {
       //60 * 60 * 24 一天的秒数
       this.$router.push({ name: "login" });
+    } else {
+      //登录以后 将 username 赋值给head控件显示
+      this.username = JSON.parse(
+        storage.getLocalStorage("user", 1000 * 60 * 60 * 24)
+      ).name;
     }
-
-    this.username = JSON.parse(
-      storage.getLocalStorage("user", 60 * 60 * 24)
-    ).name;
   }
 };
 </script>

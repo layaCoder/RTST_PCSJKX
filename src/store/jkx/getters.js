@@ -12,8 +12,11 @@ export default {
     getIp(state) {
         return state.ip
     },
-    getLoading(state){
+    getLoading(state) {
         return state.loading
+    },
+    getName(state) {
+        return state.name
     }
 
 }
