@@ -9,14 +9,14 @@
     <el-row>
       <el-col :span='5'>
         <span>区域</span>
-        <el-select v-model="area" placeholder="请选择" size="mini" clearable>
+        <el-select v-model="area" placeholder="请选择" size="mini" clearable @change="handleChangeArea">
           <el-option v-for="item in areaOptions" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </el-col>
       <el-col :span='5'>
         <span>派出所</span>
-        <el-select v-model="pcs" placeholder="请选择" size="mini" clearable>
+        <el-select v-model="pcs" placeholder="请选择" size="mini" clearable @change="handleChangePcs">
           <el-option v-for="item in pcsOptions" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
@@ -78,6 +78,7 @@ import API from "../../apis/index";
 export default {
   data() {
     return {
+      searchType: "", //查询类型，0=区域，1=派出所，2=杆号
       tableData: [],
       areaOptions: [],
       pcsOptions: [],
@@ -92,7 +93,7 @@ export default {
   },
   methods: {
     handleSearch: function() {
-      switch (this.$route.query.nodeLevel) {
+      switch (this.searchType) {
         case 0:
           let areUrl =
             API.getDNoneToonePCSSUM.devUrl +
@@ -184,19 +185,20 @@ export default {
     },
     handleCurrentChange: function(currentPage) {
       this.currentPage = currentPage;
+    },
+    handleChangeArea: function(e) {
+      this.searchType = 0;
+    },
+    handleChangePcs: function(e) {
+      if (e === 0) {
+        // vaue=0 是  【全部】  选项
+        this.searchType = 0;
+      } else this.searchType = 1;
     }
   },
   mounted: function() {
-    let testData = [
-      {
-        equipCode: "70696867",
-        pcsName: "后湖",
-        dateBegin: "2018-11-30",
-        dateEnd: "2018-12-30",
-        DN: "99"
-      }
-    ];
-    this.tableData = testData;
+    //根据url初始化查询类型
+    this.searchType = this.$route.query.nodeLevel;
 
     //加载区域select数据
     this.areaOptions = [{ label: "江岸区", value: "0003" }];
