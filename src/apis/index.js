@@ -138,5 +138,12 @@ export default {
         method: 'GetDNOneYearRow',
         devUrl: 'api/Handler/AjaxTestHandler.ashx?mod=12',
         productionUrl: ''
+    },
+
+    getDNoneToonePCS: {
+        name: '获取电能详情',
+        method: 'GetDNoneToonePCS',
+        devUrl: 'api/Handler/AjaxTestHandler.ashx?mod=16',
+        productionUrl: ''
     }
 }

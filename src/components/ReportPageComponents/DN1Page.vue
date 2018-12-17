@@ -37,14 +37,14 @@
       <el-col :span='5'>
         <div class="block">
           <span>时间</span>
-          <el-date-picker v-model="dateBegin" type="date" placeholder="选择日期" size="mini">
+          <el-date-picker v-model="dateBegin" type="date" placeholder="选择日期" size="mini" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd">
           </el-date-picker>
         </div>
       </el-col>
       <el-col :span='5'>
         <div class="block">
           <span>至</span>
-          <el-date-picker v-model="dateEnd" type="date" placeholder="选择日期" size="mini">
+          <el-date-picker v-model="dateEnd" type="date" placeholder="选择日期" size="mini" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd">
           </el-date-picker>
         </div>
       </el-col>
@@ -55,8 +55,8 @@
         </el-table-column>
         <el-table-column prop="equipCode" label="设备编号" width="180">
         </el-table-column>
-        <el-table-column prop="JKDName" label="监控点名称">
-        </el-table-column>
+        <!-- <el-table-column prop="JKDName" label="监控点名称">
+        </el-table-column> -->
         <el-table-column prop="DN" label="总电能">
         </el-table-column>
         <el-table-column prop="dateBegin" label="开始时间">
@@ -92,8 +92,54 @@ export default {
   },
   methods: {
     handleSearch: function() {
-      alert("handle search func running");
+      switch (this.$route.query.nodeLevel) {
+        case 0:
+          alert("查询区域");
+          break;
+        //查询派出所
+        case 1:
+          let pcsDnUrl =
+            API.getDNoneToonePCS.devUrl +
+            "&PCS_ID=" +
+            this.pcs +
+            "&dateFont=" +
+            this.dateBegin +
+            "&dateLater=" +
+            this.dateEnd;
+          console.log("url", pcsDnUrl);
+          this.$axios
+            .get(pcsDnUrl)
+            .then(res => {
+              console.log("return json", res);
+              if (res.data.length > 0) {
+                //获取表格数据
+                this.tableData = formatData(
+                  res.data,
+                  this.dateBegin,
+                  this.dateEnd
+                );
+              } else {
+                this.$message({
+                  message: "未查询到数据",
+                  type: "warning"
+                });
+                this.tableData = [];
+              }
+            })
+            .catch(error => {
+              console.log(error);
+              this.$message({
+                message: "查询出错",
+                type: "danger"
+              });
+              this.tableData = [];
+            });
+          break;
+        default:
+          return;
+      }
     },
+    //分页方法
     handleSizeChange: function(size) {
       this.pagesize = size;
     },
@@ -106,7 +152,6 @@ export default {
       {
         equipCode: "70696867",
         pcsName: "后湖",
-        JKDName: "测试数据",
         dateBegin: "2018-11-30",
         dateEnd: "2018-12-30",
         DN: "99"
@@ -146,6 +191,21 @@ export default {
     }
   }
 };
+
+//返回json格式化表格数据
+function formatData(data, dateBegin, dateEnd) {
+  let returnTable = [];
+  data.map(item => {
+    returnTable.push({
+      pcsName: item.PCS_Name,
+      equipCode: item.WS_Code,
+      DN: item.DN,
+      dateBegin: dateBegin,
+      dateEnd: dateEnd
+    });
+  });
+  return returnTable;
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
