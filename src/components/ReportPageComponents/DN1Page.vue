@@ -94,7 +94,46 @@ export default {
     handleSearch: function() {
       switch (this.$route.query.nodeLevel) {
         case 0:
-          alert("查询区域");
+          let areUrl =
+            API.getDNoneToonePCSSUM.devUrl +
+            "&dateFont=" +
+            this.dateBegin +
+            "&dateLater=" +
+            this.dateEnd;
+          console.log(areUrl);
+          this.$axios
+            .get(areUrl)
+            .then(res => {
+              console.log("return json", res);
+              if (res.data.length > 0) {
+                //获取表格数据
+                let returnTable = [];
+                res.data.map(item => {
+                  returnTable.push({
+                    pcsName: item.PCS_Name,
+                    equipCode: "---",
+                    DN: item.Column1,
+                    dateBegin: this.dateBegin,
+                    dateEnd: this.dateEnd
+                  });
+                });
+                this.tableData = [...returnTable];
+              } else {
+                this.$message({
+                  message: "未查询到数据",
+                  type: "warning"
+                });
+                this.tableData = [];
+              }
+            })
+            .catch(error => {
+              console.log(error);
+              this.$message({
+                message: "查询出错",
+                type: "danger"
+              });
+              this.tableData = [];
+            });
           break;
         //查询派出所
         case 1:

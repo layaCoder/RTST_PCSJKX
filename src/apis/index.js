@@ -141,9 +141,15 @@ export default {
     },
 
     getDNoneToonePCS: {
-        name: '获取电能详情',
+        name: '获取电能详情/派出所',
         method: 'GetDNoneToonePCS',
         devUrl: 'api/Handler/AjaxTestHandler.ashx?mod=16',
         productionUrl: ''
+    },
+    getDNoneToonePCSSUM: {
+        name: '获取电能详情/区域(江岸区)',
+        method: 'GetDNoneToonePCSSUM',
+        devUrl: 'api/Handler/AjaxTestHandler.ashx?mod=17',
+        productionUrl:''
     }
 }
