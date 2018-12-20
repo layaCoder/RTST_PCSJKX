@@ -570,7 +570,18 @@ function getTableOneData(data) {
   dataTable.push({ attr: "左右倾斜角度", value: data.DS_ZYQX });
   dataTable.push({ attr: "前后倾斜角度", value: data.DS_QHQX });
   dataTable.push({ attr: "光敏感度ADC", value: data.DS_GMADC });
-  dataTable.push({ attr: "PM2.5", value: data.DS_PMA });
+  //dataTable.push({ attr: "PM2.5", value: data.DS_PMA });
+
+  if (parseFloat(data.DS_PMA) > 0) {
+    dataTable.push({ attr: "PM2.5", value: "正常" });
+  } else if (parseFloat(data.DS_PMA) > 100) {
+    dataTable.push({ attr: "PM2.5", value: "轻度污染" });
+  } else if (parseFloat(data.DS_PMA) > 150) {
+    dataTable.push({ attr: "PM2.5", value: "中度污染" });
+  } else if (parseFloat(data.DS_PMA) > 200) {
+    dataTable.push({ attr: "PM2.5", value: "重度污染" });
+  }
+
   dataTable.push({ attr: "PM10", value: data.DS_PMB });
   dataTable.push({ attr: "噪声", value: "disable" });
   dataTable.push({ attr: "雨水", value: "disable" });
@@ -695,6 +706,8 @@ function fillDataLength(data) {
     return data;
   } else return data;
 }
+
+function getPM25(data) {}
 
 //todo:下发switch开关控制 对应jq版本 969行
 </script>
