@@ -78,7 +78,7 @@ import API from "../../apis/index";
 export default {
   data() {
     return {
-      searchType: "", //查询类型，0=区域，1=派出所，2=杆号
+      searchType: "", //查询类型，0=区域，1=派出所，2=设备编码
       tableData: [],
       areaOptions: [],
       pcsOptions: [],

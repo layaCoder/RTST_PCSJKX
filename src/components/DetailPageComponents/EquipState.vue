@@ -291,6 +291,43 @@ export default {
       ];
       console.log("door open ->");
       console.log(dataArray2);
+
+      //let urlSwtich2 = API.actionSwtich.devUrl + "mod=1&type=2";
+      this.$axios({
+        url: API.actionSwtich.devUrl + "mod=1&type=2",
+        method: "post",
+        data: {
+          mod: 1,
+          type: 2,
+          action: "actionSwitch",
+          state: dataArray2,
+          equipIp: this.$route.params.ipAddress
+        },
+        transformRequest: [
+          //格式化数据，以表单格式提交
+          function(data) {
+            // Do whatever you want to transform the data
+            let ret = "";
+            for (let it in data) {
+              ret +=
+                encodeURIComponent(it) +
+                "=" +
+                encodeURIComponent(data[it]) +
+                "&";
+            }
+            return ret;
+          }
+        ],
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(res => {
+          // console.log(res)
+        });
     },
     //swtich change事件
     changeStatus: function($event, num) {
@@ -322,9 +359,11 @@ export default {
         "00000000"
       ];
       console.log($event);
-      console.log(dataArray);
+      console.log("ip", this.$route.params.ipAddress);
+      console.log("actionSwitch", dataArray);
 
       let urlSwtich = API.actionSwtich.devUrl + "mod=1&type=2";
+      ////switch axios
       this.$axios({
         url: urlSwtich,
         method: "post",
@@ -360,6 +399,7 @@ export default {
         .catch(res => {
           // console.log(res)
         });
+      /////
     },
     timer: function() {
       // var url =
@@ -413,7 +453,7 @@ export default {
         // 判断条件1  判断传递值的变化
         //this.wsCode=this.$route.params.wsCode
         // var url =
-        //   "api/Handler/AjaxTestHandler.ashx?mod=3&&Ws_code=" +
+        //   "api/Handler/AjaxTfestHandler.ashx?mod=3&&Ws_code=" +
         //   this.$route.params.wsCode;
         let url = API.getWorkSiteInfoById.devUrl + this.$route.params.wsCode;
 
@@ -465,7 +505,7 @@ export default {
     // });
 
     //定时函数 计数器 计时器  定时刷新页面数据
-    this._timeOut = setInterval(this.timer, 20000);
+    this._timeOut = setInterval(this.timer, 2000);
   },
   beforeDestroy() {
     //摧毁定时器
@@ -522,7 +562,7 @@ function getTableOneData(data) {
   var dataTable = [];
   dataTable.push({ attr: "监控箱电压", value: data.DS_Jldy });
   dataTable.push({ attr: "监控箱总电能", value: data.DS_Jldn });
-  dataTable.push({ attr: "监控箱电流", value: data.DS_DC12dy });
+  dataTable.push({ attr: "监控箱电流", value: data.DS_Jldl });
   dataTable.push({ attr: "DC12v电压", value: data.DS_DC12dy });
   dataTable.push({ attr: "DC24v电压", value: data.DS_DC24dy });
   dataTable.push({ attr: "监控箱内温度", value: data.DS_WD });

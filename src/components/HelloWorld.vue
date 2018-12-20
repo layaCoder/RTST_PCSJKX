@@ -31,7 +31,7 @@
   </el-submenu> -->
               <el-menu-item index="3">电能报表</el-menu-item>
               <el-menu-item index="4">系统设置</el-menu-item>
-              <el-menu-item index="5">Module[5]</el-menu-item>
+              <!-- <el-menu-item index="5">Module[5]</el-menu-item> -->
             </el-menu>
           </el-col>
           <el-col :span="4">
