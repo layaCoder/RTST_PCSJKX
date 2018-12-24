@@ -73,6 +73,8 @@ import jiaoliudianbaojingUrl from "../../assets/StateImgs/jiaoliudian.png";
 import jiaoliudiaodianUrl from "../../assets/StateImgs/baojing.png";
 import menciUrl from "../../assets/StateImgs/menci.png";
 
+import API from "../../apis/index.js";
+
 export default {
   components: { equipListMedia },
   data() {
@@ -89,12 +91,12 @@ export default {
       currentPage: 1,
       pagesize: 10,
       state: {
-        zuoyouqingxie: 1,
+        zuoyouqingxie: 0,
         qianhouqinxie: 0,
         shuijin: 0,
         menci: 0,
-        fengji: 3,
-        led: 5,
+        fengji: 0,
+        led: 0,
         fanglei: 0,
         jldbj: 0,
         jldd: 0
@@ -137,8 +139,35 @@ export default {
       this.currentPage = currentPage;
     }
   },
-  mounted: function() {
-    //todo : load data
+  mounted: function() {},
+
+  watch: {
+    //监听
+    // 监听路由变化
+    $route(to, from) {
+      //监听路由是否变化
+      if (this.$route.params.wsCode) {
+        // 判断条件1  判断传递值的变化
+        let getPcsAlarmUrl =
+          API.getALARMCountPCS.devUrl + "&PCS_ID=" + this.$route.params.wsCode;
+        console.log("api url", getPcsAlarmUrl);
+        this.$axios.get(getPcsAlarmUrl).then(res => {
+          console.log(res);
+          if (res.data.length > 0) {
+            this.state.zuoyouqingxie = res.data[0].BITValueB0;
+            this.state.qianhouqinxie = res.data[0].BITValueB1;
+            this.state.shuijin = res.data[0].BITValueB3;
+            this.state.menci = res.data[0].BITValueC0;
+            this.state.fengji = res.data[0].BITValueC1;
+            this.state.led = res.data[0].BITValueC2;
+            this.state.fanglei = res.data[0].BITValueC3;
+            //交流电上限与下限报警合并
+            this.state.jldbj = res.data[0].BITValueC5 + res.data[0].BITValueC6;
+            this.state.jldd = res.data[0].BITValueC7;
+          }
+        });
+      }
+    }
   }
 };
 </script>

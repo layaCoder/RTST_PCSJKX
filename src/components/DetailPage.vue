@@ -82,8 +82,6 @@ export default {
         this.$store.commit("SET_NODE_LEVEL", { nodeLevel: data.nodeLevel });
         ///////////////////////////////////////////////////////
       } else if (data.isEquip === false) {
-        console.log("console", data.label);
-
         this.showHello = false;
         this.$router.push({
           name: "equipList",
@@ -99,7 +97,6 @@ export default {
         this.$store.commit("SET_IP", { ip: data.ipAddress });
         this.$store.commit("SET_NODE_LEVEL", { nodeLevel: data.nodeLevel });
         this.$store.commit("SET_NAME", { name: data.label });
-        console.log('name',this.$store.getters.getName)
         ///////////////////////////////////////////////////////
       }
     },

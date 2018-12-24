@@ -151,5 +151,11 @@ export default {
         method: 'GetDNoneToonePCSSUM',
         devUrl: 'api/Handler/AjaxTestHandler.ashx?mod=17',
         productionUrl: ''
+    },
+    getALARMCountPCS: {
+        name: '获取指定派出所下监控箱告警状态每位统计数量',
+        method: 'GetALARMCountPCS',
+        devUrl: 'api/Handler/AjaxTestHandler.ashx?mod=6',
+        productionUrl: ''
     }
-}
+}   
