@@ -32,6 +32,9 @@
       <el-col :span='1'>
         <el-button type="success" size="mini" @click="handleSearch">查询</el-button>
       </el-col>
+      <el-col :span='2'>
+        <el-button type="warning" size="mini" @click="showChart">显示图表</el-button>
+      </el-col>
     </el-row>
     <el-row>
       <el-col :span='5'>
@@ -69,6 +72,18 @@
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20, 50, 100]" :page-size="pagesize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
       </el-pagination>
     </el-row>
+    <!--Chart -->
+    <div>
+      <el-dialog title="电能图表" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
+        <ve-histogram :data="chartData" :settings="chartSettings"></ve-histogram>
+
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">关闭</el-button>
+          <!-- <el-button type="primary" @click="dialogVisible = false">确 定</el-button> -->
+        </span>
+      </el-dialog>
+
+    </div>
   </div>
 </template>
 
@@ -78,6 +93,7 @@ import API from "../../apis/index";
 export default {
   data() {
     return {
+      dialogVisible: false,
       searchType: "", //查询类型，0=区域，1=派出所，2=设备编码
       tableData: [],
       areaOptions: [],
@@ -88,13 +104,26 @@ export default {
       dateBegin: "",
       dateEnd: "",
       currentPage: 1,
-      pagesize: 10
+      pagesize: 10,
+
+      chartSettings: {
+        metrics: ["电能"],
+        dimension: ["设备编号"]
+      },
+      chartData: {
+        columns: ["设备编号", "电能"],
+        rows: [
+          // { 设备编号: "1月", 电能: 1393, 下单用户: 1093, 下单率: 0.32 },
+          // { 月份: "2月", 访问用户: 3530, 下单用户: 3230, 下单率: 0.26 },
+        ]
+      }
     };
   },
   methods: {
     handleSearch: function() {
       switch (this.searchType) {
         case 0:
+          //查询区域
           let areUrl =
             API.getDNoneToonePCSSUM.devUrl +
             "&dateFont=" +
@@ -135,6 +164,7 @@ export default {
               });
               this.tableData = [];
             });
+
           break;
         //查询派出所
         case 1:
@@ -158,6 +188,15 @@ export default {
                   this.dateBegin,
                   this.dateEnd
                 );
+                console.log("tableData", this.tableData);
+                //填充图表数据
+                this.chartData = [];
+                this.tableData.map(item => {
+                  this.chartData.rows.push({
+                    设备编号: item.equipCode,
+                    电能: item.DN
+                  });
+                });
               } else {
                 this.$message({
                   message: "未查询到数据",
@@ -174,6 +213,8 @@ export default {
               });
               this.tableData = [];
             });
+
+          console.log(this.chartData.rows);
           break;
         default:
           return;
@@ -194,6 +235,22 @@ export default {
         // vaue=0 是  【全部】  选项
         this.searchType = 0;
       } else this.searchType = 1;
+    },
+    showChart: function() {
+      if (this.tableData.length < 1) {
+        alert("请先查询数据");
+        return;
+      }
+      this.dialogVisible = true;
+    },
+
+    //关闭模态框
+    handleClose(done) {
+      // this.$confirm("确认关闭？")
+      //   .then(_ => {
+      done();
+      // })
+      // .catch(_ => {});
     }
   },
   mounted: function() {

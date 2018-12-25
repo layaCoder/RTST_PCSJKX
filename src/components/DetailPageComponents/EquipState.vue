@@ -25,14 +25,18 @@
     <el-row class="mediaRow">
       <el-col :span="2"></el-col>
       <el-col :span="4">
-        <div>
+        <mediaPartMenci :stateName="this.mediaTitleUrl.fengji.name" :stateValue="this.mediaData.fengji" :stateImg="this.mediaTitleUrl.fengji.img"></mediaPartMenci>
+
+        <!-- <div>
           <mediaPart :stateName="this.mediaTitleUrl.fengji.name" :stateValue="this.mediaData.fengji" :stateImg="this.mediaTitleUrl.fengji.img"></mediaPart>
-        </div>
+        </div> -->
       </el-col>
       <el-col :span="4">
-        <div>
+        <mediaPartMenci :stateName="this.mediaTitleUrl.led.name" :stateValue="this.mediaData.led" :stateImg="this.mediaTitleUrl.led.img"></mediaPartMenci>
+
+        <!-- <div>
           <mediaPart :stateName="this.mediaTitleUrl.led.name" :stateValue="this.mediaData.led" :stateImg="this.mediaTitleUrl.led.img"></mediaPart>
-        </div>
+        </div> -->
       </el-col>
       <el-col :span="4">
         <mediaPart :stateName="this.mediaTitleUrl.fanglei.name" :stateValue="this.mediaData.fanglei" :stateImg="this.mediaTitleUrl.fanglei.img"></mediaPart>
@@ -656,9 +660,11 @@ function getMediaData(data) {
     zuoyouqingxie: ZTBITEB.charAt(0) == "0" ? "正常" : "异常",
     qianhouqingxie: ZTBITEB.charAt(1) == "0" ? "正常" : "异常",
     shuijin: ZTBITEB.charAt(2) == "0" ? "正常" : "异常",
+    // fengji: ZTBITEC.charAt(1) == "0" ? "正常" : "异常",
+    fengji: ZTBITEC.charAt(1) == "0" ? "关闭" : "开启",
+    // led: ZTBITEC.charAt(2) == "0" ? "正常" : "异常",
+    led: ZTBITEC.charAt(2) == "0" ? "关闭" : "开启",
 
-    fengji: ZTBITEC.charAt(1) == "0" ? "正常" : "异常",
-    led: ZTBITEC.charAt(2) == "0" ? "正常" : "异常",
     fanglei: ZTBITEC.charAt(3) == "0" ? "正常" : "异常",
     jiaoliudianbaojing:
       ZTBITEC.charAt(5) == "0" && ZTBITEC.charAt(6) == "0" ? "正常" : "异常", //交流电压报警需要判断两个值，上限和下限

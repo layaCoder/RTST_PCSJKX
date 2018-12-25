@@ -7,7 +7,7 @@
       <ve-line :data="chartData" :settings="chartSettings"></ve-line>
     </el-row>
     <el-row>
-     <ve-histogram :data="chartData" :settings="chartSettings"></ve-histogram>
+      <ve-histogram :data="chartData" :settings="chartSettings"></ve-histogram>
     </el-row>
   </div>
 </template>
