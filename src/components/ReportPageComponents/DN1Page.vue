@@ -113,8 +113,8 @@ export default {
       chartData: {
         columns: ["设备编号", "电能"],
         rows: [
-          // { 设备编号: "1月", 电能: 1393, 下单用户: 1093, 下单率: 0.32 },
-          // { 月份: "2月", 访问用户: 3530, 下单用户: 3230, 下单率: 0.26 },
+          { 设备编号: "1月", 电能: 1393, 下单用户: 1093, 下单率: 0.32 },
+          { 月份: "2月", 访问用户: 3530, 下单用户: 3230, 下单率: 0.26 }
         ]
       }
     };
@@ -190,13 +190,14 @@ export default {
                 );
                 console.log("tableData", this.tableData);
                 //填充图表数据
-                this.chartData = [];
+                this.chartData.rows = [];
                 this.tableData.map(item => {
                   this.chartData.rows.push({
                     设备编号: item.equipCode,
                     电能: item.DN
                   });
                 });
+                console.log(this.chartData);
               } else {
                 this.$message({
                   message: "未查询到数据",
