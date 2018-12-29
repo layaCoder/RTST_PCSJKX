@@ -154,7 +154,7 @@
     <!--开关设置模态框 2 -->
     <div>
       <el-dialog :title="'开关设置'" :visible.sync="dialogSwitchVisible" width="60%" :before-close="handleClose">
-        <JKDSwitchComponent :equipCode="this.equipCode" v-if="dialogSwitchVisible"></JKDSwitchComponent>
+        <JKDSwitchComponent :equipCode="this.equipCode" v-if="dialogSwitchVisible" @closeDialog="closeSwitchDialog"></JKDSwitchComponent>
       </el-dialog>
     </div>
   </div>
@@ -168,7 +168,7 @@ export default {
   components: { JKDSwitchComponent },
   data() {
     return {
-      loading:true,
+      loading: true,
       equipCode: "", //设备编号，用props传递给子组件
       formType: 0, //表单状态，0位新增，1为修改
       formObj: {
@@ -216,6 +216,9 @@ export default {
     };
   },
   methods: {
+    closeSwitchDialog() {
+      this.dialogSwitchVisible = false;
+    },
 
     handleEdit(index, row) {
       this.formType = 1; //表单type=1，表示为修改方法
@@ -302,27 +305,27 @@ export default {
     //提交新增/修改表单
     handleSubmit: function(e) {
       //表单验证
-      if(this.formObj.WS_ID===''||
-      this.formObj.WS_Name===''||
-      this.formObj.WS_Area_Code===''||
-      this.formObj.WS_Code ===''||
-      this.formObj.WS_DWSCode ===''||
-      this.formObj.WS_IP ===''||
-      this.formObj.WS_Latitude ===''||
-      this.formObj.WS_Longitude===''||
-      // this.formObj.WS_Num ===''||
-      this.formObj.WS_Operators ===''||
-      this.formObj.WS_Org_Code===''||
-      this.formObj.WS_SysCode===''
-      ){
-        console.log(this.formObj)
-       
+      if (
+        this.formObj.WS_ID === "" ||
+        this.formObj.WS_Name === "" ||
+        this.formObj.WS_Area_Code === "" ||
+        this.formObj.WS_Code === "" ||
+        this.formObj.WS_DWSCode === "" ||
+        this.formObj.WS_IP === "" ||
+        this.formObj.WS_Latitude === "" ||
+        this.formObj.WS_Longitude === "" ||
+        // this.formObj.WS_Num ===''||
+        this.formObj.WS_Operators === "" ||
+        this.formObj.WS_Org_Code === "" ||
+        this.formObj.WS_SysCode === ""
+      ) {
+        console.log(this.formObj);
 
         this.$message({
-            type: "warning",
-            message: "请填写完整信息"
-          });
-        return 
+          type: "warning",
+          message: "请填写完整信息"
+        });
+        return;
       }
 
       //axios post提交表单
@@ -394,7 +397,7 @@ export default {
     this.$axios.get(url).then(res => {
       console.log(res.data);
       this.tableData = getTableData(res.data);
-      this.loading=false
+      this.loading = false;
     });
   },
 

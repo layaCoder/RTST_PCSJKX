@@ -588,6 +588,7 @@ export default {
       ).catch(function(response){
         console.log(response)
       })
+      this.$emit('closeDialog')
     }
   },
   mounted: function() {

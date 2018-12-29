@@ -36,14 +36,14 @@
       <el-col :span='5'>
         <div class="block">
           <span>时间</span>
-          <el-date-picker v-model="dateBegin" type="date" placeholder="选择日期" size="mini">
+          <el-date-picker v-model="dateBegin" type="date" placeholder="选择日期" size="mini" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd">
           </el-date-picker>
         </div>
       </el-col>
       <el-col :span='5'>
         <div class="block">
           <span>至</span>
-          <el-date-picker v-model="dateEnd" type="date" placeholder="选择日期" size="mini">
+          <el-date-picker v-model="dateEnd" type="date" placeholder="选择日期" size="mini" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd">
           </el-date-picker>
         </div>
       </el-col>
@@ -89,6 +89,7 @@ import API from "../../apis/index";
 export default {
   data() {
     return {
+      searchType: "", //查询类型，0=区域，1=派出所，2=设备编码
       tableData: [],
       areaOptions: [],
       pcsOptions: [],
@@ -103,7 +104,20 @@ export default {
   },
   methods: {
     handleSearch: function() {
-      alert("handle search func running");
+      console.log(this.dateBegin, this.dateEnd);
+      switch (this.searchType) {
+        //查询区域
+        case 0:
+          break;
+        //查询派出所
+        case 1:
+          break;
+        //查询设备编号
+        case 2:
+          break;
+        default:
+          return;
+      }
     },
     handleSizeChange: function(size) {
       this.pagesize = size;
@@ -113,20 +127,7 @@ export default {
     }
   },
   mounted: function() {
-    let testData = [
-      {
-        equipCode: "70696867",
-        pcsName: "后湖",
-        JKDName: "测试数据"
-      }
-    ];
-    this.tableData = testData;
-    //测试api接口
-    let url = "api/Handler/AjaxTestHandler.ashx?mod=6&&PCS_ID=10";
-    this.$axios.get(url).then(res => {
-      console.log(res.data);
-    });
-    ///////////////////////////
+    this.searchType = this.$route.query.nodeLevel;
 
     //加载区域select数据
     this.areaOptions = [{ label: "江岸区", value: "0003" }];

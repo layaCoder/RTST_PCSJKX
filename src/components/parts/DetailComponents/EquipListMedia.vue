@@ -1,20 +1,20 @@
 <template>
-    <div class="mediaDiv">
-        <div class="mediaRow">
-            <strong>{{stateName}}</strong>
-        </div>
-        <div class="mediaRow">
-            <img :src="this.stateImg" alt="" class="mediaImg">
-        </div>
-        <div class="mediaRow">
-            <el-button round :disabled="this.stateValue===0?true:false" :type="this.stateValue===0?'success':'warning'" @click="handleClick">{{stateValue===0?' &nbsp;&nbsp;正常&nbsp;&nbsp; ':'异常( '+stateValue+' )'}}</el-button>
-        </div>
+  <div class="mediaDiv">
+    <div class="mediaRow">
+      <strong>{{stateName}}</strong>
     </div>
+    <div class="mediaRow">
+      <img :src="this.stateImg" alt="" class="mediaImg">
+    </div>
+    <div class="mediaRow">
+      <el-button round :disabled="this.stateValue===0?true:false" :type="this.stateValue===0?'success':'warning'" @click="handleClick">{{stateValue===0?' &nbsp;&nbsp;正常&nbsp;&nbsp; ':'异常( '+stateValue+' )'}}</el-button>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-  props: ["stateName", "stateValue", "stateImg","title"],
+  props: ["stateName", "stateValue", "stateImg", "title"],
   data() {
     return {
       //用state接收从父组件props传递的值
@@ -24,12 +24,11 @@ export default {
   },
   methods: {
     handleClick() {
-      this.$emit('getTableData',this.title)
+      this.$emit("getTableData", this.title);
     }
   },
   created: function() {},
-  mounted: function() {
-  }
+  mounted: function() {}
 };
 </script>
 

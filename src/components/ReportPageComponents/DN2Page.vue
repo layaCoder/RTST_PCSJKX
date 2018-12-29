@@ -74,7 +74,11 @@ export default {
     }
   },
   mounted: function() {
-    let url = API.getDnReprotMonth.devUrl + "&WS_Code=70696867";
+    // let url = API.getDnReprotMonth.devUrl + "&WS_Code=70696867";
+
+    //todo：此接口查询的是设备月报，实际需要区域月报
+    let url =
+      API.getDnReprotMonth.devUrl + "&WS_Code=" + this.$store.getters.getWsCode;
     this.$axios
       .get(url)
       .then(res => {

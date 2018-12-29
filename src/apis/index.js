@@ -140,6 +140,13 @@ export default {
         productionUrl: ''
     },
 
+    getDNoneToone: {
+        name: '获取指定监控箱一段时间内的电能统计',
+        method: 'GetDNoneToone',
+        devUrl: 'api/Handler/AjaxTestHandler.ashx?mod=10',
+        productionUrl: ''
+    },
+
     getDNoneToonePCS: {
         name: '获取电能详情/派出所',
         method: 'GetDNoneToonePCS',
@@ -156,6 +163,12 @@ export default {
         name: '获取指定派出所下监控箱告警状态每位统计数量',
         method: 'GetALARMCountPCS',
         devUrl: 'api/Handler/AjaxTestHandler.ashx?mod=6',
+        productionUrl: ''
+    },
+    getALARMCountPCSJKX: {
+        name: '获取指定派出所下监控箱指定位的告警详情',
+        method: 'GetALARMCountPCSJKX',
+        devUrl: 'api/Handler/AjaxTestHandler.ashx?mod=13',
         productionUrl: ''
     }
 }   

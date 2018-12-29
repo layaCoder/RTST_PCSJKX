@@ -105,24 +105,28 @@ export default {
         zuoyouqingxie: {
           name: "左右倾斜",
           url: zuoyouqingxieUrl,
-          title: "zuoyouqingxie"
+          title: "BITValueB,1,1"
         },
         qianhouqinxie: {
           name: "前后倾斜",
           url: qianhouqingxieUrl,
-          title: "qianhouqinxie"
+          title: "BITValueB,2,1"
         },
-        shuijin: { name: "水浸", url: shuijinUrl, title: "shuijin" },
-        menci: { name: "门磁", url: menciUrl, title: "menci" },
-        fengji: { name: "风机", url: fengjiUrl, title: "fengji" },
-        led: { name: "led照明", url: ledUrl, title: "led" },
-        fanglei: { name: "防雷", url: fangleiUrl, title: "fanglei" },
+        shuijin: { name: "水浸", url: shuijinUrl, title: "BITValueB,3,1" },
+        menci: { name: "门磁", url: menciUrl, title: "BITValueC,1,1" },
+        fengji: { name: "风机", url: fengjiUrl, title: "BITValueB,2,1" },
+        led: { name: "led照明", url: ledUrl, title: "BITValueC,3,1" },
+        fanglei: { name: "防雷", url: fangleiUrl, title: "BITValueC,4,1" },
         jldbj: {
           name: "交流电报警",
           url: jiaoliudianbaojingUrl,
-          title: "jldbj"
+          title: "BITValueC,6,1" //需要将上限，下限合并后加入表格
         },
-        jldd: { name: "交流掉电", url: jiaoliudiaodianUrl, title: "jldd" }
+        jldd: {
+          name: "交流掉电",
+          url: jiaoliudiaodianUrl,
+          title: "BITValueC,8,1"
+        }
       }
     };
   },
@@ -131,6 +135,16 @@ export default {
       alert(childValue);
       //todo:调用API，根据 异常状态类型与区域ID 加载表格数据
       this.showTable = true;
+      let url =
+        API.getALARMCountPCSJKX.devUrl +
+        "&PCS_ID=" +
+        this.$route.params.wsCode +
+        "&BITValue=" +
+        childValue;
+      console.log("mod13-url", url);
+      this.$axios.get(url).then(res => {
+        console.log(res);
+      });
     },
     handleSizeChange: function(size) {
       this.pagesize = size;
