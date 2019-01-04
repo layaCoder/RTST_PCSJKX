@@ -20,6 +20,9 @@
       <el-col :span="4">
         <mediaPartMenci :stateName="this.mediaTitleUrl.almmenci.name" :stateValue="this.mediaData.almmenci" :stateImg="this.mediaTitleUrl.almmenci.img"></mediaPartMenci>
       </el-col>
+      <el-col :span="4">
+        <mediaPart :stateName="this.mediaTitleUrl.network.name" :stateValue="this.network" :stateImg="this.mediaTitleUrl.network.img"></mediaPart>
+      </el-col>
       <el-col :span="2"></el-col>
     </el-row>
     <el-row class="mediaRow">
@@ -214,11 +217,14 @@ import fangleiUrl from "../../assets/StateImgs/fanglei.png";
 import jiaoliudianbaojingUrl from "../../assets/StateImgs/jiaoliudian.png";
 import jiaoliudiaodianUrl from "../../assets/StateImgs/baojing.png";
 import menciUrl from "../../assets/StateImgs/menci.png";
+import networkUrl from "../../assets/StateImgs/network.png";
 
 export default {
   components: { mediaPart, mediaPartMenci },
   data() {
     return {
+      returnData: "", //记录后滩返回的所有状态信息
+      network: "正常", //网络状态单独抽出刷新，在mediaData对象中更新network，页面不会热更新
       wsCode: this.$route.params.wsCode,
       ip: "",
       tableData: [],
@@ -246,7 +252,8 @@ export default {
         fanglei: { name: "防雷", img: fangleiUrl },
         jiaoliudianbaojing: { name: "交流电报警", img: jiaoliudianbaojingUrl },
         jiaoliudiaodian: { name: "交流掉电", img: jiaoliudiaodianUrl },
-        almmenci: { name: "门磁", img: menciUrl }
+        almmenci: { name: "门磁", img: menciUrl },
+        network: { name: "网络", img: networkUrl }
       },
       state_12_1: null,
       state_12_2: null,
@@ -446,6 +453,18 @@ export default {
         //   console.log("-----------------");
         // });
       });
+    },
+    timer2: function() {
+      console.log("timer2", this.returnData);
+      let url = API.getWorkSiteInfoById.devUrl + this.$route.params.wsCode;
+      this.$axios.get(url).then(res => {
+        console.log(res.data[0]);
+        if (res.data[0].DS_ID !== this.returnData.DS_ID) {
+          this.network = "正常";
+        } else if (res.data[0].DS_ID === this.returnData.DS_ID) {
+          this.network = "异常";
+        }
+      });
     }
   },
   watch: {
@@ -464,6 +483,7 @@ export default {
         console.log(url);
         this.$axios.get(url).then(res => {
           if (res.data.length > 0) {
+            this.returnData = res.data[0]; //记录后端返回数据
             //如果有设备数据
             this.tableData = getTableOneData(res.data[0]);
             this.tableData2 = getTableTwoData(res.data[0]);
@@ -510,10 +530,13 @@ export default {
 
     //定时函数 计数器 计时器  定时刷新页面数据
     this._timeOut = setInterval(this.timer, 2000);
+    //定时器，查询前端设备是否掉网
+    this._timeOut2 = setInterval(this.timer2, 1000 * 30); //30秒检查一次是否断网
   },
   beforeDestroy() {
     //摧毁定时器
     clearInterval(this._timeOut);
+    clearInterval(this._timeOut2);
   },
   //created方法只会执行一次，后续data刷新不会运行
   created: function() {
@@ -528,6 +551,7 @@ export default {
       console.log(res.data);
       console.log("---------------");
       //加载数据列表
+      this.returnData = res.data[0]; //记录后端返回数据
       this.tableData = getTableOneData(res.data[0]);
       this.tableData2 = getTableTwoData(res.data[0]);
       this.mediaData = getMediaData(res.data[0]);
