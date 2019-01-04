@@ -473,6 +473,7 @@ export default {
     $route(to, from) {
       //监听路由是否变化
       if (this.$route.params.wsCode) {
+        this.network = "正常";
         // 判断条件1  判断传递值的变化
         //this.wsCode=this.$route.params.wsCode
         // var url =
