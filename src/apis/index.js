@@ -170,5 +170,26 @@ export default {
         method: 'GetALARMCountPCSJKX',
         devUrl: 'api/Handler/AjaxTestHandler.ashx?mod=13',
         productionUrl: ''
+    },
+    getWSAlarm: {
+        name: '获取某一个设备的告警信息',
+        method: 'GetWSAlarm',
+        devUrl: 'api/Handler/AjaxTestHandler.ashx?mod=7',
+        productionUrl: ''
+    },
+    getWSAlarmCount: {
+        name: '获取设备的告警数量',
+        method: 'getWsAlarmCount',
+        devUrl: 'api/Handler/AjaxTestHandler.ashx?mod=5'
+    },
+    getPcsAlarmCount: {
+        name: '获取指定派出所下监控箱告警状态每位统计数量',
+        method: 'GetALARMCountPCS',
+        devUrl: 'api/Handler/AjaxTestHandler.ashx?mod=6'
+    },
+    getALARMCountArea: {
+        name: '获取全区监控箱告警状态每位统计数量',
+        method: 'GetALARMCountArea',
+        devUrl: 'api/Handler/AjaxTestHandler.ashx'
     }
 }   

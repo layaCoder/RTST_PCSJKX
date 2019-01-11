@@ -24,7 +24,7 @@
 
       <el-col :span='7'>
         <span>设备编号</span>
-        <el-input v-model="ws_code" placeholder="请输入设备编号" size="mini" class="equipInput">
+        <el-input v-model="ws_code" placeholder="请输入设备编号" size="mini" class="equipInput" @focus="inputFocus">
         </el-input>
       </el-col>
 
@@ -104,16 +104,31 @@ export default {
   },
   methods: {
     handleSearch: function() {
-      console.log(this.dateBegin, this.dateEnd);
+      console.log(this.dateBegin, this.dateEnd, this.searchType);
       switch (this.searchType) {
         //查询区域
         case 0:
+          let urlArea = API.getALARMCountArea.devUrl;
+          console.log(urlArea);
+          this.$axios.get(urlArea).then(res => {
+            console.log(res.data);
+          });
           break;
         //查询派出所
         case 1:
+          let urlPcs = API.getPcsAlarmCount.devUrl + "&PCS_ID=" + this.pcs;
+          console.log(urlPcs);
+          this.$axios.get(urlPcs).then(res => {
+            this.tableData = getAlarmTable(res.data);
+          });
           break;
         //查询设备编号
         case 2:
+          let url = API.getWSAlarmCount.devUrl + "&WS_Code=" + this.ws_code;
+          console.log(url);
+          this.$axios.get(url).then(res => {
+            this.tableData = getAlarmTable(res.data);
+          });
           break;
         default:
           return;
@@ -124,6 +139,11 @@ export default {
     },
     handleCurrentChange: function(currentPage) {
       this.currentPage = currentPage;
+    },
+    inputFocus() {
+      this.searchType = 2;
+      this.area = "";
+      this.pcs = "";
     }
   },
   mounted: function() {
@@ -161,12 +181,32 @@ export default {
     }
   }
 };
+
+function getAlarmTable(data) {
+  let resultArray = [];
+  console.log(data);
+  data.map(item => {
+    let singleAlarm = {
+      zyqx: item.BITValueB0,
+      qhqx: item.BITValueB1,
+      shuijin: item.BITValueB2,
+      menci: item.BITValueC0,
+      fengji: item.BITValueC1,
+      led: item.BITValueC2,
+      fanglei: item.BITValueC3,
+      jldy: parseInt(item.BITValueC5) + parseInt(item.BITValueC6),
+      jldd: item.BITValueC7
+    };
+    resultArray.push(singleAlarm);
+  });
+  return resultArray;
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .tableRow {
-  height: 500px;
+  /* height: 500px; */
 }
 .equipInput {
   width: 60%;
