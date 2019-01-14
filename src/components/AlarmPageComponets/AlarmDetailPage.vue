@@ -31,6 +31,9 @@
       <el-col :span='1'>
         <el-button type="success" size="mini" @click="handleSearch">查询</el-button>
       </el-col>
+      <el-col :span='2'>
+        <el-button type="warning" size="mini" @click="export_Excel">导出EXCEL</el-button>
+      </el-col>
     </el-row>
     <el-row>
       <el-col :span='5'>
@@ -144,7 +147,56 @@ export default {
       this.searchType = 2;
       this.area = "";
       this.pcs = "";
+    },
+    // 导出表格数据////////////////////////////////////////
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => v[j]));
+    },
+    export_Excel() {
+      this.$confirm("确定要导出表格数据么？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          require.ensure([], () => {
+            const { exportJsonToExcel } = require("../../vendor/Export2Excel");
+            const tHeader = [
+              "派出所名称",
+              "设备编号",
+              "监控点名称",
+              "左右倾斜",
+              "前后倾斜",
+              "水浸",
+              "门磁",
+              "风机",
+              "led",
+              "防雷",
+              "交流电压",
+              "交流电流"
+            ];
+            const filterVal = [
+              "pscName",
+              "wsCode",
+              "area",
+              "zyqx",
+              "qhqx",
+              "shuijin",
+              "menci",
+              "fengji",
+              "led",
+              "fanglei",
+              "jldy",
+              "jldd"
+            ];
+            // const list = this.userList;
+            const data = this.formatJson(filterVal, this.tableData);
+            exportJsonToExcel(tHeader, data, "电能统计");
+          });
+        })
+        .catch(() => {});
     }
+    /////////////////////////////////////////////////////
   },
   mounted: function() {
     this.searchType = this.$route.query.nodeLevel;

@@ -35,6 +35,9 @@
       <el-col :span='2'>
         <el-button type="warning" size="mini" @click="showChart">显示图表</el-button>
       </el-col>
+      <el-col :span='2'>
+        <el-button type="warning" size="mini" @click="export_Excel">导出EXCEL</el-button>
+      </el-col>
     </el-row>
     <el-row>
       <el-col :span='5'>
@@ -319,6 +322,42 @@ export default {
       }
       this.dialogVisible = true;
     },
+
+    // 导出表格数据////////////////////////////////////////
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => v[j]));
+    },
+    export_Excel() {
+      this.$confirm("确定要导出表格数据么？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          require.ensure([], () => {
+            const { exportJsonToExcel } = require("../../vendor/Export2Excel");
+            const tHeader = [
+              "设备编号",
+              "派出所名称",
+              "总电能",
+              "开始时间",
+              "结束时间"
+            ];
+            const filterVal = [
+              "equipCode",
+              "pcsName",
+              "DN",
+              "dateBegin",
+              "dateEnd"
+            ];
+            // const list = this.userList;
+            const data = this.formatJson(filterVal, this.tableData);
+            exportJsonToExcel(tHeader, data, "电能统计");
+          });
+        })
+        .catch(() => {});
+    },
+    /////////////////////////////////////////////////////
 
     //关闭模态框
     handleClose(done) {
