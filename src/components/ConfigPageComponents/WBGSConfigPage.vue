@@ -7,9 +7,12 @@
       <el-col :span="1">
         <el-button @click="handleShowDialog">添加</el-button>
       </el-col>
+      <el-col :span="4" :offset="18">
+        <el-input v-model="search" placeholder="请输入搜索内容" />
+      </el-col>
     </el-row>
     <el-row>
-      <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%" v-loading="loading">
+      <el-table :data="tables.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%" v-loading="loading">
         <el-table-column prop="ID" label="单位ID" width="180">
         </el-table-column>
         <el-table-column prop="ComName" label="单位名称" width="180">
@@ -63,13 +66,13 @@
 </template>
 
 <script>
-import API from '../../apis/index.js'
-
+import API from "../../apis/index.js";
 
 export default {
   data() {
     return {
-      loading:true,
+      search: "",
+      loading: true,
       formType: 0, //表单状态，0位新增，1为修改
       formObj: {
         ID: "",
@@ -105,7 +108,7 @@ export default {
         type: "warning"
       })
         .then(() => {
-          let url2 = API.delCompany.devUrl
+          let url2 = API.delCompany.devUrl;
           this.$axios({
             url: url2,
             method: "post",
@@ -115,7 +118,7 @@ export default {
           });
           // axios post请求成功后执行
           //重新加载表格数据，刷新表格/////////////////////////
-          let url = API.getCompany.devUrl
+          let url = API.getCompany.devUrl;
           this.$axios.get(url).then(res => {
             console.log(res.data);
             this.tableData = getTableData(res.data);
@@ -154,19 +157,19 @@ export default {
     },
     //提交新增/修改表单
     handleSubmit: function(e) {
-      if(this.formObj.ComName===''){
+      if (this.formObj.ComName === "") {
         this.$message({
-            type: "warning",
-            message: "请填写完整信息"
-          });
-        return 
+          type: "warning",
+          message: "请填写完整信息"
+        });
+        return;
       }
 
       //axios post提交表单
       if (this.formType === 0) {
         this.formObj.ID = 0; //标记ID为0，后台识别为新增方法
       }
-      let url= API.addOrUpdateCompany.devUrl
+      let url = API.addOrUpdateCompany.devUrl;
       this.$axios({
         url: url,
         method: "post",
@@ -193,7 +196,7 @@ export default {
         .then(res => {
           // axios post请求成功后执行
           //重新加载表格数据，刷新表格/////////////////////////
-          var url = API.getCompany.devUrl
+          var url = API.getCompany.devUrl;
           this.$axios.get(url).then(res => {
             console.log(res.data);
             this.tableData = getTableData(res.data);
@@ -209,22 +212,33 @@ export default {
     }
   },
   created: function() {
-    let url = API.getCompany.devUrl
+    let url = API.getCompany.devUrl;
     console.log(url);
     this.$axios.get(url).then(res => {
       console.log(res.data);
       this.tableData = getTableData(res.data);
-      this.loading=false
+      this.loading = false;
     });
   },
 
-  mounted: function() {
-    // var url = "api/Handler/AjaxTestHandler.ashx?mod=42";
-    // console.log(url);
-    // this.$axios.get(url).then(res => {
-    //   this.tableData = getTableData(res.data[0]);
-    //   console.log(tableData);
-    // });
+  mounted: function() {},
+  computed: {
+    // 模糊搜索
+    tables() {
+      const search = this.search;
+      if (search) {
+        return this.tableData.filter(data => {
+          return Object.keys(data).some(key => {
+            return (
+              String(data[key])
+                .toLowerCase()
+                .indexOf(search) > -1
+            );
+          });
+        });
+      }
+      return this.tableData;
+    }
   }
 };
 
@@ -248,15 +262,14 @@ function getTableData(data) {
 strong {
   color: red;
 }
-.modalRow{
+.modalRow {
   margin-bottom: 20px;
 }
 
-.mainContent{
-  box-shadow: 0px  0px 5px #999999;
+.mainContent {
+  box-shadow: 0px 0px 5px #999999;
   padding: 10px;
   /* margin-left:-4%; */
   margin: 4% 4% 4% -4%;
 }
-
 </style>

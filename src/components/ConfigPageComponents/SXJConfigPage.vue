@@ -7,9 +7,12 @@
       <el-col :span="1">
         <el-button @click="handleShowDialog">添加</el-button>
       </el-col>
+      <el-col :span="4" :offset="18">
+        <el-input v-model="search" placeholder="请输入搜索内容" />
+      </el-col>
     </el-row>
     <el-row>
-      <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%" v-loading="loading">
+      <el-table :data="tables.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%" v-loading="loading">
         <el-table-column prop="ID" label="公司ID" width="300">
         </el-table-column>
         <el-table-column prop="ComName" label="公司名称" width="300">
@@ -77,6 +80,7 @@ export default {
   components: { SXJConfigComponent },
   data() {
     return {
+      search: "",
       loading: true,
       compId: "", //公司id，传递给子组件模态框
       formType: 0, //模态框类型，0位新增，1位修改
@@ -170,12 +174,12 @@ export default {
     },
     handleSubmit: function(e) {
       //axios post提交表单
-      if (this.formObj.SXJCom === '') {
+      if (this.formObj.SXJCom === "") {
         this.$message({
           type: "warning",
           message: "请填写完整信息"
         });
-        return
+        return;
       }
       if (this.formType === 0) {
         this.formObj.ID = 0; //标记ID为0，后台识别为新增方法
@@ -234,6 +238,24 @@ export default {
       this.tableData = getTableData(res.data);
       this.loading = false;
     });
+  },
+  computed: {
+    // 模糊搜索
+    tables() {
+      const search = this.search;
+      if (search) {
+        return this.tableData.filter(data => {
+          return Object.keys(data).some(key => {
+            return (
+              String(data[key])
+                .toLowerCase()
+                .indexOf(search) > -1
+            );
+          });
+        });
+      }
+      return this.tableData;
+    }
   }
 };
 

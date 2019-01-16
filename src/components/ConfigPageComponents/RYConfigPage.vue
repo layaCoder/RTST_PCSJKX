@@ -4,16 +4,15 @@
       <h2>人员管理</h2>
     </el-row>
     <el-row>
-      <el-col :span="2">
+      <el-col :span="1">
         <el-button @click="handleShowDialog">添加</el-button>
       </el-col>
-      <el-col :span="20">&nbsp;</el-col>
-      <el-col :span="2">
-        <el-button type="success" @click="export_Excel">导出到excel</el-button>
+      <el-col :span="4" :offset="18">
+        <el-input v-model="search" placeholder="请输入搜索内容" />
       </el-col>
     </el-row>
     <el-row>
-      <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%" v-loading="loading">
+      <el-table :data="tables.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%" v-loading="loading">
         <el-table-column prop="ID" label="人员ID" width="180">
         </el-table-column>
         <el-table-column prop="UserName" label="姓名" width="180">
@@ -39,6 +38,11 @@
     <el-row>
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20, 50, 100]" :page-size="pagesize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
       </el-pagination>
+    </el-row>
+    <el-row>
+      <el-col :span="2">
+        <el-button type="success" @click="export_Excel">导出到excel</el-button>
+      </el-col>
     </el-row>
     <!--新增/修改 模态框 -->
     <div>
@@ -104,6 +108,7 @@
           <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
         </span> -->
       </el-dialog>
+
     </div>
   </div>
 </template>
@@ -114,6 +119,7 @@ import API from "../../apis/index.js";
 export default {
   data() {
     return {
+      search: "",
       loading: true,
       formType: 0, //表单状态，0位新增，1为修改
       formObj: {
@@ -386,6 +392,24 @@ export default {
     });
 
     ///////////////////////////
+  },
+  computed: {
+    // 模糊搜索
+    tables() {
+      const search = this.search;
+      if (search) {
+        return this.tableData.filter(data => {
+          return Object.keys(data).some(key => {
+            return (
+              String(data[key])
+                .toLowerCase()
+                .indexOf(search) > -1
+            );
+          });
+        });
+      }
+      return this.tableData;
+    }
   }
 };
 
