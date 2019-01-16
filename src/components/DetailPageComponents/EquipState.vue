@@ -183,17 +183,17 @@
               </el-switch>
             </td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td>
               <span>门磁</span>
             </td>
             <td>
-              <!-- <el-switch v-model="state_menci" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
-              </el-switch> -->
+             
               <el-button type="success" @click="btnDoorOpen" :disabled="state_menci">开门按钮</el-button>
             </td>
-          </tr>
+          </tr> -->
         </table>
+        <el-button type="success" @click="btnDoorOpen" :disabled="state_menci" class="btnDoorOpen">开门按钮</el-button>
 
       </el-col>
 
@@ -775,5 +775,8 @@ table td {
 
 .colored {
   background-color: #fafafa;
+}
+.btnDoorOpen {
+  margin: 20px;
 }
 </style>
