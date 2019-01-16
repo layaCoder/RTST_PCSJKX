@@ -16,7 +16,7 @@
                         <!-- <el-menu-item-group title="分组2"> -->
                         <el-menu-item index="1-3">维保单位管理</el-menu-item>
                         <!-- </el-menu-item-group> -->
-                         <el-menu-item index="1-4">摄像机管理</el-menu-item>
+                        <el-menu-item index="1-4">摄像机管理</el-menu-item>
                     </el-submenu>
                     <!-- <el-menu-item index="2">
                         <i class="el-icon-menu"></i>
@@ -47,20 +47,15 @@ export default {
       console.log(key, keyPath);
     },
     handleSelect(index, indexPath) {
-        
-        if(index==="1-1"){
- this.$router.push({ name: "jkdConfig" });
-        }
-        else if(index==="1-2"){
- this.$router.push({ name: "ryConfig" });
-        }
-        else if(index==="1-3"){
- this.$router.push({ name: "wbgsConfig" });
-        }
-        else if(index==='1-4'){
-            this.$router.push({name:"sxjConfig"})
-        }
-       
+      if (index === "1-1") {
+        this.$router.push({ name: "jkdConfig" });
+      } else if (index === "1-2") {
+        this.$router.push({ name: "ryConfig" });
+      } else if (index === "1-3") {
+        this.$router.push({ name: "wbgsConfig" });
+      } else if (index === "1-4") {
+        this.$router.push({ name: "sxjConfig" });
+      }
     }
   }
 };
@@ -72,18 +67,18 @@ strong {
   color: red;
 }
 
-.main{
-    /* background: #172850; */
-    background-color: #ffffff;
-    /*padding: 0px;*/
+.main {
+  /* background: #172850; */
+  background-color: #ffffff;
+  /*padding: 0px;*/
 }
 
-.table{
-    background: #ffffff
+.table {
+  background: #ffffff;
 }
 
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 800px;
-  }
+  width: 200px;
+  min-height: 870px;
+}
 </style>

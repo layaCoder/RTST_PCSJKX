@@ -89,8 +89,8 @@ export default {
   background-color: #ffffff;
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width:200px;
-  min-height: 800px;
+  width: 200px;
+  min-height: 870px;
 }
 .content {
   background-color: #ffffff;

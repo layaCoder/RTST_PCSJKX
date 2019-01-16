@@ -42,9 +42,7 @@ export default {
       searchType: 1 // 选择查询类型，1：从今年1月1日至今 2：按照指定时间段
     };
   },
-  computed: {
-    
-  },
+  computed: {},
   methods: {
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
@@ -88,8 +86,8 @@ export default {
   background-color: #ffffff;
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width:200px;
-  min-height: 800px;
+  width: 200px;
+  min-height: 870px;
 }
 .content {
   background-color: #ffffff;

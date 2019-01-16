@@ -286,9 +286,6 @@ function getAlarmTable(data) {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.tableRow {
-  /* height: 500px; */
-}
 .equipInput {
   width: 60%;
 }
