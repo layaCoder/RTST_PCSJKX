@@ -9,14 +9,14 @@
     <el-row>
       <el-col :span='5'>
         <span>区域</span>
-        <el-select v-model="area" placeholder="请选择" size="mini" clearable>
+        <el-select v-model="area" placeholder="请选择" size="mini" clearable @change="handleChangeArea">
           <el-option v-for="item in areaOptions" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </el-col>
       <el-col :span='5'>
         <span>派出所</span>
-        <el-select v-model="pcs" placeholder="请选择" size="mini" clearable>
+        <el-select v-model="pcs" placeholder="请选择" size="mini" clearable @change="handleChangePcs">
           <el-option v-for="item in pcsOptions" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
@@ -57,8 +57,8 @@
         </el-table-column>
         <el-table-column prop="equipCode" label="设备编号" width="180">
         </el-table-column>
-        <el-table-column prop="JKDName" label="监控点名称">
-        </el-table-column>
+        <!-- <el-table-column prop="JKDName" label="监控点名称">
+        </el-table-column> -->
         <el-table-column prop="zyqx" label="左右倾斜">
         </el-table-column>
         <el-table-column prop="qhqx" label="前后倾斜">
@@ -102,10 +102,25 @@ export default {
       dateBegin: "",
       dateEnd: "",
       currentPage: 1,
-      pagesize: 10
+      pagesize: 10,
+      pcsName: ""
     };
   },
   methods: {
+    handleChangeArea: function() {
+      this.searchType = 0;
+      this.pcs = 0;
+      this.ws_code = "";
+    },
+    handleChangePcs: function(val) {
+      this.searchType = 1;
+      this.ws_code = "";
+      console.log(this.pcsOptions);
+    },
+    inputFocus: function() {
+      this.searchType = 2;
+      this.pcs = "";
+    },
     handleSearch: function() {
       console.log(this.dateBegin, this.dateEnd, this.searchType);
       switch (this.searchType) {
@@ -114,7 +129,7 @@ export default {
           let urlArea = API.getALARMCountArea.devUrl;
           console.log(urlArea);
           this.$axios.get(urlArea).then(res => {
-            console.log(res.data);
+            console.log(res);
           });
           break;
         //查询派出所
@@ -122,7 +137,14 @@ export default {
           let urlPcs = API.getPcsAlarmCount.devUrl + "&PCS_ID=" + this.pcs;
           console.log(urlPcs);
           this.$axios.get(urlPcs).then(res => {
-            this.tableData = getAlarmTable(res.data);
+            // this.tableData = getAlarmTable(res.data);
+            let table = getAlarmTable(res.data);
+            table.map(item => {
+              let key = "pcsName"; //通过控件取值，添加派出所名称
+              let value = this.pcsOptions[this.pcs].label;
+              item[key] = value;
+            });
+            this.tableData = table;
           });
           break;
         //查询设备编号
@@ -130,7 +152,14 @@ export default {
           let url = API.getWSAlarmCount.devUrl + "&WS_Code=" + this.ws_code;
           console.log(url);
           this.$axios.get(url).then(res => {
-            this.tableData = getAlarmTable(res.data);
+            // this.tableData = getAlarmTable(res.data);
+            let table = getAlarmTable(res.data);
+            table.map(item => {
+              let key = "equipCode";
+              let value = this.ws_code;
+              item[key] = value;
+            });
+            this.tableData = table;
           });
           break;
         default:

@@ -26,7 +26,7 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%" v-loading="loading">
+      <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%">
         <el-table-column prop="pcsName" label="派出所名称" width="180">
         </el-table-column>
         <el-table-column prop="equipName" label="设备名称" width="180">
@@ -51,7 +51,6 @@ import API from "../../apis/index.js";
 export default {
   data() {
     return {
-      loading: true,
       optionsPCS: [],
       optionsArea: [],
       tableData: [],
@@ -74,19 +73,16 @@ export default {
     }
   },
   mounted: function() {
-    // let url = API.getDnReprotMonth.devUrl + "&WS_Code=70696867";
-
     //todo：此接口查询的是设备月报，实际需要区域月报
-    let url =
-      API.getDnReprotMonth.devUrl + "&WS_Code=" + this.$store.getters.getWsCode;
+    let url = API.getDnReprotMonth.devUrl + "&PCS_Code=10";
+    //+ this.$store.getters.getWsCode;
     this.$axios
       .get(url)
       .then(res => {
-        console.log(res.data);
+        console.log("电能月报", res.data);
         if (res.data.length > 0) {
           console.log(res.data);
           this.tableData = getTableData(res.data);
-          this.loading = false;
         }
       })
       .catch(res => {
