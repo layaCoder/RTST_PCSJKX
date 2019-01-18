@@ -12,6 +12,7 @@
               <template slot="title">分组一</template>
               <el-menu-item index="1-1">告警详情</el-menu-item>
               <el-menu-item index="1-2">图表DEMO</el-menu-item>
+              <el-menu-item index="1-3">图表DEMO</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -42,9 +43,7 @@ export default {
       searchType: 1 // 选择查询类型，1：从今年1月1日至今 2：按照指定时间段
     };
   },
-  computed: {
-    
-  },
+  computed: {},
   methods: {
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
@@ -63,17 +62,26 @@ export default {
             isEquip: this.$store.state.isEquip
           }
         });
-      } 
-      else if(index==="1-2"){
+      } else if (index === "1-2") {
         this.$router.push({
-          name:'chartDemo',
-          query:{
+          name: "chartDemo",
+          query: {
             nodeLevel: this.$store.state.nodeLevel,
             wsCode: this.$store.state.wsCode,
             ip: this.$store.state.ip,
             isEquip: this.$store.state.isEquip
           }
-        })
+        });
+      } else if (index === "1-3") {
+        this.$router.push({
+          name: "uploadImgDemo",
+          query: {
+            nodeLevel: this.$store.state.nodeLevel,
+            wsCode: this.$store.state.wsCode,
+            ip: this.$store.state.ip,
+            isEquip: this.$store.state.isEquip
+          }
+        });
       }
     }
   }

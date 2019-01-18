@@ -20,7 +20,7 @@ import ChartDemo from '@/components/AlarmPageComponets/ChartDemo.vue'
 import CartPage from '@/components/CartPage'
 import CartSettlement from '@/components/CartPageComponents/CartSettlement'
 import GoodsList from '@/components/CartPageComponents/GoodsList'
-
+import UploadImgDemo from '@/components/AlarmPageComponets/UploadImgDemo'
 
 
 Vue.use(Router)
@@ -50,8 +50,8 @@ export default new Router({
           name: 'detailPage',
           path: 'detail',
           component: DetailPage,
-          meta:{
-            index:0
+          meta: {
+            index: 0
           },
           children: [
             {
@@ -73,8 +73,8 @@ export default new Router({
           path: 'alarm',
           component: AlarmPage,
           redirect: 'alarm/alarmDetail',
-          meta:{
-            index:1
+          meta: {
+            index: 1
           },
           children: [
             {
@@ -86,6 +86,11 @@ export default new Router({
               name: 'chartDemo',
               path: 'chartDemo',
               component: ChartDemo
+            },
+            {
+              name: 'uploadImgDemo',
+              path: 'uploadImgDemo',
+              component: UploadImgDemo
             }
 
           ]

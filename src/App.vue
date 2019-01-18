@@ -32,7 +32,6 @@ export default {
       // const fromIndex = from.meta.index
       // this.transitionName = toIndex < fromIndex ? 'slide-right' : 'slide-left'
       this.transitionName = "bounce";
-      
     }
   }
 };

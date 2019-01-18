@@ -7,18 +7,22 @@ import App from './App'
 import router from './router'
 import axios from "axios"
 import store from './store'
-import VCharts  from 'v-charts'
+import VCharts from 'v-charts'
+import VueCropper from 'vue-cropper'
+
+
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(VCharts)
+Vue.use(VueCropper)
 
 Vue.prototype.$axios = axios;
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  store,
-  router,
-  components: { App },
-  template: '<App/>'
+    el: '#app',
+    store,
+    router,
+    components: { App },
+    template: '<App/>'
 })
