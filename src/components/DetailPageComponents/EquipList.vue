@@ -79,6 +79,7 @@ export default {
   components: { equipListMedia },
   data() {
     return {
+      searchType: "", //搜索类型， type=0 搜索区域异常  type=1 搜索派出所异常
       showTable: false,
       loading: false,
       tableData: [
@@ -133,18 +134,33 @@ export default {
   methods: {
     getTableData(childValue) {
       alert(childValue);
-      //todo:调用API，根据 异常状态类型与区域ID 加载表格数据
-      this.showTable = true;
-      let url =
-        API.getALARMCountPCSJKX.devUrl +
-        "&PCS_ID=" +
-        this.$route.params.wsCode +
-        "&BITValue=" +
-        childValue;
-      console.log("mod13-url", url);
-      this.$axios.get(url).then(res => {
-        console.log(res);
-      });
+      //选定区域查询
+      if (this.searchType === 0) {
+        this.tableData = "";
+        console.log("api params", childValue, "searchType", this.searchType);
+        this.showTable = true;
+        let areaUrl =
+          API.getALARMCountAreaJKX.devUrl + "?BITValue=" + childValue;
+        console.log("area get url", areaUrl);
+        this.$axios.get(areaUrl).then(res => {
+          console.log(res);
+          //todo: 填充dataTable
+        });
+      } else if (this.searchType === 1) {
+        //选定派出所查询
+        this.tableData = "";
+        let url =
+          API.getALARMCountPCSJKX.devUrl +
+          "&PCS_ID=" +
+          this.$route.params.wsCode +
+          "&BITValue=" +
+          childValue;
+        console.log("api pcs url", url);
+        this.$axios.get(url).then(res => {
+          console.log(res);
+          //todo: 填充dataTable
+        });
+      }
     },
     handleSizeChange: function(size) {
       this.pagesize = size;
@@ -161,13 +177,34 @@ export default {
     $route(to, from) {
       //监听路由是否变化
       if (this.$route.params.wsCode) {
-        // 判断条件1  判断传递值的变化
-        let getPcsAlarmUrl =
-          API.getALARMCountPCS.devUrl + "&PCS_ID=" + this.$route.params.wsCode;
-        console.log("api url", getPcsAlarmUrl);
-        this.$axios.get(getPcsAlarmUrl).then(res => {
-          console.log(res);
-          if (res.data.length > 0) {
+        if (this.$route.params.nodeLevel === 1) {
+          this.searchType = 1;
+          // 判断条件1  判断传递值的变化
+          let getPcsAlarmUrl =
+            API.getALARMCountPCS.devUrl +
+            "&PCS_ID=" +
+            this.$route.params.wsCode;
+          console.log("api url", getPcsAlarmUrl);
+          this.$axios.get(getPcsAlarmUrl).then(res => {
+            console.log(res);
+            if (res.data.length > 0) {
+              this.state.zuoyouqingxie = res.data[0].BITValueB0;
+              this.state.qianhouqinxie = res.data[0].BITValueB1;
+              this.state.shuijin = res.data[0].BITValueB3;
+              this.state.menci = res.data[0].BITValueC0;
+              this.state.fengji = res.data[0].BITValueC1;
+              this.state.led = res.data[0].BITValueC2;
+              this.state.fanglei = res.data[0].BITValueC3;
+              //交流电上限与下限报警合并
+              this.state.jldbj =
+                res.data[0].BITValueC5 + res.data[0].BITValueC6;
+              this.state.jldd = res.data[0].BITValueC7;
+            }
+          });
+        } else if (this.$route.params.nodeLevel === 0) {
+          this.searchType = 0;
+          let getAreaAlarUrl = API.getALARMCountArea.devUrl;
+          this.$axios.get(getAreaAlarUrl).then(res => {
             this.state.zuoyouqingxie = res.data[0].BITValueB0;
             this.state.qianhouqinxie = res.data[0].BITValueB1;
             this.state.shuijin = res.data[0].BITValueB3;
@@ -178,8 +215,8 @@ export default {
             //交流电上限与下限报警合并
             this.state.jldbj = res.data[0].BITValueC5 + res.data[0].BITValueC6;
             this.state.jldd = res.data[0].BITValueC7;
-          }
-        });
+          });
+        }
       }
     }
   }

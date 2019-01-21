@@ -190,6 +190,11 @@ export default {
     getALARMCountArea: {
         name: '获取全区监控箱告警状态每位统计数量',
         method: 'GetALARMCountArea',
-        devUrl: 'api/Handler/AjaxTestHandler.ashx'
+        devUrl: 'api/Handler/AjaxTestHandler.ashx?mod=14'
+    },
+    getALARMCountAreaJKX: {
+        name: '获取全区监控箱指定位的告警详情',
+        method: 'GetALARMCountAreaJKX',
+        devUrl: 'api/Handler/AjaxTestHandler.ashx?mod=15'
     }
 }   
