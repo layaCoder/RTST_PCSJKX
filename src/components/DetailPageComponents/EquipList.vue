@@ -46,7 +46,6 @@
           </el-table-column>
           <el-table-column prop="state" label="异常状态">
           </el-table-column>
-
         </el-table>
       </el-row>
       <!--分页组件-->
@@ -136,7 +135,7 @@ export default {
       alert(childValue);
       //选定区域查询
       if (this.searchType === 0) {
-        this.tableData = "";
+        this.tableData = [];
         console.log("api params", childValue, "searchType", this.searchType);
         this.showTable = true;
         let areaUrl =
@@ -148,7 +147,7 @@ export default {
         });
       } else if (this.searchType === 1) {
         //选定派出所查询
-        this.tableData = "";
+        this.tableData = [];
         let url =
           API.getALARMCountPCSJKX.devUrl +
           "&PCS_ID=" +
@@ -186,7 +185,7 @@ export default {
             this.$route.params.wsCode;
           console.log("api url", getPcsAlarmUrl);
           this.$axios.get(getPcsAlarmUrl).then(res => {
-            console.log(res);
+            console.log("pcsRes", res);
             if (res.data.length > 0) {
               this.state.zuoyouqingxie = res.data[0].BITValueB0;
               this.state.qianhouqinxie = res.data[0].BITValueB1;
@@ -205,6 +204,7 @@ export default {
           this.searchType = 0;
           let getAreaAlarUrl = API.getALARMCountArea.devUrl;
           this.$axios.get(getAreaAlarUrl).then(res => {
+            console.log("areaRes", res);
             this.state.zuoyouqingxie = res.data[0].BITValueB0;
             this.state.qianhouqinxie = res.data[0].BITValueB1;
             this.state.shuijin = res.data[0].BITValueB3;
