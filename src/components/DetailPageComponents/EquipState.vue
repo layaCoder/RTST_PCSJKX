@@ -1,7 +1,6 @@
 <template>
   <div>
     <el-row>
-      <h2>test branch</h2>
       <h2>设备监控</h2>
     </el-row>
     <el-row class="mediaRow">
@@ -148,6 +147,17 @@
               </el-switch>
             </td>
           </tr>
+          <!-- 添加220v-3 -->
+          <tr class="colored">
+            <td>
+              <span>220v-3</span>
+            </td>
+            <td>
+              <el-switch v-model="state_220_3" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
+              </el-switch>
+            </td>
+          </tr>
+          <!--  -->
           <tr>
             <td>
               <span>poe-1</span>
@@ -268,7 +278,9 @@ export default {
       state_poe_2: null,
       state_poe_3: null,
       state_poe_4: null,
-      state_menci: null
+      state_menci: null,
+      //新增220v-3开关
+      state_220_3: null
     };
   },
   methods: {
@@ -355,6 +367,7 @@ export default {
       let switch_poe_2 = this.state_poe_2 === false ? "0" : "1";
       let switch_poe_3 = this.state_poe_3 === false ? "0" : "1";
       let switch_poe_4 = this.state_poe_4 === false ? "0" : "1";
+      let switch_220_3 = this.state_220_3 === false ? "0" : "1";
       //门磁始终未 ‘0’ ，当初设计时 门磁 帧结构是 =1 则开门
       //let switch_menci='0'
 
@@ -367,7 +380,12 @@ export default {
           switch_12_3 +
           switch_12_2 +
           switch_12_1,
-        "0000" + switch_poe_4 + switch_poe_3 + switch_poe_2 + switch_poe_1,
+        "000" +
+          switch_220_3 +
+          switch_poe_4 +
+          switch_poe_3 +
+          switch_poe_2 +
+          switch_poe_1,
         "00000000"
       ];
       console.log($event);
@@ -517,6 +535,8 @@ export default {
           this.state_poe_3 = getSwitchData(res.data[0]).state_poe_3;
           this.state_poe_4 = getSwitchData(res.data[0]).state_poe_4;
           this.state_menci = getSwitchData(res.data[0]).state_menci;
+
+          this.state_220_3 = getSwitchData(res.data[0]).state_220_3;
           console.log("-----------------");
         });
       }
@@ -561,7 +581,7 @@ export default {
 
       let switchUrl = API.getSwitchStateById.devUrl + this.$route.params.wsCode;
       this.$axios.get(switchUrl).then(res => {
-        console.log("----开关状态----");
+        console.log("----开关状态----", res);
         this.state_12_1 = getSwitchData(res.data[0]).state_12_1;
         this.state_12_2 = getSwitchData(res.data[0]).state_12_2;
         this.state_12_3 = getSwitchData(res.data[0]).state_12_3;
@@ -575,6 +595,8 @@ export default {
         this.state_poe_3 = getSwitchData(res.data[0]).state_poe_3;
         this.state_poe_4 = getSwitchData(res.data[0]).state_poe_4;
         this.state_menci = getSwitchData(res.data[0]).state_menci;
+
+        this.state_220_3 = getSwitchData(res.data[0]).state_220_3;
       });
     });
   },
@@ -718,7 +740,9 @@ function getSwitchData(data) {
     state_poe_2: BITValueB[6] === "0" ? false : true,
     state_poe_3: BITValueB[5] === "0" ? false : true,
     state_poe_4: BITValueB[4] === "0" ? false : true,
-    state_menci: BITValueB[0] === "0" ? false : true
+    state_menci: BITValueB[0] === "0" ? false : true,
+    //新增 220v-3开关
+    state_220_3: BITValueB[3] === "0" ? false : true
   };
   return obj;
 }
