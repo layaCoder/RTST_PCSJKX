@@ -104,7 +104,8 @@
           </tr>
           <tr class="colored">
             <td>
-              <span>12v-4</span>
+              <span>24v-1</span>
+              <!-- <span>12v-4</span> -->
             </td>
             <td>
               <el-switch v-model="state_12_4" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
@@ -113,7 +114,8 @@
           </tr>
           <tr>
             <td>
-              <span>24v-1</span>
+              <span>24v-2</span>
+              <!-- <span>24v-1</span> -->
             </td>
             <td>
               <el-switch v-model="state_24_1" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
@@ -122,7 +124,8 @@
           </tr>
           <tr class="colored">
             <td>
-              <span>24v-2</span>
+              <span>24v-3</span>
+              <!-- <span>24v-2</span> -->
             </td>
             <td>
               <el-switch v-model="state_24_2" active-text="开" inactive-text="关" @change="changeStatus($event,1)">
@@ -176,7 +179,7 @@
               </el-switch>
             </td>
           </tr>
-          <tr>
+          <tr v-show=false>
             <td>
               <span>poe-3</span>
             </td>
@@ -185,7 +188,7 @@
               </el-switch>
             </td>
           </tr>
-          <tr class="colored">
+          <tr class="colored" v-show=false>
             <td>
               <span>poe-4</span>
             </td>
@@ -381,9 +384,10 @@ export default {
           switch_12_2 +
           switch_12_1,
         "000" +
-          switch_220_3 +
-          switch_poe_4 +
-          switch_poe_3 +
+        switch_220_3 +
+        // switch_poe_4 +
+        // switch_poe_3 +
+        "00" + //poe3 , poe4停用
           switch_poe_2 +
           switch_poe_1,
         "00000000"
