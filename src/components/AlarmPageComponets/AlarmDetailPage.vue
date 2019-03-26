@@ -6,49 +6,45 @@
       </el-col>
     </el-row>
 
-    <el-row>
-      <el-col :span='5'>
-        <span>区域</span>
-        <el-select v-model="area" placeholder="请选择" size="mini" clearable @change="handleChangeArea">
+    <el-row class="inputGroup">
+      <el-col :span='6' class="inputRow">
+        <span class="inputTitle">&nbsp;&nbsp;区&nbsp;域：&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <el-select v-model="area" placeholder="请选择" size="mini" clearable @change="handleChangeArea" class="equipInput">
           <el-option v-for="item in areaOptions" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </el-col>
-      <el-col :span='5'>
-        <span>派出所</span>
-        <el-select v-model="pcs" placeholder="请选择" size="mini" clearable @change="handleChangePcs">
+      <el-col :span='6' class="inputRow">
+        <span class="inputTitle">&nbsp;派出所：&nbsp;</span>
+        <el-select v-model="pcs" placeholder="请选择" size="mini" clearable @change="handleChangePcs" class="equipInput">
           <el-option v-for="item in pcsOptions" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </el-col>
 
-      <el-col :span='7'>
-        <span>设备编号</span>
+      <el-col :span='6' >
+        <span class="inputTitle">设备编号：</span>
         <el-input v-model="ws_code" placeholder="请输入设备编号" size="mini" class="equipInput" @focus="inputFocus">
         </el-input>
       </el-col>
 
-      <el-col :span='1'>
+      <el-col :span='2'>
         <el-button type="success" size="mini" @click="handleSearch">查询</el-button>
       </el-col>
       <el-col :span='2'>
-        <el-button type="warning" size="mini" @click="export_Excel">导出EXCEL</el-button>
+        <el-button type="warning" size="mini" @click="export_Excel">导出</el-button>
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span='5'>
-        <div class="block">
-          <span>时间</span>
-          <el-date-picker v-model="dateBegin" type="date" placeholder="选择日期" size="mini" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd">
-          </el-date-picker>
-        </div>
+      <el-col :span='6'>
+        <span class="inputTitle">开始时间：</span>
+        <el-date-picker v-model="dateBegin" type="date" placeholder="选择日期" size="mini" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" class="equipInput">
+        </el-date-picker>
       </el-col>
-      <el-col :span='5'>
-        <div class="block">
-          <span>至</span>
-          <el-date-picker v-model="dateEnd" type="date" placeholder="选择日期" size="mini" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd">
-          </el-date-picker>
-        </div>
+      <el-col :span='6'>
+        <span class="inputTitle">结束时间:</span>
+        <el-date-picker v-model="dateEnd" type="date" placeholder="选择日期" size="mini" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" class="equipInput">
+        </el-date-picker>
       </el-col>
     </el-row>
     <el-row class="tableRow">
@@ -73,7 +69,7 @@
         </el-table-column>
         <el-table-column prop="fanglei" label="防雷">
         </el-table-column>
-        <el-table-column prop="jldy" label="交流电压报警">
+        <el-table-column prop="jldy" label="交流电压">
         </el-table-column>
         <el-table-column prop="jldd" label="交流掉电">
         </el-table-column>
@@ -288,5 +284,18 @@ function getAlarmTable(data) {
 <style scoped>
 .equipInput {
   width: 60%;
+}
+.inputTitle {
+  font-size: 14px;
+  font-weight: bold;
+  color: #999;
+  font-family: Microsoft YaHei;
+}
+.inputGroup > .inputRow {
+  margin-bottom: 10px;
+}
+.tableRow {
+  margin-top: 30px;
+  min-height: 400px;
 }
 </style>

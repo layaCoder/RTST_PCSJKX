@@ -6,26 +6,26 @@
       </el-col>
     </el-row>
 
-    <el-row>
-      <el-col :span='5'>
-        <span>区域</span>
-        <el-select v-model="area" placeholder="请选择" size="mini" clearable>
+    <el-row class="inputGroup">
+      <el-col :span='6' class="inputRow">
+        <span class="inputTitle">&nbsp;&nbsp;区&nbsp;域：&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <el-select v-model="area" placeholder="请选择" size="mini" clearable class="equipInput">
           <el-option v-for="item in optionsArea" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </el-col>
-      <el-col :span='7'>
-        <span>派出所</span>
-        <el-select v-model="pcs" placeholder="请选择" size="mini" clearable>
+      <el-col :span='6' class="inputRow">
+        <span class="inputTitle">&nbsp;派出所：&nbsp;</span>
+        <el-select v-model="pcs" placeholder="请选择" size="mini" clearable class="equipInput">
           <el-option v-for="item in optionsPCS" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </el-col>
-      <el-col :span='1'>
+      <el-col :span='2'>
         <el-button type="success" size="mini" @click="handleSearch">查询</el-button>
       </el-col>
     </el-row>
-    <el-row>
+    <el-row class="tableRow">
       <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%">
         <el-table-column prop="pcsName" label="派出所名称" width="180">
         </el-table-column>
@@ -133,7 +133,22 @@ function getTableData(data) {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.equipInput {
+  width: 60%;
+}
+.inputTitle {
+  font-size: 14px;
+  font-weight: bold;
+  color: #999;
+  font-family: Microsoft YaHei;
+  background-color: #ffffff;
+  
+}
+.inputGroup > .inputRow {
+  margin-bottom: 10px;
+}
 .tableRow {
-  height: 500px;
+  margin-top: 30px;
+  min-height: 400px;
 }
 </style>

@@ -17,7 +17,7 @@
         </el-table-column>
         <el-table-column prop="WS_Code" label="设备编号">
         </el-table-column>
-        <el-table-column prop="WS_Name" label="监控点名称">
+        <el-table-column prop="WS_Name" label="监控点">
         </el-table-column>
         <!-- <el-table-column prop="WS_Org_Code" label="责任人ID">
         </el-table-column> -->
@@ -529,6 +529,6 @@ function getTableData(data) {
   box-shadow: 0px 0px 5px #999999;
   padding: 10px;
   /* margin-left:-4%; */
-  margin: 4% 4% 4% -4%;
+  margin: 4% 4% 0 0;
 }
 </style>

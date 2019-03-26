@@ -3,11 +3,15 @@
     <div>
       <strong>{{stateName}}</strong>
     </div>
-    <div>
+    <div class="imgDiv">
       <img :src="this.stateImg" alt="" class="mediaImg">
     </div>
     <div class="valueDiv">
-      <span :class="this.stateValue==='关闭'?'stateValueOk':'stateValueError'" :id="this.stateName==='设备编号'?'stateValue':''">{{stateValue}}</span>
+
+      <span :class="this.stateValue==='关闭'?'stateValueOk':'stateValueError'" :id="this.stateName==='设备编号'?'stateValue':''">
+        <i :class="this.stateValue==='关闭'? 'el-icon-success':'el-icon-warning'"></i>
+        {{stateValue}}
+      </span>
     </div>
   </div>
 </template>
@@ -43,8 +47,19 @@ strong {
   width: 80px;
 }
 
+.imgDiv {
+  padding: 20px 10px;
+}
+
 .mediaDiv {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
   background-color: #eeeeee;
+  width: 150px;
+  /* padding-bottom: 10px; */
+  padding-top: 10px;
+  border-radius: 5px;
+  margin: 10px 0px;
 }
 
 .stateValueError {
@@ -56,7 +71,10 @@ strong {
   color: #00ae2c;
   font-size: 18px;
 }
-.mediaDiv {
-  padding-bottom: 10px;
+
+.valueDiv {
+  padding: 10px;
+  background-color: white;
+  border-radius: 0px 0px 5px 5px;
 }
 </style>

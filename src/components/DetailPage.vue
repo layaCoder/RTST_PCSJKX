@@ -1,8 +1,8 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="4" class="tree">
-        <div id='tree'>
+      <el-col :span="4" class="treeCol">
+        <div id='tree' class="tree">
           <el-tree @node-click="handleNodeClick" :props="defaultProps" :load="loadNode1" :highlight-current=true lazy></el-tree>
         </div>
       </el-col>
@@ -190,23 +190,41 @@ export default {
 </script>
 
 
-
+<style>
+</style>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style >
+.tree {
+  margin: 80px 0px 0px 20px;
+  /* border: 1px solid #999; */
+  /* border-radius: 10px; */
+}
+
 .el-tree {
   background-color: #ffffff;
-  border: 0.1px solid #999999;
+  /* border: 0.1px solid #999999; */
   border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 /* .el-main{
    background: #999
  } */
 
 .el-tree-node__label {
-  font-size: 17px;
+  font-size: 14px;
+  color: #888;
+  font-weight: bold;
 }
+
+.is-current > div > span {
+  color: white !important;
+}
+
 .el-tree-node__content {
-  border: 0.1px solid #999999;
+  font-family: Microsoft YaHei;
+  margin-bottom: -1px;
+  border: 1px solid #999999;
+  border-radius: 5px;
   height: 35px;
 }
 
@@ -229,5 +247,9 @@ background-color: yellow;
 }
 .welcomeMessage {
   height: 800px;
+}
+
+.wrapper {
+  margin-left: 20px;
 }
 </style>

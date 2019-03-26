@@ -281,6 +281,6 @@ function getTableData(sxjArray) {
   box-shadow: 0px 0px 5px #999999;
   padding: 10px;
   /* margin-left:-4%; */
-  margin: 4% 4% 4% -4%;
+  margin: 4% 4% 0 0;
 }
 </style>

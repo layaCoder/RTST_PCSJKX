@@ -15,10 +15,10 @@
           </el-col>
           <el-col :span="14">
             <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#172850" text-color="#fff" active-text-color="#59b0ff">
-              <el-menu-item index="1">站点详情</el-menu-item>
-              <el-menu-item index="2">告警统计</el-menu-item>
-              <el-menu-item index="3">电能报表</el-menu-item>
-              <el-menu-item index="4">系统设置</el-menu-item>
+              <el-menu-item index="1"><i class="el-icon-menu"></i><span>站点详情</span></el-menu-item>
+              <el-menu-item index="2"><i class="el-icon-date"></i><span>告警统计</span></el-menu-item>
+              <el-menu-item index="3"><i class="el-icon-document"></i><span>电能报表</span></el-menu-item>
+              <el-menu-item index="4"><i class="el-icon-setting"></i><span>系统设置</span></el-menu-item>
               <!-- <el-menu-item index="5">Module[5]</el-menu-item> -->
             </el-menu>
           </el-col>
