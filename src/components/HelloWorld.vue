@@ -72,8 +72,8 @@
       </el-row>
       <el-row>
       </el-row>
-      <el-main>
-        <router-view></router-view>
+      <el-main class="wrapperMain">
+        <router-view ></router-view>
       </el-main>
       <el-footer>
         <span id='footer'>© 湖北融通三立科技有限公司 版权所有</span>
@@ -248,5 +248,8 @@ a {
 }
 .modalRow {
   margin-bottom: 10px;
+}
+.wrapperMain{
+  background-color:#f0f2f5
 }
 </style>

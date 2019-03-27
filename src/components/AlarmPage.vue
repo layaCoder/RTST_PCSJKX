@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <el-row>
+    <el-row class="content">
       <el-col :span="4">
         <el-menu mode="vertical" :default-openeds="['1']" default-active="1-1" class="el-menu-vertical-demo" @select="handleSelect" @open="handleOpen" @close="handleClose" background-color="#172850" text-color="#fff" active-text-color="#59b0ff">
           <el-submenu index="1">
@@ -18,7 +18,7 @@
         </el-menu>
 
       </el-col>
-      <el-col :span="20" class="content">
+      <el-col :span="20" >
         <!-- <h2>电能报表</h2>
         <div>[url]节点编号 {{this.$route.params.wsCode}}</div>
         <div>[url]节点ip {{this.$route.params.ipAddress}}</div>
@@ -101,6 +101,6 @@ export default {
   min-height: 870px;
 }
 .content {
-  background-color: #ffffff;
+  background-color: #f0f2f5;
 }
 </style>

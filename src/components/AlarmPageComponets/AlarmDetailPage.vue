@@ -1,8 +1,11 @@
 <template>
   <div class="mainContent">
     <el-row>
-      <el-col>
+      <el-col span="3" offset="10">
         <h2>告警详情</h2>
+      </el-col>
+      <el-col span="1" offset="10">
+        <i class="el-icon-edit-outline" @click="export_Excel"></i>
       </el-col>
     </el-row>
 
@@ -22,7 +25,7 @@
         </el-select>
       </el-col>
 
-      <el-col :span='6' >
+      <el-col :span='6'>
         <span class="inputTitle">设备编号：</span>
         <el-input v-model="ws_code" placeholder="请输入设备编号" size="mini" class="equipInput" @focus="inputFocus">
         </el-input>
@@ -31,9 +34,9 @@
       <el-col :span='2'>
         <el-button type="success" size="mini" @click="handleSearch">查询</el-button>
       </el-col>
-      <el-col :span='2'>
+      <!-- <el-col :span='2'>
         <el-button type="warning" size="mini" @click="export_Excel">导出</el-button>
-      </el-col>
+      </el-col> -->
     </el-row>
     <el-row>
       <el-col :span='6'>
@@ -297,5 +300,16 @@ function getAlarmTable(data) {
 .tableRow {
   margin-top: 30px;
   min-height: 400px;
+}
+.mainContent {
+  box-shadow: 0px 0px 5px #999999;
+  padding: 10px;
+  /* margin-left:-4%; */
+  margin: 4% 4% 0 0;
+  background-color: #fff
+}
+
+.el-icon-edit-outline{
+  cursor: pointer;
 }
 </style>

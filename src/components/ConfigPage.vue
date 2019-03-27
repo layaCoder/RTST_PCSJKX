@@ -69,13 +69,11 @@ strong {
 
 .main {
   /* background: #172850; */
-  background-color: #ffffff;
+  background-color: #f0f2f5;
   /*padding: 0px;*/
 }
 
-.table {
-  background: #ffffff;
-}
+
 
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;

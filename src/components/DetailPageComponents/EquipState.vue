@@ -811,6 +811,7 @@ table td {
 
 .colored {
   background-color: #fafafa;
+  /* height: 50px; */
 }
 
 .btnDoorOpen {
@@ -834,5 +835,10 @@ table td {
   text-align: left;
   padding-left: 10px;
   font-family: Microsoft YaHei;
+  background-color: #ffffff;
 }
+.equipTable2 > tr{
+  height: 50px;
+}
+
 </style>

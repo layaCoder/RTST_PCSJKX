@@ -142,7 +142,6 @@ function getTableData(data) {
   color: #999;
   font-family: Microsoft YaHei;
   background-color: #ffffff;
-  
 }
 .inputGroup > .inputRow {
   margin-bottom: 10px;
@@ -150,5 +149,12 @@ function getTableData(data) {
 .tableRow {
   margin-top: 30px;
   min-height: 400px;
+}
+.mainContent {
+  box-shadow: 0px 0px 5px #999999;
+  padding: 10px;
+  /* margin-left:-4%; */
+  margin: 4% 4% 0 0;
+  background-color: #fff;
 }
 </style>

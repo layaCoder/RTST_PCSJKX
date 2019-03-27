@@ -54,7 +54,7 @@ strong {
 .mediaDiv {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
-  background-color: #eeeeee;
+  background-color: #efefef;
   width: 150px;
   /* padding-bottom: 10px; */
   padding-top: 10px;

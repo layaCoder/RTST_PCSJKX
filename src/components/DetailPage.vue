@@ -6,9 +6,14 @@
           <el-tree @node-click="handleNodeClick" :props="defaultProps" :load="loadNode1" :highlight-current=true lazy></el-tree>
         </div>
       </el-col>
-      <el-col :span="19" id='mainContent'>
+      <el-col :span="20" id='mainContent'>
         <div v-if="this.showHello" class="welcomeMessage">
           <h2>欢迎使用</h2>
+          <el-row>
+            <el-col :span="15" offset="4">
+              <mapChart/>
+            </el-col>
+          </el-row>
         </div>
         <router-view v-if="!this.showHello"></router-view>
       </el-col>
@@ -17,8 +22,10 @@
 </template>
 <script>
 import API from "../apis/index.js";
+import mapChart from "./parts/Common/MapChart.vue";
 
 export default {
+  components: { mapChart },
   data() {
     return {
       showHello: true,
@@ -246,10 +253,17 @@ background-color: yellow;
   margin-right: 25px;
 }
 .welcomeMessage {
-  height: 800px;
 }
 
 .wrapper {
   margin-left: 20px;
+}
+
+#mainContent {
+  /* background-color: #f0f2f5; */
+}
+
+.treeCol {
+  /* background-color: #f0f2f5; */
 }
 </style>

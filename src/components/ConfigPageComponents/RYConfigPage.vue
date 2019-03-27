@@ -455,5 +455,6 @@ function getTableData(data) {
   padding: 10px;
   /* margin-left:-4%; */
   margin: 4% 4% 0 0;
+  background-color: #fff
 }
 </style>

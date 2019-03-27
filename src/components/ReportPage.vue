@@ -83,13 +83,13 @@ export default {
 <style scoped>
 .main {
   /* background-color: #172850; */
-  background-color: #ffffff;
+  background-color: #f0f2f5;
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
   min-height: 870px;
 }
 .content {
-  background-color: #ffffff;
+  background-color: #f0f2f5;
 }
 </style>
